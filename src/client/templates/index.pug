@@ -1,0 +1,39 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv="Content-Security-Policy" content="script-src 'self'; object-src 'none'")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(name="description", content="Crate Inquire provides handy tools for analysis crates.io packages.")
+    link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.9.0/css/all.css", crossorigin="anonymous")
+    link(rel="stylesheet", href="/bundle.css")
+    link(rel="shortcut icon", href="/favicon.png")
+    script(type="module", src="/bundle.js")
+    title Crate Inquire | crates.io insight and explorer
+  body
+    header
+    main
+      div.main-container
+        div.header-grid
+          div
+            img(src="/favicon.png", alt="logo")
+          div 
+            div.h
+              span.crate CRATES
+              span.inquire INQUIRE
+            div.desc Explore crate packages and inspect the details.
+        div#search-bar-container
+          input#search-input(type="search", placeholder="Find a package...", spellcheck="false", )
+          div.search-icon-container
+            i#search-icon.fas.fa-search
+          div#search-dropdown(hidden)
+    footer.abs
+      div
+        div Hosted on
+        img(src="/img/heroku-logo.png", alt="hosted on")
+      div
+        div Made with
+        i.fas.fa-heart
+        div by
+        a(href="https://github.com/apskhem" target="_blank") @apskhem.
+        div &copy; 2021. All rights reserved.
