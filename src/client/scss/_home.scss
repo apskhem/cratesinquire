@@ -1,8 +1,9 @@
-main {
+/* index */
+main#home {
+  flex-grow: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
   padding: 1em;
 }
 
@@ -102,18 +103,58 @@ footer {
   padding: 12px 24px;
   color: #8695AC;
 
-  &.abs {
-    position: absolute;
-    bottom: 0;
-  }
-
   > div {
     display: flex;
     align-items: center;
     gap: 0.5em;
 
     &:last-child {
-      gap: 0.3em ;
+      gap: 0.25em ;
+    }
+  }
+}
+
+/* crate */
+main#crate {
+  flex-grow: 1;
+  padding: 1em;
+
+  .main-container {
+    display: grid;
+    gap: 1em;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .bundle-size-graph-container {
+    display: grid;
+    grid-template-columns: 84px 1fr;
+    gap: 4px;
+
+    > div {
+      position: relative;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .bundle-size-bar {
+      display: flex;
+      align-items: center;
+      position: absolute;
+      height: 100%;
+      border-radius: 8px;
+      background-color: #fdc659;
+      font-size: x-small;
+      transition: width 300ms;
+
+      &.current {
+        background-color: #c3890f;
+      }
+
+      > span {
+        margin: 0 8px;
+      }
     }
   }
 }

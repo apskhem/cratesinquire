@@ -7,21 +7,39 @@ import { join } from "path";
 
 @Injectable()
 export class AppService {
-  private cachedIndex: string | null = null;
+  private cachedIndexTemplate: string | null = null;
+  private compiledCrateTemplate: pug.compileTemplate | null = null;
 
-  private static PUG_PATH = join(__dirname, "..", "src", "client", "templates", "index.pug");
+  private static PUG_INDEX_PATH = join(__dirname, "..", "src", "client", "templates", "index.pug");
+  private static PUG_CRATES_ID_PATH = join(__dirname, "..", "src", "client", "templates", "crate.pug");
+  private static TYPESCRIPT_ENTRY_PATH = join(__dirname, "..", "src", "client", "scripts", "index.ts");
+  private static TYPESCRIPT_OUTFILE = join(__dirname, "..", "public", "bundle.js");
+  private static SASS_ENTRY_PATH = join(__dirname, "..", "src", "client", "scss", "main.scss");
+  private static SASS_OUTFILE = join(__dirname, "..", "public", "bundle.css");
 
   getCompiledIndex(): string {
-    if (this.cachedIndex) {
-      return this.cachedIndex;
+    if (this.cachedIndexTemplate) {
+      return this.cachedIndexTemplate;
     }
 
-    const pugString = fs.readFileSync(AppService.PUG_PATH, "utf8");
-    const fn = pug.compile(pugString, { filename: AppService.PUG_PATH });
+    const pugString = fs.readFileSync(AppService.PUG_INDEX_PATH, "utf8");
+    const fn = pug.compile(pugString, { filename: AppService.PUG_INDEX_PATH });
 
-    this.cachedIndex = fn();
+    this.cachedIndexTemplate = fn();
 
-    return this.cachedIndex;
+    return this.cachedIndexTemplate;
+  }
+
+  getCompiledCratesId(id: string, data: Record<string, any>, version?: string): string {
+    if (!this.compiledCrateTemplate) {
+      const pugString = fs.readFileSync(AppService.PUG_CRATES_ID_PATH, "utf8");
+      
+      this.compiledCrateTemplate = pug.compile(pugString, { filename: AppService.PUG_CRATES_ID_PATH });
+    }
+
+    const res = this.compiledCrateTemplate({ data, raw: JSON.stringify(data) });
+
+    return res;
   }
 
   /* compile */
@@ -32,27 +50,31 @@ export class AppService {
     fs.writeFileSync(outfile, fn());
   }
 
-  compileTypeScript(entry: string, outfile: string) {
+  static compileTypeScript() {
     esbuild.buildSync({
-      entryPoints: [entry],
+      entryPoints: [AppService.TYPESCRIPT_ENTRY_PATH],
       bundle: true,
       minify: true,
       sourcemap: true,
-      outfile,
+      outfile: AppService.TYPESCRIPT_OUTFILE,
       platform: "browser"
     });
   }
 
-  compileSass(entry: string, outfile: string) {
+  static compileSass() {
     const res = sass.renderSync({
-      file: entry,
-      outFile: outfile,
+      file: AppService.SASS_ENTRY_PATH,
+      outFile: AppService.SASS_OUTFILE,
       outputStyle: "compressed",
       sourceMap: true
     });
   
     // const postcssResult = await postcss([ autoprefixer() ]).process().async();
   
-    fs.writeFileSync(outfile, res.css);
+    fs.writeFileSync(AppService.SASS_OUTFILE, res.css);
+
+    if (res.map) {
+      fs.writeFileSync(`${AppService.SASS_OUTFILE}.map`, res.map);
+    }
   }
 }

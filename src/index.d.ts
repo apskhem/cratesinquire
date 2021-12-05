@@ -8,7 +8,32 @@ interface CurrentCrate {
     slug: string;
   }[];
   crate: {
-    [key: string]: string;
+    badges: string[];
+    categories: string[];
+    created_at: string;
+    description: string;
+    documentation: string;
+    downloads: number;
+    exact_match: boolean;
+    homepage: string;
+    id: string;
+    keywords: string[];
+    links: {
+      owner_team: string;
+      owner_user: string;
+      owners: string;
+      reverse_dependencies: string;
+      version_downloads: string;
+      versions: null;
+    };
+    max_stable_version: string;
+    max_version: string;
+    name: string;
+    newest_version: string;
+    recent_downloads: number;
+    repository: string;
+    updated_at: string;
+    versions: number[];
   };
   keywords: {
     crates_cnt: number;
@@ -17,6 +42,17 @@ interface CurrentCrate {
     keyword: string;
   }[];
   versions: {
+    audit_actions: {
+      action: string;
+      time: string;
+      user: {
+        avatar: string;
+        id: number;
+        login: string;
+        name: string;
+        url: string
+      }
+    }[];
     crate: string;
     crate_size: number;
     created_at: string;
@@ -25,13 +61,30 @@ interface CurrentCrate {
     features: {
       [key: string]: string[];
     };
+    id: number;
+    license: string;
+    links: {
+      authors: string;
+      dependencies: string;
+      version_downloads: string;
+    };
     num: string;
+    published_by: {
+      avatar: string;
+      id: number;
+      login: string;
+      name: string;
+      url: string;
+    };
+    readme_path: string;
+    updated_at: string;
+    yanked: boolean
   }[];
 }
 
 interface SearchResponse {
   crates: {
-    badges: [],
+    badges: [];
     categories: null;
     created_at: string;
     description: string;
@@ -42,12 +95,12 @@ interface SearchResponse {
     id: string;
     keywords: null;
     links: {
-        owner_team: string;
-        owner_user: string
-        owners: string;
-        reverse_dependencies: string;
-        version_downloads: string;
-        versions: string
+      owner_team: string;
+      owner_user: string
+      owners: string;
+      reverse_dependencies: string;
+      version_downloads: string;
+      versions: string
     };
     max_stable_version: string;
     max_version: string;

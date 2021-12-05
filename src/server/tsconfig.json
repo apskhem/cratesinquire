@@ -18,6 +18,7 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": [
-    "."
+    ".",
+    "../index.d.ts"
   ]
 }
