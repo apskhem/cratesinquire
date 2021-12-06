@@ -1,4 +1,10 @@
 {
   "collection": "@nestjs/schematics",
-  "sourceRoot": "src/server"
+  "sourceRoot": "src/server",
+  "monorepo": true,
+  "compilerOptions":{
+    "assets": [
+      { "include": "src/client/**/*.*", "watchAssets": true }
+    ]
+  }
 }

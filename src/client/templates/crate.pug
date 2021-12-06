@@ -16,13 +16,24 @@ html(lang="en")
       div.main-container
         section.crate-header
           h1 #{data.crate.name}
-          div #{data.crate.max_stable_version}
-          div updated on #{data.crate.updated_at}
-          div created on #{data.crate.created_at}
+          div #{data.crate.max_stable_version} • Published by #{data.versions[0].audit_actions[0].user.name}
+          div Updated on #{data.crate.updated_at}
+          div Created on #{data.crate.created_at}
           div #{data.crate.description}
         section.crate-bundle-size
-          div.bundle-size-graph-container
+          div.graph-header
+            div.view-swtiches
+              div#switch-crate-size.sel Crate Size
+              div#switch-dowloads Downloads
+              div#switch-lifetime Lifetime
+            div.view-options
+              div
+          div.graph-container
         section.crate-dep-tree
+          h3 Dependency Tree
+          div.dep-tree-displayer-container
+        section.crate-features
+          h3 Features
     footer.abs
       div
         div Hosted on
