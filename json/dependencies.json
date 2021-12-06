@@ -1,0 +1,28 @@
+{
+    "dependencies": [
+        {
+            "crate_id": "quickcheck",
+            "default_features": false,
+            "downloads": 0,
+            "features": [],
+            "id": 616658,
+            "kind": "dev",
+            "optional": false,
+            "req": "^0.8",
+            "target": null,
+            "version_id": 129019
+        },
+        {
+            "crate_id": "rand",
+            "default_features": true,
+            "downloads": 0,
+            "features": [],
+            "id": 616659,
+            "kind": "dev",
+            "optional": false,
+            "req": "^0.6",
+            "target": null,
+            "version_id": 129019
+        }
+    ]
+}

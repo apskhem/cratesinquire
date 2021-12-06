@@ -4,6 +4,8 @@ import * as fs from "fs";
 import * as esbuild from "esbuild";
 import * as sass from "sass";
 import { join } from "path";
+import fetch from "node-fetch";
+import * as semver from "semver";
 
 @Injectable()
 export class AppService {
@@ -30,7 +32,7 @@ export class AppService {
     return this.cachedIndexTemplate;
   }
 
-  getCompiledCratesId(id: string, data: Record<string, any>, version?: string): string {
+  getCompiledCratesId(id: string, data: any, version?: string): string {
     if (!this.compiledCrateTemplate) {
       const pugString = fs.readFileSync(AppService.PUG_CRATES_ID_PATH, "utf8");
       
@@ -40,14 +42,6 @@ export class AppService {
     const res = this.compiledCrateTemplate({ data, raw: JSON.stringify(data) });
 
     return res;
-  }
-
-  /* compile */
-  compilePug(entry: string, outfile: string) {
-    const pugString = fs.readFileSync(entry, "utf8");
-    const fn = pug.compile(pugString, { filename: entry });
-  
-    fs.writeFileSync(outfile, fn());
   }
 
   static compileTypeScript() {

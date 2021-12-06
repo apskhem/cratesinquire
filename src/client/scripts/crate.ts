@@ -1,14 +1,15 @@
 import bytes from "bytes";
 import pluralize from "pluralize";
 import semver from "semver";
+import chart from "./tree";
 
 /* utils */
-const getData = () => {
-  const dataInputEl = document.getElementById("data");
+const getData = (id: string) => {
+  const dataInputEl = document.getElementById(id);
   const data = JSON.parse(dataInputEl["value"]);
 
   dataInputEl.remove();
-  
+
   return data;
 }
 
@@ -83,7 +84,7 @@ class BarRowElement {
         this.bar.style.width = `${this.data.crate_size / maxValue * 100}%`;
 
         const formattedByteString = bytes(this.data.crate_size, { unit: "B", thousandsSeparator: "," });
-        
+
         this.innerBarLabel.innerHTML = formattedByteString;
         break;
       }
@@ -117,13 +118,13 @@ class BarRowElement {
 }
 
 /* main */
-const runCrate = () => {
+const runCrate = async () => {
   const bundleSizeGraphContainer = document.getElementsByClassName("graph-container")[0];
   const viewSwitchContainer = document.getElementsByClassName("view-swtiches")[0];
   const switchCrateSizeEl = document.getElementById("switch-crate-size");
   const switchDownloadsEl = document.getElementById("switch-dowloads");
   const switchLifetimeEl = document.getElementById("switch-lifetime");
-  let bars = [];
+  const depTreeContainer = document.getElementsByClassName("dep-tree-displayer-container")[0];
 
   // init switches event handle
   [
@@ -135,9 +136,9 @@ const runCrate = () => {
       if (el.classList.contains("sel")) {
         return;
       }
-  
+
       Array.from(viewSwitchContainer.getElementsByClassName("sel")).forEach((x) => x.classList.remove("sel"));
-  
+
       el.classList.add("sel");
     });
   });
@@ -154,7 +155,7 @@ const runCrate = () => {
     bars.forEach((x) => x.setBarMode("lifetime", maxLifetime));
   });
 
-  const data = getData() as CurrentCrate;
+  const data = getData("data") as CurrentCrate;
 
   const maxBundleSize = data.versions.reduce((acc, x) => Math.max(acc, x.crate_size), 0);
   const maxDownloads = data.versions.reduce((acc, x) => Math.max(acc, x.downloads), 0);
@@ -164,7 +165,7 @@ const runCrate = () => {
   let majorChange = semver.coerce(data.versions[0].num).major;
   let prevBar = null;
 
-  bars = data.versions.map((version) => {
+  const bars = data.versions.map((version) => {
     const bar = new BarRowElement(version, data.crate.id);
     const ver = bar.getSemVer();
 
@@ -184,11 +185,14 @@ const runCrate = () => {
 
     bar.setBarMode("size", maxBundleSize);
     bar.setParent(bundleSizeGraphContainer);
-    
+
     prevBar = bar;
 
     return bar;
   });
+
+  const chartEl = await chart(data.crate.id, data.crate.max_stable_version);
+  depTreeContainer.appendChild(chartEl);
 };
 
 export default runCrate;

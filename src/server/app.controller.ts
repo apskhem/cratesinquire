@@ -37,8 +37,6 @@ export class AppController {
       throw new HttpException("cannot get the specific crate", HttpStatus.NOT_FOUND);
     }
 
-    // console.log(data);
-
     return this.appService.getCompiledCratesId(id, data, version);
   }
 
