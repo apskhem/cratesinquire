@@ -9,7 +9,7 @@ export class AppController {
 
   @Get("/")
   async getHello() {
-    return this.appService.getCompiledIndex();
+    return this.appService.compileIndex();
   }
 
   @Get("/crates/:id")
@@ -17,18 +17,13 @@ export class AppController {
   async getCrateById(
     @Param("id") id: string
   ) {
-    // extract id into parts
-    const [ name, version ] = id.split("@");
-
-    // validate semver
-    if (version && !semver.valid(version)) {
-      throw new HttpException("bad version format", HttpStatus.BAD_REQUEST);
+    // validate id
+    if (!/^[a-zA-Z0-9_-]+$/.test(id)) {
+      throw new HttpException("bad package name identifier format", HttpStatus.BAD_REQUEST);
     }
 
     // send request
-    const res = version
-      ? await fetch(`https://crates.io/api/v1/crates/${name}/${version}`)
-      : await fetch(`https://crates.io/api/v1/crates/${name}`);
+    const res = await fetch(`https://crates.io/api/v1/crates/${id}`);
     
     // get json
     const data = await res.json();
@@ -37,11 +32,11 @@ export class AppController {
       throw new HttpException("cannot get the specific crate", HttpStatus.NOT_FOUND);
     }
 
-    return this.appService.getCompiledCratesId(id, data, version);
+    return this.appService.compileCrate(data);
   }
 
   @Get("/explore")
   async getSummary() {
-    return this.appService.getCompiledIndex();
+    return this.appService.compileIndex();
   }
 }

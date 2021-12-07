@@ -1,24 +1,27 @@
-type DepNode = {
-  name: string;
+interface DepNode extends Partial<Dependency> {
   children: DepNode[];
 }
 
-interface DependenciesResponse {
-  dependencies: {
-    crate_id: string;
-    default_features: boolean;
-    downloads: number;
-    features: string[];
-    id: number;
-    kind: string;
-    optional: boolean;
-    req: string;
-    target: null;
-    version_id: number;
-  }[];
+/* components */
+interface Dependency {
+  crate_id: string;
+  default_features: boolean;
+  downloads: number;
+  features: string[];
+  id: number;
+  kind: string;
+  optional: boolean;
+  req: string;
+  target: null;
+  version_id: number;
 }
 
-interface CurrentCrate {
+/* api response */
+interface DependenciesResponse {
+  dependencies: Dependency[];
+}
+
+interface MainCrate {
   categories: {
     category: string;
     crates_cnt: number;

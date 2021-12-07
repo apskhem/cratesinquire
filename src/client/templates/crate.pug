@@ -12,14 +12,45 @@ html(lang="en")
   body
     header
     main#crate
-      input#data(value=raw, disabled, hidden)
+      input#data(value=JSON.stringify(data), disabled, hidden)
       div.main-container
+        section.search-container
         section.crate-header
-          h1 #{data.crate.name}
-          div #{data.crate.max_stable_version} • Published by #{data.versions[0].audit_actions[0].user.name}
-          div Updated on #{data.crate.updated_at}
-          div Created on #{data.crate.created_at}
-          div #{data.crate.description}
+          div.left-header
+            div.header-title
+              h1 #{data.crate.name}
+            div.header-version #{data.crate.max_stable_version} • Published by ...
+            div.header-links
+              a(href="https://crates.io/crates/" + data.crate.id, target="_blank")
+                img(src="/img/crates-icon.png", alt="link-icon")
+              if data.crate.documentation
+                a(href=data.crate.documentation, target="_blank")
+                  img(src="/img/docs-icon.svg", alt="link-icon")
+              if data.crate.repository
+                a(href=data.crate.repository, target="_blank")
+                  img(src="/img/github-icon.svg", alt="link-icon")
+              if data.crate.homepage
+                a(href=data.crate.homepage, target="_blank")
+                  img(src="/img/homepage-icon.svg", alt="link-icon")
+            div.header-date Updated on #{new Date(data.crate.updated_at).toLocaleString("en", { year: "numeric", month: "long", day: "numeric" })}
+            div.header-date Created on #{new Date(data.crate.created_at).toLocaleString("en", { year: "numeric", month: "long", day: "numeric" })}
+            div.header-desc
+              div.header-icon-container
+                i.fas.fa-info-circle
+              div #{data.crate.description}
+            div.header-keywords
+              div.header-icon-container
+                i.fas.fa-tags
+              div.header-keywords-row
+                each keyword in data.crate.keywords
+                  a(href="https://crates.io/keywords/" + keyword, target="_blank") #{keyword}
+                if !data.crate.keywords.length
+                  span.empty-tags none
+          div.right-header
+            div.header-total-downloads
+              div.header-icon-container
+                i.fas.fa-download
+              b #{data.crate.downloads.toLocaleString("en")}
         section.crate-bundle-size
           div.graph-header
             div.view-swtiches

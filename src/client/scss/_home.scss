@@ -128,6 +128,66 @@ main#crate {
     > section {
       display: grid;
       gap: 0.5em;
+
+      &.crate-header {
+        display: flex;
+        justify-content: space-between;
+
+        .header-icon-container {
+          display: grid;
+          align-items: center;
+          min-width: 24px;
+        }
+
+        > .left-header {
+          .header-links {
+            display: flex;
+            margin: 4px 0;
+            gap: 0.5em;
+
+            img {
+              width: 24px;
+              height: 24px;
+            }
+          }
+  
+          .header-date {
+            color: #62727A;
+            font-size: small;
+          }
+  
+          .header-desc {
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+          }
+  
+          .header-keywords {
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+  
+            .header-keywords-row {
+              display: flex;
+              gap: 0.5em;
+  
+              > a {
+                padding: 0 8px;
+                border-radius: 4px;
+                color: #20A243;
+                background-color: #CEF7C5;
+              }
+            }
+          }
+        }
+
+        > .right-header {
+          .header-total-downloads {
+            display: flex;
+            gap: 0.5em;
+          }
+        }
+      }
     }
   }
 
@@ -237,6 +297,16 @@ main#crate {
         > span {
           margin: 0 8px;
         }
+      }
+    }
+  }
+
+  svg {
+    text {
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
       }
     }
   }

@@ -177,7 +177,7 @@ const runHome = () => {
 
     const name = selEl.firstElementChild.textContent;
 
-    window.location.href = `crates/${name}`;
+    window.location.href = `/crates/${name}`;
   });
 
   searchResultDropdown.removeAttribute("hidden");

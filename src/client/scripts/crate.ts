@@ -1,7 +1,8 @@
 import bytes from "bytes";
 import pluralize from "pluralize";
 import semver from "semver";
-import chart from "./tree";
+import { getDepTree } from "./get-dep";
+import { getDepChart } from "./tree";
 
 /* utils */
 const getData = (id: string) => {
@@ -33,16 +34,17 @@ class BarRowElement {
   private readonly bar = document.createElement("div");
   private readonly innerBarLabel = document.createElement("span");
 
-  private readonly data: CurrentCrate["versions"][number];
+  private readonly data: MainCrate["versions"][number];
 
-  constructor(data: CurrentCrate["versions"][number], crateId: string) {
+  constructor(data: MainCrate["versions"][number], crateId: string) {
     this.data = data;
 
     this.rTrack.classList.add("version-track");
     this.bar.classList.add("bundle-size-bar");
 
     this.label.textContent = data.num;
-    this.label.href = `/crates/${crateId}@${data.num}`
+    this.label.href = `https://crates.io/crates/${crateId}/${data.num}`;
+    this.label.target = "_blank";
 
     if (data.yanked) {
       this.rTrack.classList.add("yanked");
@@ -155,7 +157,7 @@ const runCrate = async () => {
     bars.forEach((x) => x.setBarMode("lifetime", maxLifetime));
   });
 
-  const data = getData("data") as CurrentCrate;
+  const data = getData("data") as MainCrate;
 
   const maxBundleSize = data.versions.reduce((acc, x) => Math.max(acc, x.crate_size), 0);
   const maxDownloads = data.versions.reduce((acc, x) => Math.max(acc, x.downloads), 0);
@@ -191,7 +193,9 @@ const runCrate = async () => {
     return bar;
   });
 
-  const chartEl = await chart(data.crate.id, data.crate.max_stable_version);
+  // install dep graph
+  const depData = await getDepTree(data.crate.id, data.crate.max_stable_version);
+  const chartEl = getDepChart(depData);
   depTreeContainer.appendChild(chartEl);
 };
 
