@@ -13,7 +13,7 @@ export const getDepTree = async (id: string, version: string) => {
   await getDepTreeRecursively(root, data, 10, dedupSet);
 
   return root;
-}
+};
 
 const getDepTreeRecursively = async (root: DepNode, res: DependenciesResponse, dep: number, dedupSet: Set<string>) => {
   if (res.dependencies?.length) {
@@ -34,7 +34,7 @@ const getDepTreeRecursively = async (root: DepNode, res: DependenciesResponse, d
       return {
         ...x,
         children: []
-      }
+      };
     });
 
     if (dep === 1) {
@@ -45,4 +45,4 @@ const getDepTreeRecursively = async (root: DepNode, res: DependenciesResponse, d
   }
   
   return root;
-}
+};

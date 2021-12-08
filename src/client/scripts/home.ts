@@ -1,3 +1,5 @@
+import * as d3 from "d3";
+
 const SERACH_MARGIN = 120;
 
 /* utils */
@@ -10,9 +12,9 @@ const getFormattedQuery = (value: string, query: string) => {
 /* main */
 const runHome = () => {
   const searchContainer = document.getElementById("search-bar-container");
-  const searchInput = document.getElementById("search-input") as HTMLInputElement;
-  const searchIcon = document.getElementById("search-icon");
-  const searchResultDropdown = document.getElementById("search-dropdown");
+  const searchInput = d3.select<HTMLInputElement, null>("#search-input");
+  const searchIcon = d3.select<HTMLElement, null>("#search-icon");
+  const searchResultDropdown = d3.select<HTMLElement, null>("#search-dropdown");
 
   let searchCache: SearchResponse | null = null;
   let onGoingRequest: AbortController | null = null;
@@ -26,14 +28,23 @@ const runHome = () => {
       onGoingRequest?.abort();
       onGoingRequest = controller;
 
-      const res = await fetch(`https://crates.io/api/v1/crates?page=1&per_page=8&q=${query}&sort=downloads`, { signal });
+      // create url
+      const url = new URL("https://crates.io/api/v1/crates");
+
+      url.searchParams.append("page", "1");
+      url.searchParams.append("per_page", "8");
+      url.searchParams.append("q", query);
+      url.searchParams.append("sort", "downloads");
+
+      // send request
+      const res = await fetch(url.toString(), { signal });
 
       onGoingRequest = null;
   
       const data = await res.json() as SearchResponse;
 
       /* if not delayed */
-      if (searchInput.value) {
+      if (searchInput.property("value")) {
         renderSearchResponse(data, query);
       }
 
@@ -42,17 +53,14 @@ const runHome = () => {
     catch (err) {
   
     }
-    finally {
-  
-    }
   };
 
   const clearSearchResults = () => {
-    while (searchResultDropdown.firstElementChild) {
-      searchResultDropdown.firstElementChild.remove();
-    }
+    searchResultDropdown
+      .remove()
+      .selectChildren()
+      .remove();
 
-    searchResultDropdown.remove();
     searchContainer.style.marginBottom = `${SERACH_MARGIN}px`;
   };
   
@@ -63,64 +71,66 @@ const runHome = () => {
       return;
     }
 
-    for (const crate of data.crates) {
-      const row = document.createElement("div");
-      const packageName = document.createElement("div");
-      const packageVersion = document.createElement("div");
-
-      row.classList.add("result-row");
-      packageName.innerHTML = getFormattedQuery(crate.name, query);
-      packageVersion.textContent = crate.newest_version;
-
-      // append row
-      row.appendChild(packageName);
-      row.appendChild(packageVersion);
-
-      searchResultDropdown.appendChild(row);
-
-      // add event listener
-      row.addEventListener("mouseover", () => {
-        searchResultDropdown.getElementsByClassName("sel")[0].classList.remove("sel");
-
-        row.classList.add("sel");
-      });
-
-      row.addEventListener("click", () => {
-        searchIcon.click();
-      });
-    }
-
     // show dropdown
     searchContainer.style.marginBottom = `${SERACH_MARGIN - Math.min(data.crates.length, 8) * 40}px`;
-    searchContainer.appendChild(searchResultDropdown);
+    searchContainer.appendChild(searchResultDropdown.node());
+
+    const row = searchResultDropdown
+      .selectAll("div")
+      .data(data.crates)
+      .enter()
+      .append("div")
+      .classed("result-row", true)
+      .on("mouseover", (e) => {
+        searchResultDropdown.select(".sel").classed("sel", false);
+
+        d3.select(e.target).classed("sel", true);
+      })
+      .on("click", () => handleSearch());
+
+    row.append("div").html((d) => getFormattedQuery(d.name, query));
+    row.append("div").text((d) => d.max_stable_version || d.max_version);
 
     // add selection
-    searchResultDropdown.firstElementChild?.classList.add("sel");
+    searchResultDropdown.selectChild().classed("sel", true);
+  };
+
+  /* handle seach */
+  const handleSearch = () => {
+    const selEl = d3.select(".sel");
+
+    if (selEl.empty()) {
+      return;
+    }
+
+    const name = selEl.selectChild().text();
+
+    window.location.href = `/crates/${name}`;
   };
 
   /* selection functions */
   const selectUp = () => {
-    const selEl = searchResultDropdown.getElementsByClassName("sel")[0] as HTMLElement;
+    const selEl = d3.select<HTMLElement, null>(".sel");
+    const prevSibling = selEl.node()?.previousElementSibling;
 
-    if (selEl.previousElementSibling) {
-      selEl.classList.remove("sel");
-      selEl.previousElementSibling.classList.add("sel");
+    if (prevSibling) {
+      selEl.classed("sel", false);
+      prevSibling.classList.add("sel");
     }
   };
 
   const selectDown = () => {
-    const selEl = searchResultDropdown.getElementsByClassName("sel")[0] as HTMLElement;
-
-    if (selEl.nextElementSibling) {
-      selEl.classList.remove("sel");
-      selEl.nextElementSibling.classList.add("sel");
-
-      console.log(selEl.offsetTop);
+    const selEl = d3.select<HTMLElement, null>(".sel");
+    const nextSibling = selEl.node()?.nextElementSibling;
+    
+    if (nextSibling) {
+      selEl.classed("sel", false);
+      nextSibling.classList.add("sel");
     }
   };
 
   /* document main event listeners */
-  document.body.addEventListener("click", () => {
+  d3.select("body").on("click", () => {
     clearSearchResults();
   });
 
@@ -130,19 +140,19 @@ const runHome = () => {
   });
 
   /* search event listeners */
-  searchInput.addEventListener("input", async (e) => {
-    const value = searchInput.value;
+  searchInput.on("input", async () => {
+    const value = searchInput.property("value") as string;
 
     if (value) {
-      searchRequest(value);
+      await searchRequest(value);
     }
     else {
       clearSearchResults();
     }
   });
 
-  searchInput.addEventListener("focus", () => {
-    const value = searchInput.value;
+  searchInput.on("focus", () => {
+    const value = searchInput.property("value") as string;
 
     if (searchCache && value) {
       renderSearchResponse(searchCache, value);
@@ -152,10 +162,10 @@ const runHome = () => {
     }
   });
 
-  searchInput.addEventListener("keydown", (e) => {
+  searchInput.on("keydown", (e) => {
     if (e.code === "Enter") {
       e.preventDefault();
-      searchIcon.click();
+      handleSearch();
     }
     else if (e.code === "ArrowDown") {
       e.preventDefault();
@@ -168,20 +178,11 @@ const runHome = () => {
   });
 
   /* search icon event listener */
-  searchIcon.addEventListener("click", () => {
-    const selEl = searchResultDropdown.getElementsByClassName("sel")[0];
-
-    if (!selEl) {
-      return;
-    }
-
-    const name = selEl.firstElementChild.textContent;
-
-    window.location.href = `/crates/${name}`;
+  searchIcon.on("click", () => {
+    handleSearch();
   });
 
-  searchResultDropdown.removeAttribute("hidden");
-  searchResultDropdown.remove();
+  searchResultDropdown.attr("hidden", null).remove();
 };
 
 export default runHome;

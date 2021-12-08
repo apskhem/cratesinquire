@@ -21,7 +21,7 @@ html(lang="en")
               h1 #{data.crate.name}
             div.header-version #{data.crate.max_stable_version} • Published by ...
             div.header-links
-              a(href="https://crates.io/crates/" + data.crate.id, target="_blank")
+              a(href=`https://crates.io/crates/${data.crate.id}`, target="_blank")
                 img(src="/img/crates-icon.png", alt="link-icon")
               if data.crate.documentation
                 a(href=data.crate.documentation, target="_blank")
@@ -43,7 +43,7 @@ html(lang="en")
                 i.fas.fa-tags
               div.header-keywords-row
                 each keyword in data.crate.keywords
-                  a(href="https://crates.io/keywords/" + keyword, target="_blank") #{keyword}
+                  a(href=`https://crates.io/keywords/${keyword}`, target="_blank") #{keyword}
                 if !data.crate.keywords.length
                   span.empty-tags none
           div.right-header
@@ -60,6 +60,13 @@ html(lang="en")
             div.view-options
               div
           div.graph-container
+            //- each version in data.versions
+            //-  div
+            //-    div.version-track
+            //-  a(href=`https://crates.io/crates/${data.crate.id}/${version.num}`, target="_blank") #{version.num}
+            //-  div
+            //-    div.bundle-size-bar
+            //-      span
         section.crate-dep-tree
           h3 Dependency Tree
           div.dep-tree-displayer-container

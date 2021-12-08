@@ -2,18 +2,16 @@
   "compilerOptions": {
     "target": "ES6",
     "module": "ES2020",
-    "watch": false,
     "sourceMap": true,
-    "strict": false,
+    "strict": true,
     "noImplicitReturns": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
-    /* "noUncheckedIndexedAccess": true, */
+    "noUncheckedIndexedAccess": true,
     "removeComments": true,
-    "preserveConstEnums": true,
     "esModuleInterop": true,
-    "lib": [ "DOM", "DOM.Iterable", "ES2020" ],
-    "forceConsistentCasingInFileNames": true,
+    "lib": [ "DOM", "ES2020" ],
+    "forceConsistentCasingInFileNames": true
   },
   "include": [
     "./src/client/scripts/**/*.ts",

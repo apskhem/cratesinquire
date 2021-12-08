@@ -1,29 +1,35 @@
-import type { NestExpressApplication } from "@nestjs/platform-express";
+import {
+  FastifyAdapter,
+  NestFastifyApplication
+} from "@nestjs/platform-fastify";
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import { Logger } from "@nestjs/common";
-import * as compression from "compression";
+import compression from "fastify-compress";
+import { fastifyHelmet } from "fastify-helmet";
 import * as helmet from "helmet";
 import { AppService } from "./app.service";
 
-(async () => {
+void (async () => {
   // prepare precomputed scripts
   AppService.compileSass();
   AppService.compileTypeScript();
 
   // create app
-  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter());
 
   // set middlewares
-  app.use(compression());
-  app.use(helmet({
-    contentSecurityPolicy: {
-      directives: {
-        ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-        "connect-src": [ "https://crates.io/" ]
+  await Promise.all([
+    app.register(compression),
+    app.register(fastifyHelmet, {
+      contentSecurityPolicy: {
+        directives: {
+          ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+          "connect-src": [ "https://crates.io/" ]
+        }
       }
-    }
-  }));
+    })
+  ]);
 
   await app.listen(3000);
   Logger.log(`server listening: ${await app.getUrl()}`);

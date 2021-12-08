@@ -1,22 +1,20 @@
-import { Controller, Get, Param, HttpException, HttpStatus } from "@nestjs/common";
+import { Controller, Get, Header, Param, HttpException, HttpStatus } from "@nestjs/common";
 import { AppService } from "./app.service";
 import fetch from "node-fetch";
-import * as semver from "semver";
 
 @Controller("/")
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get("/")
-  async getHello() {
+  @Header("content-type", "text/html")
+  getHello() {
     return this.appService.compileIndex();
   }
 
   @Get("/crates/:id")
-  // :id format: <package-name>[@<version>?]
-  async getCrateById(
-    @Param("id") id: string
-  ) {
+  @Header("content-type", "text/html")
+  async getCrateById(@Param("id") id: string) {
     // validate id
     if (!/^[a-zA-Z0-9_-]+$/.test(id)) {
       throw new HttpException("bad package name identifier format", HttpStatus.BAD_REQUEST);
@@ -36,7 +34,8 @@ export class AppController {
   }
 
   @Get("/explore")
-  async getSummary() {
+  @Header("content-type", "text/html")
+  getSummary() {
     return this.appService.compileIndex();
   }
 }

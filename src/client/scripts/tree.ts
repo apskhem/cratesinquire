@@ -10,10 +10,10 @@ const getTree = <T>(data: T) => {
   const tree = d3.tree<T>().nodeSize([ root["dx"], root["dy"] ])(root);
 
   return tree;
-}
+};
 
 const getBoundScope = (root: ReturnType<typeof getTree>) => {
-  let x0 = Infinity;
+  let x0 = Number.POSITIVE_INFINITY;
   let x1 = -x0;
   root.each((d) => {
     x1 = Math.max(d.x, x1);
@@ -21,15 +21,14 @@ const getBoundScope = (root: ReturnType<typeof getTree>) => {
   });
 
   return [ x0, x1 ];
-}
+};
 
 export const getDepChart = (data: DepNode) => {
   const root = getTree(data);
 
   const [ x0, x1 ] = getBoundScope(root);
 
-  const svg = d3
-    .create("svg")
+  const svg = d3.create("svg")
     .attr("viewBox", [ 0, 0, WIDTH, x1 - x0 + root["dx"] * 2 ] as any);
 
   const g = svg.append("g")
@@ -73,4 +72,4 @@ export const getDepChart = (data: DepNode) => {
     .attr("stroke", "white");
 
   return svg.node();
-}
+};

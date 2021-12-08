@@ -44,7 +44,7 @@ export class AppService {
 
   static compileTypeScript() {
     esbuild.buildSync({
-      entryPoints: [AppService.TYPESCRIPT_ENTRY_PATH],
+      entryPoints: [ AppService.TYPESCRIPT_ENTRY_PATH ],
       bundle: true,
       minify: true,
       sourcemap: true,
