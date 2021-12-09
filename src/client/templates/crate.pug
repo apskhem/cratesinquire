@@ -1,8 +1,10 @@
 doctype html
 html(lang="en")
   head
-    meta(charset="UTF-8")
+    meta(charset="utf-8")
+    meta(http-equiv="x-ua-compatible", content="ie=edge")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(name="application-name", content="Cratesinquire")
     meta(name="description", content=data.crate.description)
     link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.9.0/css/all.css", crossorigin="anonymous")
     link(rel="stylesheet", href="/bundle.css")
@@ -73,12 +75,12 @@ html(lang="en")
         section.crate-features
           h3 Features
     footer.abs
-      div
-        div Hosted on
-        img(src="/img/heroku-logo.png", alt="hosted on")
-      div
-        div Made with
-        i.fas.fa-heart
-        div by
-        a(href="https://github.com/apskhem" target="_blank") @apskhem.
-        div &copy; 2021. All rights reserved.
+      div.lhs
+        span Hosted on
+        img(src="/img/heroku-logo.png", alt="hosted-on")
+      div.rhs
+        div
+          span Made with
+          i.fas.fa-heart
+          span by
+          a(href="https://github.com/apskhem" target="_blank") @apskhem

@@ -1,7 +1,5 @@
 import * as d3 from "d3";
 
-const SERACH_MARGIN = 120;
-
 /* utils */
 const getFormattedQuery = (value: string, query: string) => {
   return value.replace(new RegExp(query, "gi"), (value) => {
@@ -11,16 +9,19 @@ const getFormattedQuery = (value: string, query: string) => {
 
 /* main */
 const runHome = () => {
-  const searchContainer = document.getElementById("search-bar-container");
-  const searchInput = d3.select<HTMLInputElement, null>("#search-input");
-  const searchIcon = d3.select<HTMLElement, null>("#search-icon");
-  const searchResultDropdown = d3.select<HTMLElement, null>("#search-dropdown");
+  const searchContainer = d3.select<HTMLElement, null>(".search-bar-grid");
+  const searchInput = d3.select<HTMLInputElement, null>(".search-input");
+  const searchIcon = d3.select<HTMLElement, null>(".search-icon");
+  const searchResultDropdown = d3.select<HTMLElement, SearchResponse["crates"]>(".search-dropdown");
+  const errorMsg = d3.select<HTMLElement, null>(".error-msg");
 
-  let searchCache: SearchResponse | null = null;
+  let cachedSearchData: SearchResponse | null = null;
   let onGoingRequest: AbortController | null = null;
 
   /* function definition */
   const searchRequest = async (query: string) => {
+    errorMsg.text("");
+
     try {
       const controller = new AbortController();
       const { signal } = controller;
@@ -39,60 +40,50 @@ const runHome = () => {
       // send request
       const res = await fetch(url.toString(), { signal });
 
+      // proess data
       onGoingRequest = null;
-  
-      const data = await res.json() as SearchResponse;
+      cachedSearchData = await res.json() as SearchResponse;
 
       /* if not delayed */
       if (searchInput.property("value")) {
-        renderSearchResponse(data, query);
+        renderSearchResponse(cachedSearchData, query);
       }
-
-      searchCache = data;
+      else {
+        cachedSearchData = null;
+      }
     }
     catch (err) {
-  
+      if (err.name !== "AbortError") {
+        errorMsg.text("Something went wrong! Please try again.");
+      }
     }
   };
 
-  const clearSearchResults = () => {
-    searchResultDropdown
-      .remove()
-      .selectChildren()
-      .remove();
-
-    searchContainer.style.marginBottom = `${SERACH_MARGIN}px`;
+  const hideDropdownResult = () => {
+    searchResultDropdown.remove();
   };
   
   const renderSearchResponse = (data: SearchResponse, query: string) => {
-    clearSearchResults();
-
     if (!data.crates.length) {
       return;
     }
 
     // show dropdown
-    searchContainer.style.marginBottom = `${SERACH_MARGIN - Math.min(data.crates.length, 8) * 40}px`;
-    searchContainer.appendChild(searchResultDropdown.node());
+    searchContainer.append(() => searchResultDropdown.node());
 
     const row = searchResultDropdown
       .selectAll("div")
-      .data(data.crates)
-      .enter()
-      .append("div")
+      .data(data.crates, (d) => d.id)
+      .join("div")
       .classed("result-row", true)
-      .on("mouseover", (e) => {
-        searchResultDropdown.select(".sel").classed("sel", false);
-
-        d3.select(e.target).classed("sel", true);
+      .classed("sel", (d, i) => i === 0)
+      .on("mouseover", (e, d1) => {
+        searchResultDropdown.selectChildren().classed("sel", (d2) => d1 === d2);
       })
       .on("click", () => handleSearch());
 
-    row.append("div").html((d) => getFormattedQuery(d.name, query));
-    row.append("div").text((d) => d.max_stable_version || d.max_version);
-
-    // add selection
-    searchResultDropdown.selectChild().classed("sel", true);
+    row.join("div").append("div").html((d) => getFormattedQuery(d.name, query));
+    row.join("div").append("div").text((d) => d.max_stable_version || d.max_version);
   };
 
   /* handle seach */
@@ -131,11 +122,11 @@ const runHome = () => {
 
   /* document main event listeners */
   d3.select("body").on("click", () => {
-    clearSearchResults();
+    hideDropdownResult();
   });
 
   /* search container event listeners */
-  searchContainer.addEventListener("click", (e) => {
+  searchContainer.on("click", (e) => {
     e.stopPropagation();
   });
 
@@ -147,18 +138,18 @@ const runHome = () => {
       await searchRequest(value);
     }
     else {
-      clearSearchResults();
+      hideDropdownResult();
     }
   });
 
   searchInput.on("focus", () => {
     const value = searchInput.property("value") as string;
 
-    if (searchCache && value) {
-      renderSearchResponse(searchCache, value);
+    if (cachedSearchData && value) {
+      renderSearchResponse(cachedSearchData, value);
     }
     else {
-      clearSearchResults();
+      hideDropdownResult();
     }
   });
 

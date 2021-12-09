@@ -73,8 +73,8 @@ interface MainCrate {
         id: number;
         login: string;
         name: string;
-        url: string
-      }
+        url: string;
+      };
     }[];
     crate: string;
     crate_size: number;
@@ -101,7 +101,7 @@ interface MainCrate {
     };
     readme_path: string;
     updated_at: string;
-    yanked: boolean
+    yanked: boolean;
   }[];
 }
 
@@ -119,11 +119,11 @@ interface SearchResponse {
     keywords: null;
     links: {
       owner_team: string;
-      owner_user: string
+      owner_user: string;
       owners: string;
       reverse_dependencies: string;
       version_downloads: string;
-      versions: string
+      versions: string;
     };
     max_stable_version: string;
     max_version: string;
@@ -132,11 +132,11 @@ interface SearchResponse {
     recent_downloads: number;
     repository: string;
     updated_at: string;
-    versions: null
+    versions: null;
   }[];
   meta: {
     next_page: string | null;
     prev_page: string | null;
     total: number;
-  }
+  };
 }
