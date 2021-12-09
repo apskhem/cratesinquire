@@ -190,6 +190,7 @@ const runCrate = async () => {
   const depData = await getDepTree(data.crate.id, data.crate.max_stable_version);
   const chartEl = getDepChart(depData);
   depTreeContainer.append(() => chartEl);
+  d3.select(".dep-tree-displayer-container > .loader-container").remove();
 };
 
 export default runCrate;

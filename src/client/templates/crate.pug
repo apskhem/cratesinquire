@@ -18,7 +18,7 @@ html(lang="en")
       div.main-container
         section.search-container
         section.crate-header
-          div.left-header
+          div.lhs
             div.header-title
               h1 #{data.crate.name}
             div.header-version #{data.crate.max_stable_version} • Published by ...
@@ -48,11 +48,15 @@ html(lang="en")
                   a(href=`https://crates.io/keywords/${keyword}`, target="_blank") #{keyword}
                 if !data.crate.keywords.length
                   span.empty-tags none
-          div.right-header
+          div.rhs
             div.header-total-downloads
               div.header-icon-container
                 i.fas.fa-download
               b #{data.crate.downloads.toLocaleString("en")}
+            div.header-total-verions
+              div.header-icon-container
+                i.fas.fa-hammer
+              b #{data.versions.length.toLocaleString("en")}
         section.crate-bundle-size
           div.graph-header
             div.view-swtiches
@@ -72,6 +76,11 @@ html(lang="en")
         section.crate-dep-tree
           h3 Dependency Tree
           div.dep-tree-displayer-container
+            div.loader-container
+              div.dot-table-layout
+                div(style="animation-delay: 0")
+                div(style="animation-delay: 100ms")
+                div(style="animation-delay: 200ms")
         section.crate-features
           h3 Features
     footer.abs
