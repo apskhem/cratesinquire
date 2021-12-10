@@ -1,9 +1,10 @@
 import bytes from "bytes";
 import pluralize from "pluralize";
 import semver from "semver";
-import { getDepTree } from "./get-dep";
+import { getDepTree } from "./deps";
 import { getDepChart } from "./tree";
 import * as d3 from "d3";
+import { initSearchBar } from "./search-bar";
 
 /* utils */
 const getData = <T>(id: string): T => {
@@ -25,6 +26,8 @@ const getTimeDiff = (d1: string, d2: string) => {
 
   return t1 - t2;
 };
+
+type BarMode = "size" | "downloads" | "lifetime" | "features";
 
 /* structs */
 class BarRowElement {
@@ -83,12 +86,12 @@ class BarRowElement {
     this.label.html(`<b>${this.data.num}</b>`);
   }
 
-  public setBarMode(mode: "size" | "downloads" | "lifetime", maxValue: number) {
+  public setBarMode(mode: BarMode, maxValue: number) {
     switch (mode) {
       case "size": {
-        this.bar.style("width", `${this.data.crate_size / maxValue * 100}%`);
+        this.bar.style("width", maxValue ? `${this.data.crate_size / maxValue * 100}%` : "0");
 
-        const formattedByteString = bytes(this.data.crate_size, { unit: "B", thousandsSeparator: "," });
+        const formattedByteString = this.data.crate_size ? bytes(this.data.crate_size, { unit: "B", thousandsSeparator: "," }) : "N/A";
 
         this.innerBarLabel.text(formattedByteString);
         break;
@@ -109,6 +112,14 @@ class BarRowElement {
         this.innerBarLabel.text(`${lifetimeDay.toLocaleString("en")} ${pluralize("day", lifetimeDay)}`);
         break;
       }
+      case "features": {
+        const featureCount = Object.keys(this.data.features).length;
+
+        this.bar.style("width", maxValue ? `${featureCount / maxValue * 100}%` : "0");
+
+        this.innerBarLabel.text(`${featureCount.toLocaleString("en")} ${pluralize("features", featureCount)}`);
+        break;
+      }
       default: {
         throw new Error();
       }
@@ -123,16 +134,16 @@ class BarRowElement {
 }
 
 /* main */
-const runCrate = async () => {
+export const runCrate = async () => {
+  initSearchBar();
+
   const bundleSizeGraphContainer = d3.select<HTMLElement, null>(".graph-container");
   const viewSwitchContainer = d3.select<HTMLElement, null>(".view-swtiches");
-  const switchCrateSizeEl = d3.select<HTMLElement, null>("#switch-crate-size");
-  const switchDownloadsEl = d3.select<HTMLElement, null>("#switch-dowloads");
-  const switchLifetimeEl = d3.select<HTMLElement, null>("#switch-lifetime");
   const depTreeContainer = d3.select<HTMLElement, null>(".dep-tree-displayer-container");
 
-  // init switches event handle
-  const addButtonEventHandler = (el: d3.Selection<HTMLElement, null, HTMLElement, null>, processFn: () => void) => {
+  const addButtonEventHandler = (queryString: string, mode: BarMode, maxValue: number) => {
+    const el = d3.select<HTMLElement, null>(queryString);
+
     el.on("click", () => {
       if (el.classed("sel")) {
         return;
@@ -142,19 +153,21 @@ const runCrate = async () => {
   
       el.classed("sel", true);
 
-      processFn();
+      bars.forEach((x) => x.setBarMode(mode, maxValue));
     });
   };
-
-  addButtonEventHandler(switchCrateSizeEl, () => bars.forEach((x) => x.setBarMode("size", maxBundleSize)));
-  addButtonEventHandler(switchDownloadsEl, () => bars.forEach((x) => x.setBarMode("downloads", maxDownloads)));
-  addButtonEventHandler(switchLifetimeEl, () => bars.forEach((x) => x.setBarMode("lifetime", maxLifetime)));
 
   const data = getData<MainCrate>("data");
 
   const maxBundleSize = data.versions.reduce((acc, x) => Math.max(acc, x.crate_size), 0);
   const maxDownloads = data.versions.reduce((acc, x) => Math.max(acc, x.downloads), 0);
   const maxLifetime = data.versions.reduce((acc, x) => Math.max(acc, getTimeDiff(new Date().toISOString(), x.created_at)), 0);
+  const maxFeatures = data.versions.reduce((acc, x) => Math.max(acc, Object.keys(x.features).length), 0);
+
+  addButtonEventHandler("#switch-crate-size", "size", maxBundleSize);
+  addButtonEventHandler("#switch-dowloads", "downloads", maxDownloads);
+  addButtonEventHandler("#switch-lifetime", "lifetime", maxLifetime);
+  addButtonEventHandler("#switch-features", "features", maxFeatures);
 
   let minorChange = semver.coerce(data.versions[0].num).minor;
   let majorChange = semver.coerce(data.versions[0].num).major;
@@ -192,5 +205,3 @@ const runCrate = async () => {
   depTreeContainer.append(() => chartEl);
   d3.select(".dep-tree-displayer-container > .loader-container").remove();
 };
-
-export default runCrate;

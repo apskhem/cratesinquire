@@ -17,11 +17,35 @@ html(lang="en")
       input#data(value=JSON.stringify(data), disabled, hidden)
       div.main-container
         section.search-container
+          div.search-ribbon
+            div.lhs
+              a.pass-href(href="/")
+                div.img-container
+                  img(src="/favicon.png", alt="logo")
+              a.pass-href(href="/")
+                div.title
+                  div.crate CRATES
+                  div.inquire INQUIRE
+            div.mid
+              div.search-bar-container
+                div.search-bar-grid
+                  input.search-input(type="search", placeholder="Find a package...", spellcheck="false")
+                  div.search-icon-container
+                    i.search-icon.fas.fa-search
+                  div.search-dropdown(hidden)
+            div.rhs
+              a.banner.pass-href(href="https://github.com/apskhem/cratesinquire", target="_blank")
+                i.fab.fa-github
+                span GITHUB REPO
         section.crate-header
           div.lhs
             div.header-title
               h1 #{data.crate.name}
-            div.header-version #{data.crate.max_stable_version} • Published by ...
+            div.header-version
+              span #{data.crate.max_stable_version}
+              if data.versions[0] && data.versions[0].published_by
+                span #{" "}• Published by#{" "}
+                a(href=data.versions[0].published_by.url, target="_blank") #{data.versions[0].published_by.name}
             div.header-links
               a(href=`https://crates.io/crates/${data.crate.id}`, target="_blank")
                 img(src="/img/crates-icon.png", alt="link-icon")
@@ -39,7 +63,7 @@ html(lang="en")
             div.header-desc
               div.header-icon-container
                 i.fas.fa-info-circle
-              div #{data.crate.description}
+              div #{data.crate.description || "none"}
             div.header-keywords
               div.header-icon-container
                 i.fas.fa-tags
@@ -57,12 +81,18 @@ html(lang="en")
               div.header-icon-container
                 i.fas.fa-hammer
               b #{data.versions.length.toLocaleString("en")}
+            if data.versions[0] && data.versions[0].license && !/^\s+$/.test(data.versions[0].license)
+              div.header-license
+                div.header-icon-container
+                  i.fas.fa-balance-scale
+                b #{data.versions[0].license}
         section.crate-bundle-size
           div.graph-header
             div.view-swtiches
               div#switch-crate-size.sel Crate Size
               div#switch-dowloads Downloads
               div#switch-lifetime Lifetime
+              div#switch-features Features
             div.view-options
               div
           div.graph-container

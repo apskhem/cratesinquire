@@ -15,7 +15,7 @@ html(lang="en")
     header
       div.lhs
       div.rhs
-        a.github-container.badge(href="https://github.com/apskhem/cratesinquire", target="_blank")
+        a.banner.pass-href(href="https://github.com/apskhem/cratesinquire", target="_blank")
           i.fab.fa-github
           span GITHUB REPO
     main#home
@@ -25,13 +25,13 @@ html(lang="en")
             div.img-container
               img(src="/favicon.png", alt="logo")
             div
-              div.app-title
+              div.title
                 span.crate CRATES
                 span.inquire INQUIRE
               div.desc Explore crate packages and inspect the details.
           div.search-bar-container
             div.search-bar-grid
-              input.search-input(type="search", placeholder="Find a package...", spellcheck="false", )
+              input.search-input(type="search", placeholder="Find a package...", spellcheck="false")
               div.search-icon-container
                 i.search-icon.fas.fa-search
               div.search-dropdown(hidden)

@@ -66,7 +66,7 @@ export const getDepChart = (data: DepNode) => {
     .attr("x", (d) => d.children ? -6 : 6)
     .attr("font-size", "1em")
     .attr("text-anchor", (d) => d.children ? "end" : "start")
-    .text((d) => d.data.crate_id)
+    .text((d) => [ d.data.crate_id, d.data.req ].join(" "))
     .on("click", (e, d) => window.location.href = `/crates/${d.data.crate_id}`)
     .clone(true).lower()
     .attr("stroke", "white");

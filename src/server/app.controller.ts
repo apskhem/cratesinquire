@@ -1,4 +1,4 @@
-import { Controller, Get, Header, Param, HttpException, HttpStatus } from "@nestjs/common";
+import { Controller, Get, Header, Param, HttpStatus } from "@nestjs/common";
 import { AppService } from "./app.service";
 import fetch from "node-fetch";
 
@@ -9,7 +9,7 @@ export class AppController {
   @Get("/")
   @Header("content-type", "text/html")
   getHello() {
-    return this.appService.compileIndex();
+    return this.appService.renderIndex();
   }
 
   @Get("/crates/:id")
@@ -17,25 +17,31 @@ export class AppController {
   async getCrateById(@Param("id") id: string) {
     // validate id
     if (!/^[a-zA-Z0-9_-]+$/.test(id)) {
-      throw new HttpException("bad package name identifier format", HttpStatus.BAD_REQUEST);
+      return this.appService.renderNotFound(id, `Could not find "${id}" crate.`, HttpStatus.BAD_REQUEST);
     }
 
     // send request
-    const res = await fetch(`https://crates.io/api/v1/crates/${id}`);
+    const raw = await fetch(`https://crates.io/api/v1/crates/${id}`);
     
     // get json
-    const data = await res.json();
+    const data = await raw.json();
 
-    if (data.errors) {
-      throw new HttpException("cannot get the specific crate", HttpStatus.NOT_FOUND);
+    if ("errors" in data) {
+      return this.appService.renderNotFound(id, `Could not find "${id}" crate.`, HttpStatus.NOT_FOUND);
     }
 
-    return this.appService.compileCrate(data);
+    return this.appService.renderCrate(data);
   }
 
-  @Get("/explore")
+  @Get("*")
   @Header("content-type", "text/html")
   getSummary() {
-    return this.appService.compileIndex();
+    return this.appService.renderNotFound("Unknown Route", "Unknown route.", HttpStatus.NOT_FOUND);
   }
+
+  // @Get("/explore")
+  // @Header("content-type", "text/html")
+  // getSummary() {
+  //   return this.appService.compileIndex();
+  // }
 }

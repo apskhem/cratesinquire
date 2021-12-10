@@ -7,37 +7,62 @@ import { join } from "path";
 
 @Injectable()
 export class AppService {
-  private cachedIndexTemplate: string | null = null;
-  private compiledCrateTemplate: pug.compileTemplate | null = null;
+  private readonly staticSiteCache = new Map<string, string>();
+  private readonly compiledServerSideGeneration = new Map<string, pug.compileTemplate>();
 
   private static PUG_INDEX_PATH = join(__dirname, "..", "src", "client", "templates", "index.pug");
   private static PUG_CRATES_ID_PATH = join(__dirname, "..", "src", "client", "templates", "crate.pug");
+  private static PUG_404_PATH = join(__dirname, "..", "src", "client", "templates", "404.pug");
   private static TYPESCRIPT_ENTRY_PATH = join(__dirname, "..", "src", "client", "scripts", "index.ts");
   private static TYPESCRIPT_OUTFILE = join(__dirname, "..", "public", "bundle.js");
   private static SASS_ENTRY_PATH = join(__dirname, "..", "src", "client", "scss", "main.scss");
   private static SASS_OUTFILE = join(__dirname, "..", "public", "bundle.css");
 
-  compileIndex(): string {
-    if (this.cachedIndexTemplate) {
-      return this.cachedIndexTemplate;
+  renderIndex(): string {
+    if (this.staticSiteCache.has("index")) {
+      this.staticSiteCache.get("index");
     }
 
     const pugString = fs.readFileSync(AppService.PUG_INDEX_PATH, "utf8");
     const fn = pug.compile(pugString, { filename: AppService.PUG_INDEX_PATH });
 
-    this.cachedIndexTemplate = fn();
+    const temp = fn();
 
-    return this.cachedIndexTemplate;
+    this.staticSiteCache.set("index", temp);
+
+    return fn();
   }
 
-  compileCrate(data: any): string {
-    if (!this.compiledCrateTemplate) {
+  renderCrate(data: any): string {
+    if (!this.compiledServerSideGeneration.has("crate")) {
       const pugString = fs.readFileSync(AppService.PUG_CRATES_ID_PATH, "utf8");
-      
-      this.compiledCrateTemplate = pug.compile(pugString, { filename: AppService.PUG_CRATES_ID_PATH });
+      const temp = pug.compile(pugString, { filename: AppService.PUG_CRATES_ID_PATH });
+
+      this.compiledServerSideGeneration.set("crate", temp);
     }
 
-    const res = this.compiledCrateTemplate({ data });
+    const res = this.compiledServerSideGeneration.get("crate")?.({ data });
+
+    if (!res) {
+      throw new Error("res is undefined");
+    }
+
+    return res;
+  }
+
+  renderNotFound(title: string, msg: string, status: number): string {
+    if (!this.compiledServerSideGeneration.has("404")) {
+      const pugString = fs.readFileSync(AppService.PUG_404_PATH, "utf8");
+      const temp = pug.compile(pugString, { filename: AppService.PUG_404_PATH });
+
+      this.compiledServerSideGeneration.set("404", temp);
+    }
+
+    const res = this.compiledServerSideGeneration.get("404")?.({ title, msg, status });
+
+    if (!res) {
+      throw new Error("res is undefined");
+    }
 
     return res;
   }

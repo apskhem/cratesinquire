@@ -136,8 +136,6 @@ rules:
       message: require is not allowed.
   no-restricted-syntax:
     - error
-    - selector: BinaryExpression[operator="in"]
-      message: Unexpected operator, in operator is not allowed.
     - selector: BinaryExpression[operator="**"]
       message: Unexpected exponential operator, use Math.pow instead.
     - selector: UnaryExpression[operator="delete"]
