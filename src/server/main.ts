@@ -10,6 +10,8 @@ import { fastifyHelmet } from "fastify-helmet";
 import * as helmet from "helmet";
 import { AppService } from "./app.service";
 
+declare const module: any;
+
 void (async () => {
   // prepare precomputed scripts
   AppService.compileSass();
@@ -31,6 +33,11 @@ void (async () => {
     })
   ]);
 
-  await app.listen(3000);
+  await app.listen(process.env["PORT"] || 3000);
   Logger.log(`server listening: ${await app.getUrl()}`);
+
+  if ("hot" in module) {
+    module.hot.accept();
+    module.hot.dispose(() => app.close());
+  }
 })();

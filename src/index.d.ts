@@ -21,7 +21,7 @@ interface DependenciesResponse {
   dependencies: Dependency[];
 }
 
-interface MainCrate {
+interface CrateResponse {
   categories: {
     category: string;
     crates_cnt: number;

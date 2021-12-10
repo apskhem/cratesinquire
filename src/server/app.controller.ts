@@ -24,7 +24,7 @@ export class AppController {
     const raw = await fetch(`https://crates.io/api/v1/crates/${id}`);
     
     // get json
-    const data = await raw.json();
+    const data = await raw.json() as CrateResponse;
 
     if ("errors" in data) {
       return this.appService.renderNotFound(id, `Could not find "${id}" crate.`, HttpStatus.NOT_FOUND);

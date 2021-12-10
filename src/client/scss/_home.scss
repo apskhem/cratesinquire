@@ -95,12 +95,7 @@ main#home {
   
     > .search-input {
       height: $height;
-      width: 100%;
       padding: 0 16px;
-      background-color: transparent;
-      border: 0;
-      font-size: inherit;
-      font: inherit;
     }
   
     > .search-icon-container {
@@ -110,12 +105,6 @@ main#home {
   
       > i {
         font-size: large;
-        cursor: pointer;
-        transition: 300ms;
-  
-        &:hover {
-          color: #c3890f;
-        }
       }
     }
 
@@ -148,6 +137,15 @@ a.pass-href {
   &:active,
   &:hover {
     text-decoration: none;
+  }
+}
+
+.interactable-icon {
+  cursor: pointer;
+  transition: 300ms;
+
+  &:hover {
+    color: #c3890f;
   }
 }
 
@@ -239,6 +237,40 @@ main#crate {
   flex-grow: 1;
   padding: 1em;
 
+  @media only screen and (max-width: 600px) {
+    .main-container {
+      > section {
+        &.search-container {
+          > .search-ribbon {
+            grid-template-columns: 1fr !important;
+            gap: 0 !important;
+            height: min-content !important;
+
+            > .lhs, .rhs {
+              justify-self: center;
+            }
+
+            > .mid {
+              padding: 0 8px;
+            }
+          }
+        }
+
+        &.crate-header {
+          flex-flow: column;
+
+          > .rhs {
+            align-items: flex-start !important;
+
+            > div {
+              gap: 0.5em
+            }
+          }
+        }
+      }
+    }
+  }
+
   .main-container {
     display: grid;
     gap: 1em;
@@ -297,6 +329,8 @@ main#crate {
         }
 
         > .lhs {
+          max-width: 640px;
+
           .header-links {
             display: flex;
             margin: 4px 0;
@@ -344,7 +378,7 @@ main#crate {
           align-items: flex-end;
 
           > div {
-            display: flex;
+            display: flex;;
           }
         }
       }
@@ -479,6 +513,68 @@ main#crate {
               }
             }
           }
+        }
+      }
+
+      &.crate-features {
+        .features-input-container {
+          position: relative;
+          height: 42px;
+          border-radius: 8px;
+          background-color: #F3F5F7;
+
+          .features-input-grid {
+            display: grid;
+            grid-template-columns: 96px 1fr min-content;
+            gap: 1em;
+            padding: 4px 1em;
+
+            select {
+              height: 36px;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+
+            .features-selection-container {
+              
+              
+            }
+
+            .features-display-pane {
+              margin: auto 0;
+              padding-left: 1em;
+              border-left: 1px solid #62727A;
+              font-family: "Fira Code", monospace;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+
+              span {
+                &.string {
+                  color: #008200;
+                }
+
+                &.keyword {
+                  color: #b21e00;
+                }
+              }
+            }
+
+            .copy-icon-container {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+
+              i {
+                font-size: large;
+              }
+            }
+          }
+        }
+
+        .features-toggles {
+
         }
       }
     }

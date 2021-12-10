@@ -31,7 +31,7 @@ html(lang="en")
                 div.search-bar-grid
                   input.search-input(type="search", placeholder="Find a package...", spellcheck="false")
                   div.search-icon-container
-                    i.search-icon.fas.fa-search
+                    i.search-icon.interactable-icon.fas.fa-search
                   div.search-dropdown(hidden)
             div.rhs
               a.banner.pass-href(href="https://github.com/apskhem/cratesinquire", target="_blank")
@@ -44,7 +44,7 @@ html(lang="en")
             div.header-version
               span #{data.crate.max_stable_version}
               if data.versions[0] && data.versions[0].published_by
-                span #{" "}• Published by#{" "}
+                span #{" • Published by "}
                 a(href=data.versions[0].published_by.url, target="_blank") #{data.versions[0].published_by.name}
             div.header-links
               a(href=`https://crates.io/crates/${data.crate.id}`, target="_blank")
@@ -113,6 +113,25 @@ html(lang="en")
                 div(style="animation-delay: 200ms")
         section.crate-features
           h3 Features
+          div.features-input-container
+            div.features-input-grid
+              div.features-selection-container
+                select
+                  each version in data.versions
+                    if data.crate.max_stable_version === version.num
+                      option(value=version.num, selected) #{version.num}
+                    else
+                      option(value=version.num) #{version.num}
+              div.features-display-pane
+                span #{data.crate.id}
+                span #{" = "}
+                span.string "#{data.crate.max_stable_version}"
+              div.copy-icon-container
+                i.interactable-icon.fas.fa-copy
+              div.features-selection-dropdown(hidden)
+          div.features-toggles
+        section.download-trend
+           h3 Download Trend
     footer.abs
       div.lhs
         span Hosted on

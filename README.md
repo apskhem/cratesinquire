@@ -9,7 +9,7 @@
   <a href="https://cratesinquire.com">cratesinquire.com</a><br />
 </p>
 <p align="center">
-  Explore crate packages and inspect the details.
+  Explore crate packages and inspect the details, inspired by Bundlephobia.
 </p>
 
 ## What It Can Do?

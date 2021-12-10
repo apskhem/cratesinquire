@@ -14,6 +14,9 @@ parserOptions:
     - ./src/server/tsconfig.json
 plugins:
   - "@typescript-eslint"
+ignorePatterns:
+  - "*.mjs"
+  - "*.js"
 rules:
   # vanilla warn
   accessor-pairs:

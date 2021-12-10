@@ -38,9 +38,9 @@ class BarRowElement {
   private readonly bar = d3.create("div");
   private readonly innerBarLabel = d3.create("span");
 
-  private readonly data: MainCrate["versions"][number];
+  private readonly data: CrateResponse["versions"][number];
 
-  public constructor(data: MainCrate["versions"][number], crateId: string) {
+  public constructor(data: CrateResponse["versions"][number], crateId: string) {
     this.data = data;
 
     this.rTrack.classed("version-track", true);
@@ -157,7 +157,7 @@ export const runCrate = async () => {
     });
   };
 
-  const data = getData<MainCrate>("data");
+  const data = getData<CrateResponse>("data");
 
   const maxBundleSize = data.versions.reduce((acc, x) => Math.max(acc, x.crate_size), 0);
   const maxDownloads = data.versions.reduce((acc, x) => Math.max(acc, x.downloads), 0);

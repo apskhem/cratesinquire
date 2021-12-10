@@ -43,8 +43,29 @@ img {
   -o-user-drag: none;
 }
 
+select {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  width: 100%;
+  background-color: transparent;
+  border: 0;
+  font-size: inherit;
+  font: inherit;
+
+  &:focus {
+    outline: none;
+  }
+}
+
 input {
   margin: 0;
+  padding: 0;
+  font: inherit;
+  width: 100%;
+  background-color: transparent;
+  border: 0;
+  font-size: inherit;
   font: inherit;
   
   &:focus {

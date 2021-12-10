@@ -33,7 +33,7 @@ export class AppService {
     return fn();
   }
 
-  renderCrate(data: any): string {
+  renderCrate(data: CrateResponse): string {
     if (!this.compiledServerSideGeneration.has("crate")) {
       const pugString = fs.readFileSync(AppService.PUG_CRATES_ID_PATH, "utf8");
       const temp = pug.compile(pugString, { filename: AppService.PUG_CRATES_ID_PATH });
