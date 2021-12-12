@@ -488,86 +488,93 @@ main#crate {
   
         .bar-chart-container {
           display: grid;
-          grid-template-columns: 32px 84px 1fr;
           gap: 4px;
-      
-          > div, a {
-            position: relative;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-      
+
+          .bar-row {
+            display: grid;
+            grid-template-columns: 32px 84px 1fr;
+            gap: 4px;
+
+            &.current {
+              a {
+                font-weight: bold;
+              }
+
+              .bar-content {
+                background-color: #c3890f;
+              }
+            }
+
             &.yanked {
-              color: #960D0D;
+              a {
+                color: #960D0D;
+              }
+
+              .version-track {
+                > div {
+                  border-color: #960D0D;
+                  background-color: #FDCECE;
+                }
+              }
             }
       
             &.pre {
-              color: #C48B21;
-            }
-      
-            &.version-track {
-              > div {
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                width: 8px;
-                height: 100%;
-                background-color: #F3F5F7;
-                transform: translate(-50%, -50%);
-      
-                &.mark {
-                  border-radius: 50%;
-                }
-      
-                &.minor {
-                  width: 16px;
-                  height: 16px;
-                }
-      
-                &.major {
-                  width: 16px;
-                  height: 16px;
-                  border: 2px solid #62727A;
-                }
+              a {
+                color: #C48B21;
               }
-      
-              &.yanked {
+
+              .version-track {
                 > div {
-                  background-color: #FDCECE;
-      
-                  &.major {
-                    border-color: #960D0D;
-                  }
-                }
-              }
-      
-              &.pre {
-                > div {
+                  border-color: #C48B21;
                   background-color: #FFEFD1;
-      
-                  &.major {
-                    border-color: #C48B21;
-                  }
                 }
               }
             }
+
+            > div, a {
+              position: relative;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
         
-            > .bundle-size-bar {
-              display: flex;
-              align-items: center;
-              position: absolute;
-              height: 100%;
-              border-radius: 8px;
-              background-color: #fdc659;
-              font-size: x-small;
-              transition: width 300ms;
+              &.version-track {
+                > div {
+                  position: absolute;
+                  left: 50%;
+                  top: 50%;
+                  width: 8px;
+                  height: 100%;
+                  background-color: #F3F5F7;
+                  transform: translate(-50%, -50%);
         
-              &.current {
-                background-color: #c3890f;
+                  &.minor {
+                    width: 16px;
+                    height: 16px;
+                    border-radius: 50%;
+                  }
+        
+                  &.major {
+                    width: 16px;
+                    height: 16px;
+                    border-radius: 50%;
+                    border: 2px solid #62727A;
+                  }
+                }
               }
-        
-              > span {
-                margin: 0 8px;
+          
+              > .bar-content {
+                display: flex;
+                align-items: center;
+                position: absolute;
+                height: 100%;
+                border-radius: 8px;
+                background-color: #fdc659;
+                font-size: x-small;
+                transition: width 300ms;
+          
+                > span {
+                  margin: 0 8px;
+                }
               }
             }
           }
