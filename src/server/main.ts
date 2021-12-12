@@ -31,7 +31,9 @@ void (async () => {
     })
   ]);
 
-  await app.listen(process.env["PORT"] || 3000);
+  const host = process.env["HOST"] || "127.0.0.1";
+  const port = process.env["PORT"] || 3000;
+  await app.listen(port, host);
   Logger.log(`server listening: ${await app.getUrl()}`);
 
   if ("hot" in module) {
