@@ -30,6 +30,9 @@ rules:
       arraysInArrays: false
   arrow-spacing: warn
   comma-style: warn
+  dot-location:
+    - warn
+    - property
   eol-last:
     - warn
     - always
@@ -146,7 +149,9 @@ rules:
     - selector: DoWhileStatement
       message: Unexpected statement, do while loop statement is not allowed.
     - selector: ForInStatement
-      message: Unexpected statement, for in loop statement is not allowed.
+      message: Unexpected statement, for-in loop statement is not allowed.
+    - selector: ForOfStatement
+      message: Unexpected statement, for-of loop statement is not allowed.
     - selector: ForStatement
       message: Unexpected statement, traditional for loop statement is not allowed.
     - selector: ClassExpression

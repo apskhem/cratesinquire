@@ -1,6 +1,5 @@
 import { Controller, Get, Header, Param, HttpStatus } from "@nestjs/common";
 import { AppService } from "./app.service";
-import fetch from "node-fetch";
 
 @Controller("/")
 export class AppController {

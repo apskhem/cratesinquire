@@ -12,7 +12,7 @@ const getTree = <T>(data: T) => {
   return tree;
 };
 
-const getBoundScope = (root: ReturnType<typeof getTree>) => {
+const getBoundScope = (root: ReturnType<typeof getTree>): [number, number] => {
   let x0 = Number.POSITIVE_INFINITY;
   let x1 = -x0;
   root.each((d) => {
@@ -29,7 +29,7 @@ export const getDepChart = (data: DepNode) => {
   const [ x0, x1 ] = getBoundScope(root);
 
   const svg = d3.create("svg")
-    .attr("viewBox", [ 0, 0, WIDTH, x1 - x0 + root["dx"] * 2 ] as any);
+    .attr("viewBox", [ 0, 0, WIDTH, x1 - x0 + root["dx"] * 2 ].join(" "));
 
   const g = svg.append("g")
     .attr("font-size", 10)
@@ -65,9 +65,11 @@ export const getDepChart = (data: DepNode) => {
     .attr("x", (d) => d.children ? -6 : 6)
     .attr("font-size", "1em")
     .attr("text-anchor", (d) => d.children ? "end" : "start")
+    .attr("pointer-events", (d) => d.data.id === root.id ? "none" : "auto")
     .text((d) => [ d.data.crate_id, d.data.req ].join(" "))
-    .on("click", (e, d) => window.location.href = `/crates/${d.data.crate_id}`)
-    .clone(true).lower()
+    .on("click", (e, d) => d.data.crate_id ? window.location.href = `/crates/${d.data.crate_id}` : null)
+    .clone(true)
+    .lower()
     .attr("stroke", "white");
 
   return svg.node();

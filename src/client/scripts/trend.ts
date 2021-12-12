@@ -17,14 +17,16 @@ type Data = {
 }[];
 
 export const getTrend = (data: Data) => {
-  // List of groups (here I have one group per column)
   const allGroup = data.map((x) => x.name);
-  const maxXScale = data.reduce((acc, x) => Math.max(acc, x.values.length), 0);
   const maxYScale = data.reduce((acc, x) => Math.max(acc, x.values.reduce((acc, x) => Math.max(acc, x.downloads), 0)), 0);
+  const unformattedXScale = data.reduce((acc, x) => {
+    return x.values.reduce((acc, x) => acc.add(x.date.getTime()), acc);
+  }, new Set<number>());
+  const readyXScale = Array.from(unformattedXScale).map((x) => new Date(x));
 
   // append the svg object to the body of the page
   const root = d3.create("svg")
-    .attr("viewBox", [ 0, 0, width + margin.left + margin.right, height + margin.top + margin.bottom ] as any);
+    .attr("viewBox", [ 0, 0, width + margin.left + margin.right, height + margin.top + margin.bottom ].join(" "));
 
   const svg = root
     .append("g")
@@ -37,7 +39,7 @@ export const getTrend = (data: Data) => {
 
   // Add X axis --> it is a date format
   const x = d3.scaleTime()
-    .domain(d3.extent(data[0]?.values, (d) => d.date))
+    .domain(d3.extent(readyXScale, (d) => d) as [Date, Date])
     .range([ 0, width ]);
   svg.append("g")
     .attr("transform", `translate(0, ${height})`)

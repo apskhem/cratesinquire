@@ -1,13 +1,14 @@
 import bytes from "bytes";
 import pluralize from "pluralize";
 import semver from "semver";
-import { getDepTree } from "./deps";
+import { getBaseDepTree, getDevDepTree, getOptionalDepTree } from "./deps";
 import { getDepChart } from "./tree";
 import * as d3 from "d3";
 import { initSearchBar as possessSearchBar } from "./search-bar";
 import { getTrend } from "./trend";
 
 type BarMode = "size" | "downloads" | "lifetime" | "features";
+type A = [ number, number ];
 
 /* utils */
 const getData = <T>(id: string): T => {
@@ -194,8 +195,27 @@ const initBarChartSection = (id: string, stableVersio: string, versions: CrateRe
 };
 
 const initDependencySection = async (id: string, num: string) => {
+  const container = d3.select(".dep-tree-toggles");
+  const devBtn = container.select("#dev");
+  const optionalBtn = container.select("#optional");
+
+  // mount toggle event listener
+  devBtn.select(".toggle-button").on("click", () => {
+    const value = !devBtn.classed("checked");
+    devBtn.classed("checked", value);
+
+    // getDevDepTree();
+  });
+
+  optionalBtn.select(".toggle-button").on("click", () => {
+    const value = !optionalBtn.classed("checked");
+    optionalBtn.classed("checked", value);
+
+    // getOptionalDepTree();
+  });
+
   await useLoader(".dep-tree-display-container", async () => {
-    const depData = await getDepTree(id, num);
+    const depData = await getBaseDepTree(id, num);
     const chartEl = getDepChart(depData);
 
     return chartEl;
