@@ -143,7 +143,7 @@ html(lang="en")
                       option(value=version.num) #{version.num}
               div.features-display-pane
                 | #{data.crate.id}#{" = "}
-                span.string "#{data.crate.max_stable_version}"
+                span.string "#{data.crate.max_stable_version || data.crate.max_version}"
               div.copy-icon-container
                 i.interactable-icon.copy-icon.fas.fa-copy
               div.features-selection-dropdown(hidden)

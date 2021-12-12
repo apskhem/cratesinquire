@@ -512,7 +512,7 @@ main#crate {
 
               .version-track {
                 > div {
-                  border-color: #960D0D;
+                  border-color: #960D0D !important;
                   background-color: #FDCECE;
                 }
               }
@@ -525,7 +525,7 @@ main#crate {
 
               .version-track {
                 > div {
-                  border-color: #C48B21;
+                  border-color: #C48B21 !important;
                   background-color: #FFEFD1;
                 }
               }
