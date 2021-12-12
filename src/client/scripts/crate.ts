@@ -37,12 +37,14 @@ export const runCrate = async () => {
 
   const { categories, crate, keywords, versions } = getData<CrateResponse>("data");
 
-  initBarChartSection(crate.id, crate.max_stable_version, versions);
-  initFeaturesSection(crate.id, crate.max_stable_version, versions);
+  const num = crate.max_stable_version || crate.max_version;
+
+  initBarChartSection(crate.id, num, versions);
+  initFeaturesSection(crate.id, num, versions);
 
   // install dep graph
   await Promise.all([
-    initDependencySection(crate.id, crate.max_stable_version),
+    initDependencySection(crate.id, num),
     initTrendSection(crate.id, new Map(versions.map((x) => [ x.id, x.num ])))
   ]);
 };
@@ -252,11 +254,7 @@ const initFeaturesSection = (id: string, stableVersion: string, versions: CrateR
 
   // member functions
   const selectVersion = (num: string, versions: CrateResponse["versions"]) => {
-    const features = versions.find((x) => x.num === num)?.features;
-
-    if (!features) {
-      throw new Error();
-    }
+    const features = versions.find((x) => x.num === num)?.features ?? [];
 
     return Object.entries(features);
   };
