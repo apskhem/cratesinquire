@@ -13,15 +13,13 @@ import { AppService } from "./app.service";
 declare const module: any;
 
 void (async () => {
-  // prepare precomputed scripts
-  AppService.compileSass();
-  AppService.compileTypeScript();
-
   // create app
   const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter());
 
   // set middlewares
   await Promise.all([
+    AppService.bundleSass(),
+    AppService.bundleTypeScript(),
     app.register(compression),
     app.register(fastifyHelmet, {
       contentSecurityPolicy: {
@@ -38,6 +36,12 @@ void (async () => {
 
   if ("hot" in module) {
     module.hot.accept();
+    // module.hot.accept([ "/src/client/scripts/index.ts" ], () => {
+    //   AppService.compileTypeScript();
+    // });
+    // module.hot.accept("/src/client/scss/main.scss", () => {
+    //   console.log("change");
+    // });
     module.hot.dispose(() => app.close());
   }
 })();

@@ -1,12 +1,12 @@
 import semver from "semver";
 
-export const getDepTree = async (id: string, version: string) => {
+export const getDepTree = async (id: string, num: string) => {
   const root = {
     crate_id: id,
     children: []
   };
 
-  const res = await fetch(`https://crates.io/api/v1/crates/${id}/${version}/dependencies`);
+  const res = await fetch(`https://crates.io/api/v1/crates/${id}/${num}/dependencies`);
   const data = await res.json() as DependenciesResponse;
   const dedupSet = new Set([ id ]);
 

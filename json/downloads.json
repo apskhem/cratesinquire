@@ -1,0 +1,2618 @@
+{
+    "meta": {
+        "extra_downloads": [
+            {
+                "date": "2021-09-13",
+                "downloads": 104253
+            },
+            {
+                "date": "2021-09-14",
+                "downloads": 120246
+            },
+            {
+                "date": "2021-09-15",
+                "downloads": 109109
+            },
+            {
+                "date": "2021-09-16",
+                "downloads": 102413
+            },
+            {
+                "date": "2021-09-17",
+                "downloads": 99704
+            },
+            {
+                "date": "2021-09-18",
+                "downloads": 41831
+            },
+            {
+                "date": "2021-09-19",
+                "downloads": 44242
+            },
+            {
+                "date": "2021-09-20",
+                "downloads": 89847
+            },
+            {
+                "date": "2021-09-21",
+                "downloads": 108522
+            },
+            {
+                "date": "2021-09-22",
+                "downloads": 108633
+            },
+            {
+                "date": "2021-09-23",
+                "downloads": 101205
+            },
+            {
+                "date": "2021-09-24",
+                "downloads": 92950
+            },
+            {
+                "date": "2021-09-25",
+                "downloads": 38920
+            },
+            {
+                "date": "2021-09-26",
+                "downloads": 36813
+            },
+            {
+                "date": "2021-09-27",
+                "downloads": 94660
+            },
+            {
+                "date": "2021-09-28",
+                "downloads": 99320
+            },
+            {
+                "date": "2021-09-29",
+                "downloads": 108338
+            },
+            {
+                "date": "2021-09-30",
+                "downloads": 116452
+            },
+            {
+                "date": "2021-10-01",
+                "downloads": 91541
+            },
+            {
+                "date": "2021-10-02",
+                "downloads": 39630
+            },
+            {
+                "date": "2021-10-03",
+                "downloads": 40425
+            },
+            {
+                "date": "2021-10-04",
+                "downloads": 88826
+            },
+            {
+                "date": "2021-10-05",
+                "downloads": 104296
+            },
+            {
+                "date": "2021-10-06",
+                "downloads": 103270
+            },
+            {
+                "date": "2021-10-07",
+                "downloads": 118962
+            },
+            {
+                "date": "2021-10-08",
+                "downloads": 125251
+            },
+            {
+                "date": "2021-10-09",
+                "downloads": 50119
+            },
+            {
+                "date": "2021-10-10",
+                "downloads": 47786
+            },
+            {
+                "date": "2021-10-11",
+                "downloads": 102294
+            },
+            {
+                "date": "2021-10-12",
+                "downloads": 109216
+            },
+            {
+                "date": "2021-10-13",
+                "downloads": 117210
+            },
+            {
+                "date": "2021-10-14",
+                "downloads": 111328
+            },
+            {
+                "date": "2021-10-15",
+                "downloads": 113128
+            },
+            {
+                "date": "2021-10-16",
+                "downloads": 49971
+            },
+            {
+                "date": "2021-10-17",
+                "downloads": 61487
+            },
+            {
+                "date": "2021-10-18",
+                "downloads": 120342
+            },
+            {
+                "date": "2021-10-19",
+                "downloads": 124428
+            },
+            {
+                "date": "2021-10-20",
+                "downloads": 120054
+            },
+            {
+                "date": "2021-10-21",
+                "downloads": 111084
+            },
+            {
+                "date": "2021-10-22",
+                "downloads": 95622
+            },
+            {
+                "date": "2021-10-23",
+                "downloads": 41964
+            },
+            {
+                "date": "2021-10-24",
+                "downloads": 45052
+            },
+            {
+                "date": "2021-10-25",
+                "downloads": 107427
+            },
+            {
+                "date": "2021-10-26",
+                "downloads": 115237
+            },
+            {
+                "date": "2021-10-27",
+                "downloads": 107707
+            },
+            {
+                "date": "2021-10-28",
+                "downloads": 120125
+            },
+            {
+                "date": "2021-10-29",
+                "downloads": 95780
+            },
+            {
+                "date": "2021-10-30",
+                "downloads": 45890
+            },
+            {
+                "date": "2021-10-31",
+                "downloads": 42664
+            },
+            {
+                "date": "2021-11-01",
+                "downloads": 113059
+            },
+            {
+                "date": "2021-11-02",
+                "downloads": 120133
+            },
+            {
+                "date": "2021-11-03",
+                "downloads": 109153
+            },
+            {
+                "date": "2021-11-04",
+                "downloads": 111490
+            },
+            {
+                "date": "2021-11-05",
+                "downloads": 92623
+            },
+            {
+                "date": "2021-11-06",
+                "downloads": 57831
+            },
+            {
+                "date": "2021-11-07",
+                "downloads": 43085
+            },
+            {
+                "date": "2021-11-08",
+                "downloads": 107338
+            },
+            {
+                "date": "2021-11-09",
+                "downloads": 119551
+            },
+            {
+                "date": "2021-11-10",
+                "downloads": 122873
+            },
+            {
+                "date": "2021-11-11",
+                "downloads": 97905
+            },
+            {
+                "date": "2021-11-12",
+                "downloads": 90169
+            },
+            {
+                "date": "2021-11-13",
+                "downloads": 42870
+            },
+            {
+                "date": "2021-11-14",
+                "downloads": 42933
+            },
+            {
+                "date": "2021-11-15",
+                "downloads": 106407
+            },
+            {
+                "date": "2021-11-16",
+                "downloads": 104973
+            },
+            {
+                "date": "2021-11-17",
+                "downloads": 103174
+            },
+            {
+                "date": "2021-11-18",
+                "downloads": 99266
+            },
+            {
+                "date": "2021-11-19",
+                "downloads": 94481
+            },
+            {
+                "date": "2021-11-20",
+                "downloads": 47786
+            },
+            {
+                "date": "2021-11-21",
+                "downloads": 41583
+            },
+            {
+                "date": "2021-11-22",
+                "downloads": 99218
+            },
+            {
+                "date": "2021-11-23",
+                "downloads": 101971
+            },
+            {
+                "date": "2021-11-24",
+                "downloads": 95485
+            },
+            {
+                "date": "2021-11-25",
+                "downloads": 83211
+            },
+            {
+                "date": "2021-11-26",
+                "downloads": 73649
+            },
+            {
+                "date": "2021-11-27",
+                "downloads": 41124
+            },
+            {
+                "date": "2021-11-28",
+                "downloads": 40811
+            },
+            {
+                "date": "2021-11-29",
+                "downloads": 100233
+            },
+            {
+                "date": "2021-11-30",
+                "downloads": 110647
+            },
+            {
+                "date": "2021-12-01",
+                "downloads": 117358
+            },
+            {
+                "date": "2021-12-02",
+                "downloads": 109827
+            },
+            {
+                "date": "2021-12-03",
+                "downloads": 114509
+            },
+            {
+                "date": "2021-12-04",
+                "downloads": 50085
+            },
+            {
+                "date": "2021-12-05",
+                "downloads": 50652
+            },
+            {
+                "date": "2021-12-06",
+                "downloads": 110938
+            },
+            {
+                "date": "2021-12-07",
+                "downloads": 119863
+            },
+            {
+                "date": "2021-12-08",
+                "downloads": 129374
+            },
+            {
+                "date": "2021-12-09",
+                "downloads": 132383
+            },
+            {
+                "date": "2021-12-10",
+                "downloads": 115565
+            },
+            {
+                "date": "2021-12-11",
+                "downloads": 44734
+            }
+        ]
+    },
+    "version_downloads": [
+        {
+            "date": "2021-09-13",
+            "downloads": 809,
+            "version": 326822
+        },
+        {
+            "date": "2021-09-13",
+            "downloads": 63034,
+            "version": 390022
+        },
+        {
+            "date": "2021-09-13",
+            "downloads": 697,
+            "version": 322376
+        },
+        {
+            "date": "2021-09-13",
+            "downloads": 63,
+            "version": 316445
+        },
+        {
+            "date": "2021-09-13",
+            "downloads": 20109,
+            "version": 331918
+        },
+        {
+            "date": "2021-09-14",
+            "downloads": 61775,
+            "version": 390022
+        },
+        {
+            "date": "2021-09-14",
+            "downloads": 785,
+            "version": 326822
+        },
+        {
+            "date": "2021-09-14",
+            "downloads": 87,
+            "version": 316445
+        },
+        {
+            "date": "2021-09-14",
+            "downloads": 25346,
+            "version": 331918
+        },
+        {
+            "date": "2021-09-14",
+            "downloads": 672,
+            "version": 322376
+        },
+        {
+            "date": "2021-09-15",
+            "downloads": 84,
+            "version": 316445
+        },
+        {
+            "date": "2021-09-15",
+            "downloads": 628,
+            "version": 322376
+        },
+        {
+            "date": "2021-09-15",
+            "downloads": 783,
+            "version": 326822
+        },
+        {
+            "date": "2021-09-15",
+            "downloads": 64305,
+            "version": 390022
+        },
+        {
+            "date": "2021-09-15",
+            "downloads": 22865,
+            "version": 331918
+        },
+        {
+            "date": "2021-09-16",
+            "downloads": 20805,
+            "version": 331918
+        },
+        {
+            "date": "2021-09-16",
+            "downloads": 633,
+            "version": 326822
+        },
+        {
+            "date": "2021-09-16",
+            "downloads": 773,
+            "version": 322376
+        },
+        {
+            "date": "2021-09-16",
+            "downloads": 59471,
+            "version": 390022
+        },
+        {
+            "date": "2021-09-16",
+            "downloads": 36,
+            "version": 316445
+        },
+        {
+            "date": "2021-09-17",
+            "downloads": 571,
+            "version": 326822
+        },
+        {
+            "date": "2021-09-17",
+            "downloads": 36,
+            "version": 316445
+        },
+        {
+            "date": "2021-09-17",
+            "downloads": 502,
+            "version": 322376
+        },
+        {
+            "date": "2021-09-17",
+            "downloads": 59683,
+            "version": 390022
+        },
+        {
+            "date": "2021-09-17",
+            "downloads": 17949,
+            "version": 331918
+        },
+        {
+            "date": "2021-09-18",
+            "downloads": 208,
+            "version": 326822
+        },
+        {
+            "date": "2021-09-18",
+            "downloads": 30345,
+            "version": 390022
+        },
+        {
+            "date": "2021-09-18",
+            "downloads": 22,
+            "version": 316445
+        },
+        {
+            "date": "2021-09-18",
+            "downloads": 294,
+            "version": 322376
+        },
+        {
+            "date": "2021-09-18",
+            "downloads": 6973,
+            "version": 331918
+        },
+        {
+            "date": "2021-09-19",
+            "downloads": 8199,
+            "version": 331918
+        },
+        {
+            "date": "2021-09-19",
+            "downloads": 28952,
+            "version": 390022
+        },
+        {
+            "date": "2021-09-19",
+            "downloads": 305,
+            "version": 322376
+        },
+        {
+            "date": "2021-09-19",
+            "downloads": 35,
+            "version": 316445
+        },
+        {
+            "date": "2021-09-19",
+            "downloads": 163,
+            "version": 326822
+        },
+        {
+            "date": "2021-09-20",
+            "downloads": 60747,
+            "version": 390022
+        },
+        {
+            "date": "2021-09-20",
+            "downloads": 47,
+            "version": 316445
+        },
+        {
+            "date": "2021-09-20",
+            "downloads": 610,
+            "version": 326822
+        },
+        {
+            "date": "2021-09-20",
+            "downloads": 16836,
+            "version": 331918
+        },
+        {
+            "date": "2021-09-20",
+            "downloads": 450,
+            "version": 322376
+        },
+        {
+            "date": "2021-09-21",
+            "downloads": 105,
+            "version": 316445
+        },
+        {
+            "date": "2021-09-21",
+            "downloads": 592,
+            "version": 322376
+        },
+        {
+            "date": "2021-09-21",
+            "downloads": 21655,
+            "version": 331918
+        },
+        {
+            "date": "2021-09-21",
+            "downloads": 61233,
+            "version": 390022
+        },
+        {
+            "date": "2021-09-21",
+            "downloads": 876,
+            "version": 326822
+        },
+        {
+            "date": "2021-09-22",
+            "downloads": 60355,
+            "version": 390022
+        },
+        {
+            "date": "2021-09-22",
+            "downloads": 919,
+            "version": 326822
+        },
+        {
+            "date": "2021-09-22",
+            "downloads": 430,
+            "version": 322376
+        },
+        {
+            "date": "2021-09-22",
+            "downloads": 50,
+            "version": 316445
+        },
+        {
+            "date": "2021-09-22",
+            "downloads": 21229,
+            "version": 331918
+        },
+        {
+            "date": "2021-09-23",
+            "downloads": 18,
+            "version": 316445
+        },
+        {
+            "date": "2021-09-23",
+            "downloads": 753,
+            "version": 326822
+        },
+        {
+            "date": "2021-09-23",
+            "downloads": 58354,
+            "version": 390022
+        },
+        {
+            "date": "2021-09-23",
+            "downloads": 422,
+            "version": 322376
+        },
+        {
+            "date": "2021-09-23",
+            "downloads": 17938,
+            "version": 331918
+        },
+        {
+            "date": "2021-09-24",
+            "downloads": 384,
+            "version": 322376
+        },
+        {
+            "date": "2021-09-24",
+            "downloads": 669,
+            "version": 326822
+        },
+        {
+            "date": "2021-09-24",
+            "downloads": 17237,
+            "version": 331918
+        },
+        {
+            "date": "2021-09-24",
+            "downloads": 27,
+            "version": 316445
+        },
+        {
+            "date": "2021-09-24",
+            "downloads": 56574,
+            "version": 390022
+        },
+        {
+            "date": "2021-09-25",
+            "downloads": 6069,
+            "version": 331918
+        },
+        {
+            "date": "2021-09-25",
+            "downloads": 192,
+            "version": 326822
+        },
+        {
+            "date": "2021-09-25",
+            "downloads": 28460,
+            "version": 390022
+        },
+        {
+            "date": "2021-09-25",
+            "downloads": 31,
+            "version": 316445
+        },
+        {
+            "date": "2021-09-25",
+            "downloads": 354,
+            "version": 322376
+        },
+        {
+            "date": "2021-09-26",
+            "downloads": 172,
+            "version": 326822
+        },
+        {
+            "date": "2021-09-26",
+            "downloads": 25627,
+            "version": 390022
+        },
+        {
+            "date": "2021-09-26",
+            "downloads": 8,
+            "version": 316445
+        },
+        {
+            "date": "2021-09-26",
+            "downloads": 5107,
+            "version": 331918
+        },
+        {
+            "date": "2021-09-26",
+            "downloads": 337,
+            "version": 322376
+        },
+        {
+            "date": "2021-09-27",
+            "downloads": 581,
+            "version": 326822
+        },
+        {
+            "date": "2021-09-27",
+            "downloads": 30,
+            "version": 316445
+        },
+        {
+            "date": "2021-09-27",
+            "downloads": 59769,
+            "version": 390022
+        },
+        {
+            "date": "2021-09-27",
+            "downloads": 415,
+            "version": 322376
+        },
+        {
+            "date": "2021-09-27",
+            "downloads": 16406,
+            "version": 331918
+        },
+        {
+            "date": "2021-09-28",
+            "downloads": 681,
+            "version": 326822
+        },
+        {
+            "date": "2021-09-28",
+            "downloads": 16900,
+            "version": 331918
+        },
+        {
+            "date": "2021-09-28",
+            "downloads": 575,
+            "version": 322376
+        },
+        {
+            "date": "2021-09-28",
+            "downloads": 42,
+            "version": 316445
+        },
+        {
+            "date": "2021-09-28",
+            "downloads": 62389,
+            "version": 390022
+        },
+        {
+            "date": "2021-09-29",
+            "downloads": 65917,
+            "version": 390022
+        },
+        {
+            "date": "2021-09-29",
+            "downloads": 63,
+            "version": 316445
+        },
+        {
+            "date": "2021-09-29",
+            "downloads": 18220,
+            "version": 331918
+        },
+        {
+            "date": "2021-09-29",
+            "downloads": 547,
+            "version": 326822
+        },
+        {
+            "date": "2021-09-29",
+            "downloads": 566,
+            "version": 322376
+        },
+        {
+            "date": "2021-09-30",
+            "downloads": 728,
+            "version": 326822
+        },
+        {
+            "date": "2021-09-30",
+            "downloads": 67693,
+            "version": 390022
+        },
+        {
+            "date": "2021-09-30",
+            "downloads": 403,
+            "version": 322376
+        },
+        {
+            "date": "2021-09-30",
+            "downloads": 23685,
+            "version": 331918
+        },
+        {
+            "date": "2021-09-30",
+            "downloads": 63,
+            "version": 316445
+        },
+        {
+            "date": "2021-10-01",
+            "downloads": 70,
+            "version": 316445
+        },
+        {
+            "date": "2021-10-01",
+            "downloads": 351,
+            "version": 322376
+        },
+        {
+            "date": "2021-10-01",
+            "downloads": 528,
+            "version": 326822
+        },
+        {
+            "date": "2021-10-01",
+            "downloads": 62221,
+            "version": 390022
+        },
+        {
+            "date": "2021-10-01",
+            "downloads": 15255,
+            "version": 331918
+        },
+        {
+            "date": "2021-10-02",
+            "downloads": 5570,
+            "version": 331918
+        },
+        {
+            "date": "2021-10-02",
+            "downloads": 30381,
+            "version": 390022
+        },
+        {
+            "date": "2021-10-02",
+            "downloads": 299,
+            "version": 322376
+        },
+        {
+            "date": "2021-10-02",
+            "downloads": 257,
+            "version": 326822
+        },
+        {
+            "date": "2021-10-02",
+            "downloads": 16,
+            "version": 316445
+        },
+        {
+            "date": "2021-10-03",
+            "downloads": 189,
+            "version": 326822
+        },
+        {
+            "date": "2021-10-03",
+            "downloads": 5448,
+            "version": 331918
+        },
+        {
+            "date": "2021-10-03",
+            "downloads": 29734,
+            "version": 390022
+        },
+        {
+            "date": "2021-10-03",
+            "downloads": 19,
+            "version": 316445
+        },
+        {
+            "date": "2021-10-03",
+            "downloads": 333,
+            "version": 322376
+        },
+        {
+            "date": "2021-10-04",
+            "downloads": 44,
+            "version": 316445
+        },
+        {
+            "date": "2021-10-04",
+            "downloads": 14264,
+            "version": 331918
+        },
+        {
+            "date": "2021-10-04",
+            "downloads": 556,
+            "version": 322376
+        },
+        {
+            "date": "2021-10-04",
+            "downloads": 59335,
+            "version": 390022
+        },
+        {
+            "date": "2021-10-04",
+            "downloads": 656,
+            "version": 326822
+        },
+        {
+            "date": "2021-10-05",
+            "downloads": 342,
+            "version": 322376
+        },
+        {
+            "date": "2021-10-05",
+            "downloads": 54,
+            "version": 316445
+        },
+        {
+            "date": "2021-10-05",
+            "downloads": 62568,
+            "version": 390022
+        },
+        {
+            "date": "2021-10-05",
+            "downloads": 16669,
+            "version": 331918
+        },
+        {
+            "date": "2021-10-05",
+            "downloads": 598,
+            "version": 326822
+        },
+        {
+            "date": "2021-10-06",
+            "downloads": 549,
+            "version": 326822
+        },
+        {
+            "date": "2021-10-06",
+            "downloads": 61897,
+            "version": 390022
+        },
+        {
+            "date": "2021-10-06",
+            "downloads": 32,
+            "version": 316445
+        },
+        {
+            "date": "2021-10-06",
+            "downloads": 18507,
+            "version": 331918
+        },
+        {
+            "date": "2021-10-06",
+            "downloads": 450,
+            "version": 322376
+        },
+        {
+            "date": "2021-10-07",
+            "downloads": 60387,
+            "version": 390022
+        },
+        {
+            "date": "2021-10-07",
+            "downloads": 24938,
+            "version": 331918
+        },
+        {
+            "date": "2021-10-07",
+            "downloads": 63,
+            "version": 316445
+        },
+        {
+            "date": "2021-10-07",
+            "downloads": 434,
+            "version": 322376
+        },
+        {
+            "date": "2021-10-07",
+            "downloads": 646,
+            "version": 326822
+        },
+        {
+            "date": "2021-10-08",
+            "downloads": 28786,
+            "version": 331918
+        },
+        {
+            "date": "2021-10-08",
+            "downloads": 504,
+            "version": 326822
+        },
+        {
+            "date": "2021-10-08",
+            "downloads": 60169,
+            "version": 390022
+        },
+        {
+            "date": "2021-10-08",
+            "downloads": 515,
+            "version": 322376
+        },
+        {
+            "date": "2021-10-08",
+            "downloads": 58,
+            "version": 316445
+        },
+        {
+            "date": "2021-10-09",
+            "downloads": 8052,
+            "version": 331918
+        },
+        {
+            "date": "2021-10-09",
+            "downloads": 349,
+            "version": 322376
+        },
+        {
+            "date": "2021-10-09",
+            "downloads": 247,
+            "version": 326822
+        },
+        {
+            "date": "2021-10-09",
+            "downloads": 51,
+            "version": 316445
+        },
+        {
+            "date": "2021-10-09",
+            "downloads": 28475,
+            "version": 390022
+        },
+        {
+            "date": "2021-10-10",
+            "downloads": 7261,
+            "version": 331918
+        },
+        {
+            "date": "2021-10-10",
+            "downloads": 389,
+            "version": 322376
+        },
+        {
+            "date": "2021-10-10",
+            "downloads": 167,
+            "version": 326822
+        },
+        {
+            "date": "2021-10-10",
+            "downloads": 53,
+            "version": 316445
+        },
+        {
+            "date": "2021-10-10",
+            "downloads": 29154,
+            "version": 390022
+        },
+        {
+            "date": "2021-10-11",
+            "downloads": 343,
+            "version": 326822
+        },
+        {
+            "date": "2021-10-11",
+            "downloads": 69970,
+            "version": 390022
+        },
+        {
+            "date": "2021-10-11",
+            "downloads": 43,
+            "version": 316445
+        },
+        {
+            "date": "2021-10-11",
+            "downloads": 14847,
+            "version": 331918
+        },
+        {
+            "date": "2021-10-11",
+            "downloads": 470,
+            "version": 322376
+        },
+        {
+            "date": "2021-10-12",
+            "downloads": 604,
+            "version": 326822
+        },
+        {
+            "date": "2021-10-12",
+            "downloads": 69646,
+            "version": 390022
+        },
+        {
+            "date": "2021-10-12",
+            "downloads": 493,
+            "version": 322376
+        },
+        {
+            "date": "2021-10-12",
+            "downloads": 16870,
+            "version": 331918
+        },
+        {
+            "date": "2021-10-12",
+            "downloads": 48,
+            "version": 316445
+        },
+        {
+            "date": "2021-10-13",
+            "downloads": 417,
+            "version": 322376
+        },
+        {
+            "date": "2021-10-13",
+            "downloads": 69200,
+            "version": 390022
+        },
+        {
+            "date": "2021-10-13",
+            "downloads": 19969,
+            "version": 331918
+        },
+        {
+            "date": "2021-10-13",
+            "downloads": 624,
+            "version": 326822
+        },
+        {
+            "date": "2021-10-13",
+            "downloads": 41,
+            "version": 316445
+        },
+        {
+            "date": "2021-10-14",
+            "downloads": 67,
+            "version": 316445
+        },
+        {
+            "date": "2021-10-14",
+            "downloads": 532,
+            "version": 322376
+        },
+        {
+            "date": "2021-10-14",
+            "downloads": 688,
+            "version": 326822
+        },
+        {
+            "date": "2021-10-14",
+            "downloads": 18109,
+            "version": 331918
+        },
+        {
+            "date": "2021-10-14",
+            "downloads": 71439,
+            "version": 390022
+        },
+        {
+            "date": "2021-10-15",
+            "downloads": 21060,
+            "version": 331918
+        },
+        {
+            "date": "2021-10-15",
+            "downloads": 422,
+            "version": 326822
+        },
+        {
+            "date": "2021-10-15",
+            "downloads": 78,
+            "version": 316445
+        },
+        {
+            "date": "2021-10-15",
+            "downloads": 67934,
+            "version": 390022
+        },
+        {
+            "date": "2021-10-15",
+            "downloads": 524,
+            "version": 322376
+        },
+        {
+            "date": "2021-10-16",
+            "downloads": 378,
+            "version": 322376
+        },
+        {
+            "date": "2021-10-16",
+            "downloads": 29421,
+            "version": 390022
+        },
+        {
+            "date": "2021-10-16",
+            "downloads": 9560,
+            "version": 331918
+        },
+        {
+            "date": "2021-10-16",
+            "downloads": 262,
+            "version": 326822
+        },
+        {
+            "date": "2021-10-16",
+            "downloads": 81,
+            "version": 316445
+        },
+        {
+            "date": "2021-10-17",
+            "downloads": 224,
+            "version": 326822
+        },
+        {
+            "date": "2021-10-17",
+            "downloads": 86,
+            "version": 316445
+        },
+        {
+            "date": "2021-10-17",
+            "downloads": 29012,
+            "version": 390022
+        },
+        {
+            "date": "2021-10-17",
+            "downloads": 14885,
+            "version": 331918
+        },
+        {
+            "date": "2021-10-17",
+            "downloads": 396,
+            "version": 322376
+        },
+        {
+            "date": "2021-10-18",
+            "downloads": 76566,
+            "version": 390022
+        },
+        {
+            "date": "2021-10-18",
+            "downloads": 489,
+            "version": 322376
+        },
+        {
+            "date": "2021-10-18",
+            "downloads": 21812,
+            "version": 331918
+        },
+        {
+            "date": "2021-10-18",
+            "downloads": 131,
+            "version": 316445
+        },
+        {
+            "date": "2021-10-18",
+            "downloads": 371,
+            "version": 326822
+        },
+        {
+            "date": "2021-10-19",
+            "downloads": 78301,
+            "version": 390022
+        },
+        {
+            "date": "2021-10-19",
+            "downloads": 527,
+            "version": 326822
+        },
+        {
+            "date": "2021-10-19",
+            "downloads": 20800,
+            "version": 331918
+        },
+        {
+            "date": "2021-10-19",
+            "downloads": 449,
+            "version": 322376
+        },
+        {
+            "date": "2021-10-19",
+            "downloads": 69,
+            "version": 316445
+        },
+        {
+            "date": "2021-10-20",
+            "downloads": 25,
+            "version": 316445
+        },
+        {
+            "date": "2021-10-20",
+            "downloads": 74317,
+            "version": 390022
+        },
+        {
+            "date": "2021-10-20",
+            "downloads": 532,
+            "version": 322376
+        },
+        {
+            "date": "2021-10-20",
+            "downloads": 444,
+            "version": 326822
+        },
+        {
+            "date": "2021-10-20",
+            "downloads": 20983,
+            "version": 331918
+        },
+        {
+            "date": "2021-10-21",
+            "downloads": 428,
+            "version": 322376
+        },
+        {
+            "date": "2021-10-21",
+            "downloads": 47,
+            "version": 316445
+        },
+        {
+            "date": "2021-10-21",
+            "downloads": 77296,
+            "version": 390022
+        },
+        {
+            "date": "2021-10-21",
+            "downloads": 16772,
+            "version": 331918
+        },
+        {
+            "date": "2021-10-21",
+            "downloads": 442,
+            "version": 326822
+        },
+        {
+            "date": "2021-10-22",
+            "downloads": 65077,
+            "version": 390022
+        },
+        {
+            "date": "2021-10-22",
+            "downloads": 14178,
+            "version": 331918
+        },
+        {
+            "date": "2021-10-22",
+            "downloads": 409,
+            "version": 326822
+        },
+        {
+            "date": "2021-10-22",
+            "downloads": 399,
+            "version": 322376
+        },
+        {
+            "date": "2021-10-22",
+            "downloads": 30,
+            "version": 316445
+        },
+        {
+            "date": "2021-10-23",
+            "downloads": 243,
+            "version": 326822
+        },
+        {
+            "date": "2021-10-23",
+            "downloads": 30353,
+            "version": 390022
+        },
+        {
+            "date": "2021-10-23",
+            "downloads": 300,
+            "version": 322376
+        },
+        {
+            "date": "2021-10-23",
+            "downloads": 37,
+            "version": 316445
+        },
+        {
+            "date": "2021-10-23",
+            "downloads": 6349,
+            "version": 331918
+        },
+        {
+            "date": "2021-10-24",
+            "downloads": 61,
+            "version": 316445
+        },
+        {
+            "date": "2021-10-24",
+            "downloads": 303,
+            "version": 322376
+        },
+        {
+            "date": "2021-10-24",
+            "downloads": 29944,
+            "version": 390022
+        },
+        {
+            "date": "2021-10-24",
+            "downloads": 5858,
+            "version": 331918
+        },
+        {
+            "date": "2021-10-24",
+            "downloads": 157,
+            "version": 326822
+        },
+        {
+            "date": "2021-10-25",
+            "downloads": 72633,
+            "version": 390022
+        },
+        {
+            "date": "2021-10-25",
+            "downloads": 57,
+            "version": 316445
+        },
+        {
+            "date": "2021-10-25",
+            "downloads": 16329,
+            "version": 331918
+        },
+        {
+            "date": "2021-10-25",
+            "downloads": 365,
+            "version": 322376
+        },
+        {
+            "date": "2021-10-25",
+            "downloads": 607,
+            "version": 326822
+        },
+        {
+            "date": "2021-10-26",
+            "downloads": 20156,
+            "version": 331918
+        },
+        {
+            "date": "2021-10-26",
+            "downloads": 50,
+            "version": 316445
+        },
+        {
+            "date": "2021-10-26",
+            "downloads": 569,
+            "version": 326822
+        },
+        {
+            "date": "2021-10-26",
+            "downloads": 73189,
+            "version": 390022
+        },
+        {
+            "date": "2021-10-26",
+            "downloads": 355,
+            "version": 322376
+        },
+        {
+            "date": "2021-10-27",
+            "downloads": 60,
+            "version": 316445
+        },
+        {
+            "date": "2021-10-27",
+            "downloads": 17362,
+            "version": 331918
+        },
+        {
+            "date": "2021-10-27",
+            "downloads": 899,
+            "version": 326822
+        },
+        {
+            "date": "2021-10-27",
+            "downloads": 359,
+            "version": 322376
+        },
+        {
+            "date": "2021-10-27",
+            "downloads": 68805,
+            "version": 390022
+        },
+        {
+            "date": "2021-10-28",
+            "downloads": 652,
+            "version": 326822
+        },
+        {
+            "date": "2021-10-28",
+            "downloads": 52,
+            "version": 316445
+        },
+        {
+            "date": "2021-10-28",
+            "downloads": 460,
+            "version": 322376
+        },
+        {
+            "date": "2021-10-28",
+            "downloads": 20576,
+            "version": 331918
+        },
+        {
+            "date": "2021-10-28",
+            "downloads": 71374,
+            "version": 390022
+        },
+        {
+            "date": "2021-10-29",
+            "downloads": 68708,
+            "version": 390022
+        },
+        {
+            "date": "2021-10-29",
+            "downloads": 365,
+            "version": 326822
+        },
+        {
+            "date": "2021-10-29",
+            "downloads": 338,
+            "version": 322376
+        },
+        {
+            "date": "2021-10-29",
+            "downloads": 31,
+            "version": 316445
+        },
+        {
+            "date": "2021-10-29",
+            "downloads": 11205,
+            "version": 331918
+        },
+        {
+            "date": "2021-10-30",
+            "downloads": 282,
+            "version": 322376
+        },
+        {
+            "date": "2021-10-30",
+            "downloads": 3084,
+            "version": 331918
+        },
+        {
+            "date": "2021-10-30",
+            "downloads": 31441,
+            "version": 390022
+        },
+        {
+            "date": "2021-10-30",
+            "downloads": 191,
+            "version": 326822
+        },
+        {
+            "date": "2021-10-30",
+            "downloads": 20,
+            "version": 316445
+        },
+        {
+            "date": "2021-10-31",
+            "downloads": 17,
+            "version": 316445
+        },
+        {
+            "date": "2021-10-31",
+            "downloads": 2599,
+            "version": 331918
+        },
+        {
+            "date": "2021-10-31",
+            "downloads": 266,
+            "version": 322376
+        },
+        {
+            "date": "2021-10-31",
+            "downloads": 32143,
+            "version": 390022
+        },
+        {
+            "date": "2021-10-31",
+            "downloads": 155,
+            "version": 326822
+        },
+        {
+            "date": "2021-11-01",
+            "downloads": 41,
+            "version": 316445
+        },
+        {
+            "date": "2021-11-01",
+            "downloads": 428,
+            "version": 322376
+        },
+        {
+            "date": "2021-11-01",
+            "downloads": 554,
+            "version": 326822
+        },
+        {
+            "date": "2021-11-01",
+            "downloads": 16787,
+            "version": 331918
+        },
+        {
+            "date": "2021-11-01",
+            "downloads": 73679,
+            "version": 390022
+        },
+        {
+            "date": "2021-11-02",
+            "downloads": 16730,
+            "version": 331918
+        },
+        {
+            "date": "2021-11-02",
+            "downloads": 74085,
+            "version": 390022
+        },
+        {
+            "date": "2021-11-02",
+            "downloads": 442,
+            "version": 322376
+        },
+        {
+            "date": "2021-11-02",
+            "downloads": 43,
+            "version": 316445
+        },
+        {
+            "date": "2021-11-02",
+            "downloads": 612,
+            "version": 326822
+        },
+        {
+            "date": "2021-11-03",
+            "downloads": 49,
+            "version": 316445
+        },
+        {
+            "date": "2021-11-03",
+            "downloads": 14608,
+            "version": 331918
+        },
+        {
+            "date": "2021-11-03",
+            "downloads": 547,
+            "version": 322376
+        },
+        {
+            "date": "2021-11-03",
+            "downloads": 568,
+            "version": 326822
+        },
+        {
+            "date": "2021-11-03",
+            "downloads": 73830,
+            "version": 390022
+        },
+        {
+            "date": "2021-11-04",
+            "downloads": 515,
+            "version": 326822
+        },
+        {
+            "date": "2021-11-04",
+            "downloads": 358,
+            "version": 322376
+        },
+        {
+            "date": "2021-11-04",
+            "downloads": 14513,
+            "version": 331918
+        },
+        {
+            "date": "2021-11-04",
+            "downloads": 75730,
+            "version": 390022
+        },
+        {
+            "date": "2021-11-04",
+            "downloads": 32,
+            "version": 316445
+        },
+        {
+            "date": "2021-11-05",
+            "downloads": 388,
+            "version": 322376
+        },
+        {
+            "date": "2021-11-05",
+            "downloads": 10438,
+            "version": 331918
+        },
+        {
+            "date": "2021-11-05",
+            "downloads": 66235,
+            "version": 390022
+        },
+        {
+            "date": "2021-11-05",
+            "downloads": 69,
+            "version": 316445
+        },
+        {
+            "date": "2021-11-05",
+            "downloads": 483,
+            "version": 326822
+        },
+        {
+            "date": "2021-11-06",
+            "downloads": 52,
+            "version": 316445
+        },
+        {
+            "date": "2021-11-06",
+            "downloads": 34941,
+            "version": 390022
+        },
+        {
+            "date": "2021-11-06",
+            "downloads": 299,
+            "version": 322376
+        },
+        {
+            "date": "2021-11-06",
+            "downloads": 230,
+            "version": 326822
+        },
+        {
+            "date": "2021-11-06",
+            "downloads": 7766,
+            "version": 331918
+        },
+        {
+            "date": "2021-11-07",
+            "downloads": 56,
+            "version": 316445
+        },
+        {
+            "date": "2021-11-07",
+            "downloads": 162,
+            "version": 326822
+        },
+        {
+            "date": "2021-11-07",
+            "downloads": 33138,
+            "version": 390022
+        },
+        {
+            "date": "2021-11-07",
+            "downloads": 3716,
+            "version": 331918
+        },
+        {
+            "date": "2021-11-07",
+            "downloads": 296,
+            "version": 322376
+        },
+        {
+            "date": "2021-11-08",
+            "downloads": 491,
+            "version": 326822
+        },
+        {
+            "date": "2021-11-08",
+            "downloads": 58,
+            "version": 316445
+        },
+        {
+            "date": "2021-11-08",
+            "downloads": 11507,
+            "version": 331918
+        },
+        {
+            "date": "2021-11-08",
+            "downloads": 405,
+            "version": 322376
+        },
+        {
+            "date": "2021-11-08",
+            "downloads": 75645,
+            "version": 390022
+        },
+        {
+            "date": "2021-11-09",
+            "downloads": 78,
+            "version": 316445
+        },
+        {
+            "date": "2021-11-09",
+            "downloads": 413,
+            "version": 322376
+        },
+        {
+            "date": "2021-11-09",
+            "downloads": 79010,
+            "version": 390022
+        },
+        {
+            "date": "2021-11-09",
+            "downloads": 14343,
+            "version": 331918
+        },
+        {
+            "date": "2021-11-09",
+            "downloads": 595,
+            "version": 326822
+        },
+        {
+            "date": "2021-11-10",
+            "downloads": 16114,
+            "version": 331918
+        },
+        {
+            "date": "2021-11-10",
+            "downloads": 55,
+            "version": 316445
+        },
+        {
+            "date": "2021-11-10",
+            "downloads": 375,
+            "version": 322376
+        },
+        {
+            "date": "2021-11-10",
+            "downloads": 78056,
+            "version": 390022
+        },
+        {
+            "date": "2021-11-10",
+            "downloads": 524,
+            "version": 326822
+        },
+        {
+            "date": "2021-11-11",
+            "downloads": 43,
+            "version": 316445
+        },
+        {
+            "date": "2021-11-11",
+            "downloads": 530,
+            "version": 326822
+        },
+        {
+            "date": "2021-11-11",
+            "downloads": 68790,
+            "version": 390022
+        },
+        {
+            "date": "2021-11-11",
+            "downloads": 11581,
+            "version": 331918
+        },
+        {
+            "date": "2021-11-11",
+            "downloads": 395,
+            "version": 322376
+        },
+        {
+            "date": "2021-11-12",
+            "downloads": 26,
+            "version": 316445
+        },
+        {
+            "date": "2021-11-12",
+            "downloads": 9917,
+            "version": 331918
+        },
+        {
+            "date": "2021-11-12",
+            "downloads": 322,
+            "version": 322376
+        },
+        {
+            "date": "2021-11-12",
+            "downloads": 68286,
+            "version": 390022
+        },
+        {
+            "date": "2021-11-12",
+            "downloads": 439,
+            "version": 326822
+        },
+        {
+            "date": "2021-11-13",
+            "downloads": 5158,
+            "version": 331918
+        },
+        {
+            "date": "2021-11-13",
+            "downloads": 243,
+            "version": 326822
+        },
+        {
+            "date": "2021-11-13",
+            "downloads": 31908,
+            "version": 390022
+        },
+        {
+            "date": "2021-11-13",
+            "downloads": 278,
+            "version": 322376
+        },
+        {
+            "date": "2021-11-13",
+            "downloads": 22,
+            "version": 316445
+        },
+        {
+            "date": "2021-11-14",
+            "downloads": 317,
+            "version": 322376
+        },
+        {
+            "date": "2021-11-14",
+            "downloads": 139,
+            "version": 326822
+        },
+        {
+            "date": "2021-11-14",
+            "downloads": 32341,
+            "version": 390022
+        },
+        {
+            "date": "2021-11-14",
+            "downloads": 13,
+            "version": 316445
+        },
+        {
+            "date": "2021-11-14",
+            "downloads": 5126,
+            "version": 331918
+        },
+        {
+            "date": "2021-11-15",
+            "downloads": 135,
+            "version": 316445
+        },
+        {
+            "date": "2021-11-15",
+            "downloads": 502,
+            "version": 322376
+        },
+        {
+            "date": "2021-11-15",
+            "downloads": 393,
+            "version": 326822
+        },
+        {
+            "date": "2021-11-15",
+            "downloads": 11242,
+            "version": 331918
+        },
+        {
+            "date": "2021-11-15",
+            "downloads": 79316,
+            "version": 390022
+        },
+        {
+            "date": "2021-11-16",
+            "downloads": 11113,
+            "version": 331918
+        },
+        {
+            "date": "2021-11-16",
+            "downloads": 465,
+            "version": 326822
+        },
+        {
+            "date": "2021-11-16",
+            "downloads": 79759,
+            "version": 390022
+        },
+        {
+            "date": "2021-11-16",
+            "downloads": 414,
+            "version": 322376
+        },
+        {
+            "date": "2021-11-16",
+            "downloads": 402,
+            "version": 316445
+        },
+        {
+            "date": "2021-11-17",
+            "downloads": 519,
+            "version": 322376
+        },
+        {
+            "date": "2021-11-17",
+            "downloads": 10435,
+            "version": 331918
+        },
+        {
+            "date": "2021-11-17",
+            "downloads": 154,
+            "version": 316445
+        },
+        {
+            "date": "2021-11-17",
+            "downloads": 587,
+            "version": 326822
+        },
+        {
+            "date": "2021-11-17",
+            "downloads": 75466,
+            "version": 390022
+        },
+        {
+            "date": "2021-11-18",
+            "downloads": 529,
+            "version": 322376
+        },
+        {
+            "date": "2021-11-18",
+            "downloads": 75439,
+            "version": 390022
+        },
+        {
+            "date": "2021-11-18",
+            "downloads": 9803,
+            "version": 331918
+        },
+        {
+            "date": "2021-11-18",
+            "downloads": 495,
+            "version": 326822
+        },
+        {
+            "date": "2021-11-18",
+            "downloads": 100,
+            "version": 316445
+        },
+        {
+            "date": "2021-11-19",
+            "downloads": 70796,
+            "version": 390022
+        },
+        {
+            "date": "2021-11-19",
+            "downloads": 10009,
+            "version": 331918
+        },
+        {
+            "date": "2021-11-19",
+            "downloads": 576,
+            "version": 326822
+        },
+        {
+            "date": "2021-11-19",
+            "downloads": 389,
+            "version": 322376
+        },
+        {
+            "date": "2021-11-19",
+            "downloads": 69,
+            "version": 316445
+        },
+        {
+            "date": "2021-11-20",
+            "downloads": 235,
+            "version": 326822
+        },
+        {
+            "date": "2021-11-20",
+            "downloads": 296,
+            "version": 322376
+        },
+        {
+            "date": "2021-11-20",
+            "downloads": 54,
+            "version": 316445
+        },
+        {
+            "date": "2021-11-20",
+            "downloads": 2849,
+            "version": 331918
+        },
+        {
+            "date": "2021-11-20",
+            "downloads": 38332,
+            "version": 390022
+        },
+        {
+            "date": "2021-11-21",
+            "downloads": 2797,
+            "version": 331918
+        },
+        {
+            "date": "2021-11-21",
+            "downloads": 33455,
+            "version": 390022
+        },
+        {
+            "date": "2021-11-21",
+            "downloads": 347,
+            "version": 322376
+        },
+        {
+            "date": "2021-11-21",
+            "downloads": 84,
+            "version": 316445
+        },
+        {
+            "date": "2021-11-21",
+            "downloads": 197,
+            "version": 326822
+        },
+        {
+            "date": "2021-11-22",
+            "downloads": 8962,
+            "version": 331918
+        },
+        {
+            "date": "2021-11-22",
+            "downloads": 393,
+            "version": 326822
+        },
+        {
+            "date": "2021-11-22",
+            "downloads": 462,
+            "version": 322376
+        },
+        {
+            "date": "2021-11-22",
+            "downloads": 176,
+            "version": 316445
+        },
+        {
+            "date": "2021-11-22",
+            "downloads": 75450,
+            "version": 390022
+        },
+        {
+            "date": "2021-11-23",
+            "downloads": 8249,
+            "version": 331918
+        },
+        {
+            "date": "2021-11-23",
+            "downloads": 75815,
+            "version": 390022
+        },
+        {
+            "date": "2021-11-23",
+            "downloads": 546,
+            "version": 326822
+        },
+        {
+            "date": "2021-11-23",
+            "downloads": 151,
+            "version": 316445
+        },
+        {
+            "date": "2021-11-23",
+            "downloads": 1677,
+            "version": 322376
+        },
+        {
+            "date": "2021-11-24",
+            "downloads": 88,
+            "version": 316445
+        },
+        {
+            "date": "2021-11-24",
+            "downloads": 536,
+            "version": 322376
+        },
+        {
+            "date": "2021-11-24",
+            "downloads": 70583,
+            "version": 390022
+        },
+        {
+            "date": "2021-11-24",
+            "downloads": 7670,
+            "version": 331918
+        },
+        {
+            "date": "2021-11-24",
+            "downloads": 362,
+            "version": 326822
+        },
+        {
+            "date": "2021-11-25",
+            "downloads": 47,
+            "version": 316445
+        },
+        {
+            "date": "2021-11-25",
+            "downloads": 305,
+            "version": 326822
+        },
+        {
+            "date": "2021-11-25",
+            "downloads": 8231,
+            "version": 331918
+        },
+        {
+            "date": "2021-11-25",
+            "downloads": 60956,
+            "version": 390022
+        },
+        {
+            "date": "2021-11-25",
+            "downloads": 464,
+            "version": 322376
+        },
+        {
+            "date": "2021-11-26",
+            "downloads": 55551,
+            "version": 390022
+        },
+        {
+            "date": "2021-11-26",
+            "downloads": 4683,
+            "version": 331918
+        },
+        {
+            "date": "2021-11-26",
+            "downloads": 234,
+            "version": 326822
+        },
+        {
+            "date": "2021-11-26",
+            "downloads": 381,
+            "version": 322376
+        },
+        {
+            "date": "2021-11-26",
+            "downloads": 49,
+            "version": 316445
+        },
+        {
+            "date": "2021-11-27",
+            "downloads": 31147,
+            "version": 390022
+        },
+        {
+            "date": "2021-11-27",
+            "downloads": 136,
+            "version": 326822
+        },
+        {
+            "date": "2021-11-27",
+            "downloads": 33,
+            "version": 316445
+        },
+        {
+            "date": "2021-11-27",
+            "downloads": 1854,
+            "version": 331918
+        },
+        {
+            "date": "2021-11-27",
+            "downloads": 233,
+            "version": 322376
+        },
+        {
+            "date": "2021-11-28",
+            "downloads": 22,
+            "version": 316445
+        },
+        {
+            "date": "2021-11-28",
+            "downloads": 2319,
+            "version": 331918
+        },
+        {
+            "date": "2021-11-28",
+            "downloads": 79,
+            "version": 322376
+        },
+        {
+            "date": "2021-11-28",
+            "downloads": 33974,
+            "version": 390022
+        },
+        {
+            "date": "2021-11-28",
+            "downloads": 87,
+            "version": 326822
+        },
+        {
+            "date": "2021-11-29",
+            "downloads": 117,
+            "version": 316445
+        },
+        {
+            "date": "2021-11-29",
+            "downloads": 385,
+            "version": 326822
+        },
+        {
+            "date": "2021-11-29",
+            "downloads": 7985,
+            "version": 331918
+        },
+        {
+            "date": "2021-11-29",
+            "downloads": 79460,
+            "version": 390022
+        },
+        {
+            "date": "2021-11-29",
+            "downloads": 198,
+            "version": 322376
+        },
+        {
+            "date": "2021-11-30",
+            "downloads": 495,
+            "version": 326822
+        },
+        {
+            "date": "2021-11-30",
+            "downloads": 264,
+            "version": 322376
+        },
+        {
+            "date": "2021-11-30",
+            "downloads": 90,
+            "version": 316445
+        },
+        {
+            "date": "2021-11-30",
+            "downloads": 83359,
+            "version": 390022
+        },
+        {
+            "date": "2021-11-30",
+            "downloads": 9186,
+            "version": 331918
+        },
+        {
+            "date": "2021-12-01",
+            "downloads": 83139,
+            "version": 390022
+        },
+        {
+            "date": "2021-12-01",
+            "downloads": 9014,
+            "version": 331918
+        },
+        {
+            "date": "2021-12-01",
+            "downloads": 667,
+            "version": 326822
+        },
+        {
+            "date": "2021-12-01",
+            "downloads": 371,
+            "version": 322376
+        },
+        {
+            "date": "2021-12-01",
+            "downloads": 128,
+            "version": 316445
+        },
+        {
+            "date": "2021-12-02",
+            "downloads": 456,
+            "version": 322376
+        },
+        {
+            "date": "2021-12-02",
+            "downloads": 48,
+            "version": 316445
+        },
+        {
+            "date": "2021-12-02",
+            "downloads": 10019,
+            "version": 331918
+        },
+        {
+            "date": "2021-12-02",
+            "downloads": 584,
+            "version": 326822
+        },
+        {
+            "date": "2021-12-02",
+            "downloads": 78021,
+            "version": 390022
+        },
+        {
+            "date": "2021-12-03",
+            "downloads": 74,
+            "version": 316445
+        },
+        {
+            "date": "2021-12-03",
+            "downloads": 17582,
+            "version": 331918
+        },
+        {
+            "date": "2021-12-03",
+            "downloads": 67343,
+            "version": 390022
+        },
+        {
+            "date": "2021-12-03",
+            "downloads": 670,
+            "version": 326822
+        },
+        {
+            "date": "2021-12-03",
+            "downloads": 309,
+            "version": 322376
+        },
+        {
+            "date": "2021-12-04",
+            "downloads": 195,
+            "version": 326822
+        },
+        {
+            "date": "2021-12-04",
+            "downloads": 266,
+            "version": 322376
+        },
+        {
+            "date": "2021-12-04",
+            "downloads": 31137,
+            "version": 390022
+        },
+        {
+            "date": "2021-12-04",
+            "downloads": 6858,
+            "version": 331918
+        },
+        {
+            "date": "2021-12-04",
+            "downloads": 73,
+            "version": 316445
+        },
+        {
+            "date": "2021-12-05",
+            "downloads": 151,
+            "version": 326822
+        },
+        {
+            "date": "2021-12-05",
+            "downloads": 32098,
+            "version": 390022
+        },
+        {
+            "date": "2021-12-05",
+            "downloads": 7421,
+            "version": 331918
+        },
+        {
+            "date": "2021-12-05",
+            "downloads": 278,
+            "version": 322376
+        },
+        {
+            "date": "2021-12-05",
+            "downloads": 29,
+            "version": 316445
+        },
+        {
+            "date": "2021-12-06",
+            "downloads": 76520,
+            "version": 390022
+        },
+        {
+            "date": "2021-12-06",
+            "downloads": 362,
+            "version": 322376
+        },
+        {
+            "date": "2021-12-06",
+            "downloads": 508,
+            "version": 326822
+        },
+        {
+            "date": "2021-12-06",
+            "downloads": 50,
+            "version": 316445
+        },
+        {
+            "date": "2021-12-06",
+            "downloads": 14659,
+            "version": 331918
+        },
+        {
+            "date": "2021-12-07",
+            "downloads": 98,
+            "version": 316445
+        },
+        {
+            "date": "2021-12-07",
+            "downloads": 423,
+            "version": 322376
+        },
+        {
+            "date": "2021-12-07",
+            "downloads": 16300,
+            "version": 331918
+        },
+        {
+            "date": "2021-12-07",
+            "downloads": 411,
+            "version": 326822
+        },
+        {
+            "date": "2021-12-07",
+            "downloads": 75895,
+            "version": 390022
+        },
+        {
+            "date": "2021-12-08",
+            "downloads": 19688,
+            "version": 331918
+        },
+        {
+            "date": "2021-12-08",
+            "downloads": 76714,
+            "version": 390022
+        },
+        {
+            "date": "2021-12-08",
+            "downloads": 309,
+            "version": 322376
+        },
+        {
+            "date": "2021-12-08",
+            "downloads": 83,
+            "version": 316445
+        },
+        {
+            "date": "2021-12-08",
+            "downloads": 415,
+            "version": 326822
+        },
+        {
+            "date": "2021-12-09",
+            "downloads": 91,
+            "version": 316445
+        },
+        {
+            "date": "2021-12-09",
+            "downloads": 74618,
+            "version": 390022
+        },
+        {
+            "date": "2021-12-09",
+            "downloads": 403,
+            "version": 322376
+        },
+        {
+            "date": "2021-12-09",
+            "downloads": 23806,
+            "version": 331918
+        },
+        {
+            "date": "2021-12-09",
+            "downloads": 632,
+            "version": 326822
+        },
+        {
+            "date": "2021-12-10",
+            "downloads": 73396,
+            "version": 390022
+        },
+        {
+            "date": "2021-12-10",
+            "downloads": 576,
+            "version": 326822
+        },
+        {
+            "date": "2021-12-10",
+            "downloads": 49,
+            "version": 316445
+        },
+        {
+            "date": "2021-12-10",
+            "downloads": 17052,
+            "version": 331918
+        },
+        {
+            "date": "2021-12-10",
+            "downloads": 323,
+            "version": 322376
+        },
+        {
+            "date": "2021-12-11",
+            "downloads": 28339,
+            "version": 390022
+        },
+        {
+            "date": "2021-12-11",
+            "downloads": 231,
+            "version": 322376
+        },
+        {
+            "date": "2021-12-11",
+            "downloads": 5703,
+            "version": 331918
+        },
+        {
+            "date": "2021-12-11",
+            "downloads": 192,
+            "version": 326822
+        },
+        {
+            "date": "2021-12-11",
+            "downloads": 49,
+            "version": 316445
+        }
+    ]
+}

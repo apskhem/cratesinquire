@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 
-const WIDTH = 954;
+const WIDTH = 900;
 
 const getTree = <T>(data: T) => {
   const root = d3.hierarchy(data);
@@ -32,7 +32,6 @@ export const getDepChart = (data: DepNode) => {
     .attr("viewBox", [ 0, 0, WIDTH, x1 - x0 + root["dx"] * 2 ] as any);
 
   const g = svg.append("g")
-    .attr("font-family", "Cabin, sans-serif")
     .attr("font-size", 10)
     .attr("transform", `translate(${root["dy"] / 3},${root["dx"] - x0})`);
 

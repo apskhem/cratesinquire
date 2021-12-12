@@ -149,6 +149,11 @@ a.pass-href {
   }
 }
 
+.disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
 .banner {
   display: flex;
   align-items: center;
@@ -164,6 +169,80 @@ a.pass-href {
     border-color: #fdc659;
     color: #fdc659;
     text-decoration: none;
+  }
+}
+
+.toggle-flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+.toggle-content {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: 1em;
+
+  .toggle-container {
+    $btn-size: 16px;
+
+    position: relative;
+    height: 24px;
+
+    &.checked {
+      .toggle-button {
+        left: 0;
+        border-color: #fdc659;
+        background-color: #FFEFD1;
+        transform: translate(100%, -50%);
+      }
+
+      .toggle-line {
+        background-color: #fdc659;
+      }
+    }
+
+    .toggle-button {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: $btn-size;
+      height: $btn-size;
+      border-radius: 50%;
+      border: 2px solid #62727A;
+      background-color: white;
+      cursor: pointer;
+      transform: translate(0, -50%);
+      transition: 300ms;
+    }
+
+    .toggle-line {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      height: 2px;
+      border-radius: 1px;
+      background-color: #62727A;
+      transform: translate(0, -50%);
+    }
+  }
+
+  .toggle-text-container {
+    .toggle-label {
+      width: fit-content;
+
+      &.default {
+        font-weight: bold;
+      }
+
+      &.highlighted {
+        color: #fdc659;
+      }
+    }
+
+    .feature-sub {
+      color: #8695AC;
+    }
   }
 }
 
@@ -383,8 +462,8 @@ main#crate {
         }
       }
 
-      &.crate-bundle-size {
-        .graph-header {
+      &.bar-chart {
+        .bar-chart-header {
           display: flex;
           align-items: center;
           justify-content: space-between;
@@ -407,7 +486,7 @@ main#crate {
           }
         }
   
-        .graph-container {
+        .bar-chart-container {
           display: grid;
           grid-template-columns: 32px 84px 1fr;
           gap: 4px;
@@ -496,7 +575,7 @@ main#crate {
       }
   
       &.crate-dep-tree {
-        .dep-tree-displayer-container {
+        .dep-tree-display-container {
           display: flex;
           align-items: center;
           justify-content: center;
@@ -506,6 +585,7 @@ main#crate {
             flex-grow: 1;
     
             text {
+              font-family: "Cabin", sans-serif;
               cursor: pointer;
         
               &:hover {
@@ -537,8 +617,7 @@ main#crate {
             }
 
             .features-selection-container {
-              
-              
+
             }
 
             .features-display-pane {
@@ -549,6 +628,20 @@ main#crate {
               white-space: nowrap;
               overflow: hidden;
               text-overflow: ellipsis;
+
+              &.blinked {
+                animation: blink 300ms;
+
+                span {
+                  &.string {
+                    animation: blink-string 300ms;
+                  }
+  
+                  &.keyword {
+                    animation: blink-keyword 300ms;
+                  }
+                }
+              }
 
               span {
                 &.string {
@@ -574,7 +667,24 @@ main#crate {
         }
 
         .features-toggles {
-
+          
+        }
+      }
+      
+      &.downloads-trend {
+        .downloads-trend-display-container {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 212px;
+    
+          svg {
+            flex-grow: 1;
+    
+            text {
+              font-family: "Cabin", sans-serif;
+            }
+          }
         }
       }
     }
@@ -584,8 +694,20 @@ main#crate {
 /* loader */
 .loader-container {
   display: flex;
+  flex-flow: column;
   align-items: center;
   justify-content: center;
+
+  > .result-msg, .action-msg {
+    color: #8695AC;
+  }
+
+  > .action-msg {
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
 
   > .dot-table-layout {
     display: grid;
@@ -612,5 +734,33 @@ main#crate {
     100% {
       transform: scale(1);
     }
+  }
+}
+
+/* animation */
+@keyframes blink {
+  from {
+    color: transparent;
+  }
+  to {
+    color: currentColor;
+  }
+}
+
+@keyframes blink-string {
+  from {
+    color: transparent;
+  }
+  to {
+    color: #008200;
+  }
+}
+
+@keyframes blink-keyword {
+  from {
+    color: transparent;
+  }
+  to {
+    color: #b21e00;
   }
 }

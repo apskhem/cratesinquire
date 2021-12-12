@@ -140,3 +140,17 @@ interface SearchResponse {
     total: number;
   };
 }
+
+interface DownloadsResponse {
+  meta: {
+    extra_downloads: {
+      date: string;
+      downloads: number;
+    }[];
+  };
+  version_downloads: {
+    date: string;
+    downloads: number;
+    version: number;
+  }[];
+}

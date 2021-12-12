@@ -15,16 +15,17 @@ export class AppController {
   @Get("/crates/:id")
   @Header("content-type", "text/html")
   async getCrateById(@Param("id") id: string) {
+    // only in development mode
+    if (!this.appService.isProductionMode) {
+      await this.appService.compilePreprocess();
+    }
+
     // validate id
     if (!/^[a-zA-Z0-9_-]+$/.test(id)) {
       return this.appService.renderNotFound(id, `Could not find "${id}" crate.`, HttpStatus.BAD_REQUEST);
     }
 
-    // send request
-    const raw = await fetch(`https://crates.io/api/v1/crates/${id}`);
-    
-    // get json
-    const data = await raw.json() as CrateResponse;
+    const data = await this.appService.fetchCache(id);
 
     if ("errors" in data) {
       return this.appService.renderNotFound(id, `Could not find "${id}" crate.`, HttpStatus.NOT_FOUND);

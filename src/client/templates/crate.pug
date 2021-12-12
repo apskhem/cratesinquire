@@ -86,8 +86,8 @@ html(lang="en")
                 div.header-icon-container
                   i.fas.fa-balance-scale
                 b #{data.versions[0].license}
-        section.crate-bundle-size
-          div.graph-header
+        section.bar-chart
+          div.bar-chart-header
             div.view-swtiches
               div#switch-crate-size.sel Crate Size
               div#switch-dowloads Downloads
@@ -95,7 +95,7 @@ html(lang="en")
               div#switch-features Features
             div.view-options
               div
-          div.graph-container
+          div.bar-chart-container
             //- each version in data.versions
             //-  div
             //-    div.version-track
@@ -105,7 +105,26 @@ html(lang="en")
             //-      span
         section.crate-dep-tree
           h3 Dependency Tree
-          div.dep-tree-displayer-container
+          div.dep-tree-toggles.toggle-flex-container(hidden)
+            div.toggle-content.disabled
+              div.toggle-container.checked
+                div.toggle-line
+                div.toggle-button
+              div.toggle-text-container
+                div.toggle-label base
+            div.toggle-content
+              div.toggle-container
+                div.toggle-line
+                div.toggle-button
+              div.toggle-text-container
+                div.toggle-label dev
+            div.toggle-content
+              div.toggle-container
+                div.toggle-line
+                div.toggle-button
+              div.toggle-text-container
+                div.toggle-label optional
+          div.dep-tree-display-container
             div.loader-container
               div.dot-table-layout
                 div(style="animation-delay: 0")
@@ -116,22 +135,38 @@ html(lang="en")
           div.features-input-container
             div.features-input-grid
               div.features-selection-container
-                select
+                select.features-selection
                   each version in data.versions
                     if data.crate.max_stable_version === version.num
                       option(value=version.num, selected) #{version.num}
                     else
                       option(value=version.num) #{version.num}
               div.features-display-pane
-                span #{data.crate.id}
-                span #{" = "}
+                | #{data.crate.id}#{" = "}
                 span.string "#{data.crate.max_stable_version}"
               div.copy-icon-container
-                i.interactable-icon.fas.fa-copy
+                i.interactable-icon.copy-icon.fas.fa-copy
               div.features-selection-dropdown(hidden)
           div.features-toggles
-        section.download-trend
-           h3 Download Trend
+            //- div.toggle-content
+            //-   div.toggle-container
+            //-     div.toggle-line
+            //-     div.toggle-button.checked
+            //-   div.toggle-text-container
+            //-     div.toggle-label default
+            //-     div.feature-sub
+            //-       ul 
+            //-         li test
+        section.downloads-trend
+          h3 Downloads Trend
+          div.downloads-trend-toggles.toggle-flex-container(hidden)
+            //- .toggle-content ...
+          div.downloads-trend-display-container
+            div.loader-container
+              div.dot-table-layout
+                div(style="animation-delay: 0")
+                div(style="animation-delay: 100ms")
+                div(style="animation-delay: 200ms")
     footer.abs
       div.lhs
         span Hosted on
