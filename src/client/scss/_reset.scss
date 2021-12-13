@@ -11,16 +11,11 @@ body {
 
 * {
   box-sizing: inherit;
-
-  &:not(textarea),
-  &:not([contenteditable=true]),
-  &:not(input) {
-    -webkit-user-select: none; /* Safari */
-    -khtml-user-select: none; /* Konqueror HTML */
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-    user-select: none; /* supported by Chrome and Opera */
-  }
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* supported by Chrome and Opera */
 
   &::before,
   &::after {
@@ -48,6 +43,12 @@ img {
 }
 
 select {
+  -webkit-user-select: text; /* Safari */
+  -khtml-user-select: all; /* Konqueror HTML */
+  -moz-user-select: all; /* Firefox */
+  -ms-user-select: all; /* Internet Explorer/Edge */
+  user-select: all; /* supported by Chrome and Opera */
+
   margin: 0;
   padding: 0;
   font: inherit;
@@ -63,6 +64,12 @@ select {
 }
 
 input {
+  -webkit-user-select: text; /* Safari */
+  -khtml-user-select: all; /* Konqueror HTML */
+  -moz-user-select: all; /* Firefox */
+  -ms-user-select: all; /* Internet Explorer/Edge */
+  user-select: all; /* supported by Chrome and Opera */
+  
   margin: 0;
   padding: 0;
   font: inherit;
