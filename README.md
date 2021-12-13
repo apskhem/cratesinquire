@@ -6,7 +6,7 @@
   <img src="https://img.shields.io/badge/license-Apache--2.0-informational?style=for-the-badge" alt="badge" />
 </p>
 <p align="center">
-  <a href="https://cratesinquire.com">cratesinquire.com</a><br />
+  <a href="https://www.cratesinquire.com/">www.cratesinquire.com</a><br />
 </p>
 <p align="center">
   Explore crate packages and inspect the details, inspired by Bundlephobia.
@@ -14,7 +14,7 @@
 
 ## What It Can Do?
 
-- Send request to https://crates.io/api/v1/ and process the data.
+- Sends request to https://crates.io/api/v1/ and process the data.
 - Displays extra crate data, extended from crate.io.
 - Displays data diagram comparison.
 - Displays crate dependencies in depth.

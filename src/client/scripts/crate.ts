@@ -183,6 +183,7 @@ const initBarChartSection = (id: string, stableVersio: string, versions: CrateRe
 
   row.append("a")
     .text((d) => d.num)
+    .attr("rel", "noreferrer")
     .attr("href", (d) => `https://crates.io/crates/${id}/${d.num}`)
     .attr("target", "_blank");
 
