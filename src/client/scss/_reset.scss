@@ -43,12 +43,6 @@ img {
 }
 
 select {
-  -webkit-user-select: text; /* Safari */
-  -khtml-user-select: all; /* Konqueror HTML */
-  -moz-user-select: all; /* Firefox */
-  -ms-user-select: all; /* Internet Explorer/Edge */
-  user-select: all; /* supported by Chrome and Opera */
-
   margin: 0;
   padding: 0;
   font: inherit;
@@ -57,6 +51,15 @@ select {
   border: 0;
   font-size: inherit;
   font: inherit;
+
+  $carret-size: 12px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='black' stroke-width='12' stroke-linejoin='round' stroke-linecap='round'><path d='M8,25 L50,75 L92,25'/></svg>");
+  background-size: $carret-size;
+  background-position: 100% 50%;
+  background-repeat: no-repeat;
 
   &:focus {
     outline: none;

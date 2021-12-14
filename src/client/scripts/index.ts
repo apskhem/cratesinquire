@@ -2,6 +2,12 @@ import { runCrate } from "./crate";
 import { runHome } from "./home";
 import * as d3 from "d3";
 
+// redirect if is not https
+if (location.protocol !== "https:" && !/localhost/.test(location.hostname)) {
+  location.replace(`https://www.cratesinquire.com${location.pathname}`);
+}
+
+// when everything is loaded, run this script
 window.onload = () => {
   switch (d3.select("main").attr("id")) {
     case "home": {

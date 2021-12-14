@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 
-const WIDTH = 900;
+const WIDTH = Math.min(900, window.innerWidth);
 
 const getTree = <T>(data: T) => {
   const root = d3.hierarchy(data);

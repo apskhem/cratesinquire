@@ -154,3 +154,14 @@ interface DownloadsResponse {
     version: number;
   }[];
 }
+
+/* script structs */
+type Point = {
+  date: Date;
+  downloads: number;
+};
+
+type TrendData = {
+  date: number;
+  [key: string]: number;
+}[];

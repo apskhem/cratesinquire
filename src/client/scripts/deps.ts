@@ -1,9 +1,10 @@
 import semver from "semver";
 
 const dedupMap = new Map<string, DependenciesResponse>();
+let builtTree: DepNode | null = null;
 
 export const getBaseDepTree = async (id: string, num: string) => {
-  const root = {
+  builtTree = {
     crate_id: id,
     children: []
   };
@@ -13,9 +14,9 @@ export const getBaseDepTree = async (id: string, num: string) => {
 
   dedupMap.set(id, data);
 
-  await getDepTreeRecursively(root, data, 10, dedupMap);
+  await getDepTreeRecursively(builtTree, data, 10, dedupMap);
 
-  return root;
+  return builtTree;
 };
 
 const getDepTreeRecursively = async (root: DepNode, res: DependenciesResponse, depth: number, dedupSet: Map<string, DependenciesResponse>) => {
@@ -23,13 +24,16 @@ const getDepTreeRecursively = async (root: DepNode, res: DependenciesResponse, d
     return root;
   }
 
-  const nonDevDep = res.dependencies.filter((x) => x.kind !== "dev" && !x.optional);
+  const nonDevDep = res.dependencies.filter((x) => !/dev|build/.test(x.kind) && !x.optional);
   const nonDevDepReq = nonDevDep.filter((x) => !dedupSet.has(x.crate_id));
 
-  const fetches = nonDevDepReq.map((x) => {
+  const fetches = nonDevDepReq.reduce((acc, x) => {
     const num = semver.coerce(x.req)?.raw;
-    return fetch(`https://crates.io/api/v1/crates/${x.crate_id}/${num}/dependencies`);
-  });
+
+    return num
+      ? acc.concat(fetch(`https://crates.io/api/v1/crates/${x.crate_id}/${num}/dependencies`))
+      : acc;
+  }, [] as Promise<Response>[]);
 
   const resGroup = await Promise.all(fetches);
   const dataGroup = await Promise.all<DependenciesResponse>(resGroup.map((x) => x.json()));

@@ -6,6 +6,7 @@ import { getDepChart } from "./tree";
 import * as d3 from "d3";
 import { initSearchBar as possessSearchBar } from "./search-bar";
 import { getTrend } from "./trend";
+import convert from "color-convert";
 
 type BarMode = "size" | "downloads" | "lifetime" | "features";
 type A = [ number, number ];
@@ -51,7 +52,7 @@ export const runCrate = async () => {
 
 const useLoader = async (selector: string, callback: () => Promise<SVGSVGElement | null>) => {
   const displayContainer = d3.select<HTMLElement, null>(selector);
-  const toggleContainer = displayContainer.node()?.previousElementSibling;
+  const toggleContainer = displayContainer.node()?.parentElement?.getElementsByClassName("toggle-flex-container") ?? [];
   const loaderContainer = displayContainer.selectChild();
   const loaderLayout = loaderContainer.selectChild();
 
@@ -60,7 +61,7 @@ const useLoader = async (selector: string, callback: () => Promise<SVGSVGElement
 
     displayContainer.append(() => el);
     loaderContainer.remove();
-    toggleContainer?.removeAttribute("hidden");
+    Array.from(toggleContainer).forEach((x) => x.removeAttribute("hidden"));
   }
   catch (err) {
     console.log(err);
@@ -344,7 +345,18 @@ const initFeaturesSection = (id: string, stableVersion: string, versions: CrateR
       .append("ul")
       .selectAll<HTMLLIElement, string>("li")
       .data((d) => d[1], (d) => d)
-      .join("li")
+      .join("li");
+
+    const externalIcon = includingList
+      .filter((d) => data.every((x) => x[0] !== d))
+      .append("i")
+      .classed("fas fa-truck-loading", true);
+    const devIcon = includingList
+      .filter((d) => false)
+      .append("i")
+      .classed("fas fa-wrench", true);
+    const listText = includingList
+      .append("span")
       .text((d) => d);
   };
 
@@ -398,41 +410,52 @@ const initFeaturesSection = (id: string, stableVersion: string, versions: CrateR
 };
 
 const initTrendSection = async (id: string, nummap: Map<number, string>) => {
-  const createTrendToggles = (data: string[], nummap: Map<number, string>, handleDisable: (name: string) => void) => {
-    const toggleLayout = d3.select(".downloads-trend-toggles");
+  const createTrendToggles = (data: string[], nummap: Map<number, string>, highlight: (name: string) => void, unhighlight: (name: string) => void) => {
+    const colorLayout = d3.select(".downloads-trend-toggles");
+
+    const colorScheme = [
+      "#4393c3",
+      "#92c5df",
+      "#f4a582",
+      "#d6604d",
+      "#b2172b",
+      "#670020"
+    ];
   
-    const content = toggleLayout
-      .selectAll(".toggle-content")
+    const content = colorLayout
+      .selectAll(".color-content")
       .data(data)
       .join("div")
-      .classed("toggle-content", true);
+      .classed("color-content", true);
   
-    const toggleContainer = content
+    const colorContainer = content
       .join("div")
       .append("div")
-      .classed("toggle-container", true)
-      .classed("checked", true);
+      .classed("color-container", true)
+      .classed("checked", true)
+      .style("background-color", (d, i) => `rgba(${convert.hex.rgb(colorScheme[i] ?? "#eee")}, 0.4)`)
+      .style("border-color", (d, i) => `rgba(${convert.hex.rgb(colorScheme[i] ?? "#eee")}, 0.4)`)
+      .on("click", (e, d1) => {
+        // const self = colorContainer.filter((d2) => d1 === d2);
+
+        // const value = !self.classed("checked");
+        // self.classed("checked", value);
+  
+        // handleDisable(d1);
+      })
+      .on("mouseover", (e, d1) => {
+        highlight(d1);
+      })
+      .on("mouseleave", (e, d1) => {
+        unhighlight(d1);
+      });
     const textContainer = content
       .join("div")
       .append("div")
-      .classed("toggle-text-container", true);
-  
-    const toggleLine = toggleContainer
-      .append("div")
-      .classed("toggle-line", true);
-    const toggleButton = toggleContainer.append("div")
-      .classed("toggle-button", true)
-      .on("click", (e, d1) => {
-        const self = toggleContainer.filter((d2) => d1 === d2);
-        
-        const value = !self.classed("checked");
-        self.classed("checked", value);
-  
-        handleDisable(d1);
-      });
+      .classed("color-text-container", true);
   
     const name = textContainer.append("div")
-      .classed("toggle-label", true)
+      .classed("color-label", true)
       .text((d) => d === "Others" ? "Others" : nummap.get(Number(d)) ?? "");
   };
 
@@ -440,38 +463,42 @@ const initTrendSection = async (id: string, nummap: Map<number, string>) => {
     const res = await fetch(`https://crates.io/api/v1/crates/${id}/downloads`);
     const data = await res.json() as DownloadsResponse;
 
-    // vmap
-    const vmap = new Map<string, { date: Date; downloads: number; }[]>([[
-      "Others",
-      data.meta.extra_downloads.map((x) => ({ date: new Date(x.date), downloads: x.downloads }))
-    ]]);
+    // set first data row
+    const d = data.meta.extra_downloads.reduce((acc, x) => {
+      return acc.set(new Date(x.date).getTime(), { Others: x.downloads });
+    }, new Map<number, Record<string, number>>());
 
-    data.version_downloads.forEach((d) => {
-      const m = vmap.get(`${d.version}`);
-      const point = { date: new Date(d.date), downloads: d.downloads };
+    // get all version keys
+    const dKeys = Array.from(data.version_downloads.reduce((acc, x) => acc.add(`${x.version}`), new Set<string>()));
+    const requiredKeys = [ "Others" ].concat(dKeys);
 
-      m
-        ? m.push(point)
-        : vmap.set(`${d.version}`, [ point ]);
+    // fill the row
+    d.forEach((val) => {
+      dKeys.forEach((x) => {
+        val[x] = 0;
+      });
     });
 
-    // tmap
-    /* const tmap = new Map<string, number>(data.meta.extra_downloads.map((x) => [ x.date, x.downloads ]));
+    // fill the value
+    data.version_downloads.forEach((x) => {
+      const t = new Date(x.date).getTime();
+      const val = d.get(t);
 
-    data.version_downloads.forEach((d) => {
-      tmap.set(d.date, (tmap.get(d.date) || 0) + d.downloads);
+      if (val) {
+        val[`${x.version}`] = x.downloads;
+      }
     });
 
-    const tValues = Array.from(tmap).map(([ date, downloads ]) => ({ date: new Date(date), downloads }));
-    const tReadyData = { name: "all", values: tValues }; */
+    // flatten the array
+    const readyData = Array.from(d).map(([ date, dRow ]) => {
+      return { date, ...dRow };
+    });
 
-    // get ready data
-    const readyData = Array.from(vmap).map(([ name, values ]) => ({ name, values }));
-
-    const { svg, handleDisable } = getTrend(readyData);
+    // render trend graph
+    const { svg, highlight, unhighlight } = getTrend(readyData, requiredKeys);
 
     // create toggles
-    createTrendToggles(Array.from(vmap).map(([ name ]) => name), nummap, handleDisable);
+    createTrendToggles(requiredKeys, nummap, highlight, unhighlight);
 
     return svg;
   });
