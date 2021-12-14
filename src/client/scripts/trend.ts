@@ -161,6 +161,7 @@ export const getTrend = (data: TrendData, keys: string[]) => {
   const x2 = yValues.size + 1;
   const y2 = leastSquaresCoeff[0] * xSeries.length + leastSquaresCoeff[1];
   const trendData = [[ x1, y1, x2, y2 ]];
+  // const trendSlope = (y2 - y1) / (x2 - x1) * (y2 - y1);
   
   const trendline = svg.selectAll(".trendline")
     .data(trendData);
@@ -177,14 +178,12 @@ export const getTrend = (data: TrendData, keys: string[]) => {
     .attr("stroke-width", 1.5)
     .attr("stroke-dasharray", "4 2");
 
-  const trendCoeff = leastSquaresCoeff[0] * leastSquaresCoeff[2];
-
-  svg.append("text")
-    .text(`trend coeff: ${(trendCoeff).toFixed(3)} (${getTrendKeyword(trendCoeff)})`)
+  /* svg.append("text")
+    .text(`trend coeff: ${(trendSlope).toFixed(3)} (${getTrendKeyword(trendSlope)})`)
     .attr("class", "text-label")
     .attr("x", xScale(2))
     .attr("y", y(maxYScale))
-    .attr("font-size", 10);
+    .attr("font-size", 10); */
 
   // Add the brushing
   /* areaChart
