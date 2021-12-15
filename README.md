@@ -14,7 +14,7 @@
 
 ## What It Can Do?
 
-- Fetches data from crates.io's API and visualize the data.
+- Fetches data from crates.io's APIs and visualizes the data.
 - Displays extra crate data, extended from crate.io.
 - Displays data diagram comparison.
 - Displays crate dependencies in depth.
@@ -28,7 +28,7 @@
 - Styling: SCSS and PostCSS
 - Backend framework: NestJS-Fastify
 - Linter: ESLint and Stylelint
-- Rendering method: SSR and SEO optimization
+- Rendering method: SEO-first SSR
 
 ## Can I Join the Contribution?
 

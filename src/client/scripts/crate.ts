@@ -52,7 +52,7 @@ export const runCrate = async () => {
 
 const useLoader = async (selector: string, callback: () => Promise<SVGSVGElement | null>) => {
   const displayContainer = d3.select<HTMLElement, null>(selector);
-  const toggleContainer = displayContainer.node()?.parentElement?.getElementsByClassName("toggle-flex-container") ?? [];
+  const toggleContainer = displayContainer.node()?.parentElement?.getElementsByClassName("flex-items-container") ?? [];
   const loaderContainer = displayContainer.selectChild();
   const loaderLayout = loaderContainer.selectChild();
 

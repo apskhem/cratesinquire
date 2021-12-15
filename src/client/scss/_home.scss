@@ -4,36 +4,6 @@ main#home {
   display: flex;
   align-items: center;
   justify-content: center;
-
-  @media only screen and (max-width: 600px) {
-    .main-layout {
-      max-width: 100vw;
-    }
-
-    .main-container {
-      margin-top: 30%;
-
-      .header-grid {
-        display: flex;
-        align-items: center;
-        flex-flow: column;
-        gap: 0;
-  
-        .img-container {
-          width: 32%;
-        }
-      }
-  
-      .title {
-        text-align: center;
-        font-size: 1.5rem;
-      }
-
-      .desc {
-        font-size: smaller;
-      }
-    }
-  }
 }
 
 .main-layout {
@@ -172,10 +142,10 @@ a.pass-href {
   }
 }
 
-.toggle-flex-container {
+.flex-items-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 0 1em;
+  gap: 0.5em 1em;
 }
 
 .color-content {
@@ -200,22 +170,6 @@ a.pass-href {
   .color-text-container {
     .color-label {
       width: fit-content;
-
-      &.default {
-        font-weight: bold;
-      }
-
-      &.highlighted {
-        color: #fdc659;
-      }
-    }
-
-    .feature-sub {
-      color: #8695AC;
-
-      i {
-        margin-right: 0.5em;
-      }
     }
   }
 }
@@ -343,58 +297,10 @@ footer {
   }
 }
 
-@media only screen and (max-width: 600px) {
-  footer {
-    flex-flow: column;
-    align-items: flex-start;
-
-    > .rhs {
-      width: 100%;
-      margin-top: 1em;
-      padding-top: 1em;
-      border-top: 1px solid #8695AC;
-    }
-  }
-}
-
 /* crate */
 main#crate {
   flex-grow: 1;
   padding: 1em;
-
-  @media only screen and (max-width: 600px) {
-    .main-container {
-      > section {
-        &.search-container {
-          > .search-ribbon {
-            grid-template-columns: 1fr !important;
-            gap: 0 !important;
-            height: min-content !important;
-
-            > .lhs, .rhs {
-              justify-self: center;
-            }
-
-            > .mid {
-              padding: 0 8px;
-            }
-          }
-        }
-
-        &.crate-header {
-          flex-flow: column;
-
-          > .rhs {
-            align-items: flex-start !important;
-
-            > div {
-              gap: 0.5em
-            }
-          }
-        }
-      }
-    }
-  }
 
   .main-container {
     display: grid;

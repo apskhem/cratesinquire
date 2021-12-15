@@ -15,7 +15,8 @@
     "dev": "nest build --webpack --webpackPath webpack.config.js --watch",
     "debug": "nest start --debug --watch",
     "prod": "node dist/main",
-    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix"
+    "lint:scripts": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "lint:styles": "npx stylelint 'src/client/scss/**/*.scss'"
   },
   "dependencies": {
     "@nestjs/common": "^8.2.3",
@@ -26,7 +27,7 @@
     "bytes": "^3.1.1",
     "color-convert": "^2.0.1",
     "d3": "~6.7.0",
-    "esbuild": "^0.14.2",
+    "esbuild": "^0.14.5",
     "fastify-compress": "^4.0.0",
     "fastify-helmet": "^5.3.2",
     "fastify-static": "^4.5.0",
@@ -56,6 +57,9 @@
     "run-script-webpack-plugin": "^0.0.11",
     "sass": "^1.44.0",
     "source-map-support": "^0.5.21",
+    "stylelint": "^14.1.0",
+    "stylelint-config-recess-order": "^3.0.0",
+    "stylelint-config-standard-scss": "^3.0.0",
     "ts-loader": "^9.2.6",
     "ts-node": "^10.4.0",
     "tsconfig-paths": "^3.12.0",

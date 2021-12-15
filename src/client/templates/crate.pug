@@ -1,52 +1,43 @@
 doctype html
 html(lang="en")
   head
-    meta(charset="utf-8")
-    meta(http-equiv="x-ua-compatible", content="ie=edge")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    meta(name="application-name", content="Cratesinquire")
+    include includes/default-head.pug
     meta(name="description", content=data.crate.description)
     link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.9.0/css/all.css", crossorigin="anonymous")
     link(rel="stylesheet", href="/bundle.css")
-    link(rel="shortcut icon", href="/favicon.svg")
     script(type="module", src="/bundle.js")
     title #{data.crate.name} | Cratesinquire
   body
     header
     main#crate
       input#data(value=JSON.stringify(data), disabled, hidden)
-      div.main-container
+      .main-container
         section.search-container
-          div.search-ribbon
-            div.lhs
+          .search-ribbon
+            .lhs
               a.pass-href(href="/")
-                div.img-container
+                .img-container
                   img(src="/favicon.svg", alt="logo")
               a.pass-href(href="/")
-                div.title
-                  div.a CRATES
-                  div.b INQUIRE
-            div.mid
-              div.search-bar-container
-                div.search-bar-grid
-                  input.search-input(type="search", placeholder="Find a package...", spellcheck="false")
-                  div.search-icon-container
-                    i.search-icon.interactable-icon.fas.fa-search
-                  div.search-dropdown(hidden)
-            div.rhs
+                .title
+                  .a CRATES
+                  .b INQUIRE
+            .mid
+              include includes/search-bar.pug
+            .rhs
               a.banner.pass-href(rel="noreferrer", href="https://github.com/apskhem/cratesinquire", target="_blank")
                 i.fab.fa-github
                 span GITHUB REPO
         section.crate-header
-          div.lhs
-            div.header-title
+          .lhs
+            .header-title
               h1 #{data.crate.name}
-            div.header-version
+            .header-version
               span #{data.crate.max_stable_version}
-              if data.versions[0] && data.versions[0].published_by
+              if data.versions[0] && data.versions[0].published_by && !/^\s+$/.test(data.versions[0].published_by)
                 span #{" • Published by "}
                 a(rel="noreferrer", href=data.versions[0].published_by.url, target="_blank") #{data.versions[0].published_by.name}
-            div.header-links
+            .header-links
               a(rel="noreferrer", href=`https://crates.io/crates/${data.crate.id}`, target="_blank")
                 img(src="/img/crates-icon.png", alt="link-icon")
               if data.crate.documentation
@@ -58,122 +49,101 @@ html(lang="en")
               if data.crate.homepage
                 a(rel="noreferrer", href=data.crate.homepage, target="_blank")
                   img(src="/img/homepage-icon.svg", alt="link-icon")
-            div.header-date Updated on #{new Date(data.crate.updated_at).toLocaleString("en", { year: "numeric", month: "long", day: "numeric" })}
-            div.header-date Created on #{new Date(data.crate.created_at).toLocaleString("en", { year: "numeric", month: "long", day: "numeric" })}
-            div.header-desc
-              div.header-icon-container
+            .header-date Updated on #{new Date(data.crate.updated_at).toLocaleString("en", { year: "numeric", month: "long", day: "numeric" })}
+            .header-date Created on #{new Date(data.crate.created_at).toLocaleString("en", { year: "numeric", month: "long", day: "numeric" })}
+            .header-desc
+              .header-icon-container
                 i.fas.fa-info-circle
               div #{data.crate.description || "none"}
-            div.header-keywords
-              div.header-icon-container
+            .header-keywords
+              .header-icon-container
                 i.fas.fa-tags
-              div.header-keywords-row
+              .header-keywords-row
                 each keyword in data.crate.keywords
                   a(rel="noreferrer", href=`https://crates.io/keywords/${keyword}`, target="_blank") #{keyword}
                 if !data.crate.keywords.length
                   span.empty-tags none
-          div.rhs
-            div.header-total-downloads
-              div.header-icon-container
+          .rhs
+            .header-total-downloads
+              .header-icon-container
                 i.fas.fa-download
               b #{data.crate.downloads.toLocaleString("en")}
-            div.header-total-verions
-              div.header-icon-container
+            .header-total-verions
+              .header-icon-container
                 i.fas.fa-hammer
               b #{data.versions.length.toLocaleString("en")}
             if data.versions[0] && data.versions[0].license && !/^\s+$/.test(data.versions[0].license)
-              div.header-license
-                div.header-icon-container
+              .header-license
+                .header-icon-container
                   i.fas.fa-balance-scale
                 b #{data.versions[0].license}
         section.bar-chart
-          div.bar-chart-header
-            div.view-swtiches
-              div#switch-crate-size.sel Crate Size
-              div#switch-dowloads Downloads
-              div#switch-lifetime Lifetime
-              div#switch-features Features
-            div.view-options
+          .bar-chart-header
+            .view-swtiches
+              #switch-crate-size.sel Crate Size
+              #switch-dowloads Downloads
+              #switch-lifetime Lifetime
+              #switch-features Features
+            .view-options
               div
-          div.bar-chart-container
+          .bar-chart-container
             //- each version in data.versions
             //-  div
-            //-    div.version-track
+            //-    .version-track
             //-  a(rel="noreferrer", href=`https://crates.io/crates/${data.crate.id}/${version.num}`, target="_blank") #{version.num}
             //-  div
-            //-    div.bar-content
+            //-    .bar-content
             //-      span
         section.crate-dep-tree
           h3 Dependency Tree
-          div.dep-tree-toggles.toggle-flex-container(hidden)
-            div.toggle-content.disabled
-              div.toggle-container.checked
-                div.toggle-line
-                div.toggle-button
-              div.toggle-text-container
-                div.toggle-label base
-            div.toggle-content(hidden)
-              div.toggle-container#dev
-                div.toggle-line
-                div.toggle-button
-              div.toggle-text-container
-                div.toggle-label dev
-            div.toggle-content(hidden)
-              div.toggle-container#optional
-                div.toggle-line
-                div.toggle-button
-              div.toggle-text-container
-                div.toggle-label optional
-          div.dep-tree-display-container
-            div.loader-container
-              div.dot-table-layout
+          .flex-items-container(hidden)
+            .toggle-content(hidden)
+              .toggle-container#dev
+                .toggle-line
+                .toggle-button
+              .toggle-text-container
+                .toggle-label dev
+          .dep-tree-display-container
+            .loader-container
+              .dot-table-layout
                 div(style="animation-delay: 0")
                 div(style="animation-delay: 100ms")
                 div(style="animation-delay: 200ms")
         section.crate-features
           h3 Features
-          div.features-input-container
-            div.features-input-grid
-              div.features-selection-container
+          .features-input-container
+            .features-input-grid
+              .features-selection-container
                 select.features-selection
                   each version in data.versions
                     if data.crate.max_stable_version === version.num
                       option(value=version.num, selected) #{version.num}
                     else
                       option(value=version.num) #{version.num}
-              div.features-display-pane
+              .features-display-pane
                 | #{data.crate.id}#{" = "}
                 span.string "#{data.crate.max_stable_version || data.crate.max_version}"
-              div.copy-icon-container
+              .copy-icon-container
                 i.interactable-icon.copy-icon.fas.fa-copy
-              div.features-selection-dropdown(hidden)
-          div.features-toggles
-            //- div.toggle-content
-            //-   div.toggle-container
-            //-     div.toggle-line
-            //-     div.toggle-button.checked
-            //-   div.toggle-text-container
-            //-     div.toggle-label default
-            //-     div.feature-sub
+              .features-selection-dropdown(hidden)
+          .features-toggles
+            //- .toggle-content
+            //-   .toggle-container
+            //-     .toggle-line
+            //-     .toggle-button.checked
+            //-   .toggle-text-container
+            //-     .toggle-label default
+            //-     .feature-sub
             //-       ul 
             //-         li test
         section.downloads-trend
           h3 Downloads Trend
-          div.downloads-trend-toggles.toggle-flex-container(hidden)
+          .downloads-trend-toggles.flex-items-container(hidden)
             //- .toggle-content ...
-          div.downloads-trend-display-container
-            div.loader-container
-              div.dot-table-layout
+          .downloads-trend-display-container
+            .loader-container
+              .dot-table-layout
                 div(style="animation-delay: 0")
                 div(style="animation-delay: 100ms")
                 div(style="animation-delay: 200ms")
-    footer.abs
-      div.lhs
-        span Hosted on
-        img(src="/img/heroku-logo.svg", alt="hosted-on")
-      div.rhs
-        div
-          span Made with
-          i.fas.fa-heart
-          span by
-          a(rel="noreferrer", href="https://github.com/apskhem", target="_blank") @apskhem
+    include includes/footer.pug

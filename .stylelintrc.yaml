@@ -1,0 +1,32 @@
+extends:
+  - stylelint-config-standard-scss
+  - stylelint-config-recess-order
+defaultSeverity: warning
+rules:
+  # css
+  alpha-value-notation: number
+  at-rule-no-unknown: null
+  color-function-notation: legacy
+  color-hex-case: upper
+  color-hex-length: long
+  declaration-block-no-redundant-longhand-properties: true
+  declaration-property-unit-allowed-list:
+    /^animation|^transition/:
+      - ms
+  font-family-name-quotes: always-unless-keyword
+  font-weight-notation: named-where-possible
+  function-url-quotes: always
+  hue-degree-notation: angle
+  indentation:
+    - 2
+  no-descending-specificity: null
+  no-eol-whitespace:
+    - true
+    - ignore: [empty-lines]
+  no-missing-end-of-source-newline: null
+  number-leading-zero: always
+  string-quotes: double
+
+  # scss
+  scss/at-rule-no-unknown: true
+  scss/selector-no-redundant-nesting-selector: true
