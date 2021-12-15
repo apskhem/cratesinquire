@@ -1,5 +1,5 @@
 import { Controller, Get, Header, Param, HttpStatus } from "@nestjs/common";
-import { AppService } from "./app.service";
+import { AppService, PUG_404_PATH, PUG_CRATES_ID_PATH } from "./app.service";
 
 @Controller("/")
 export class AppController {
@@ -8,7 +8,7 @@ export class AppController {
   @Get("/")
   @Header("content-type", "text/html")
   getHello() {
-    return this.appService.renderIndex();
+    return this.appService.generateIndex();
   }
 
   @Get("/crates/:id")
@@ -21,22 +21,35 @@ export class AppController {
 
     // validate id
     if (!/^[a-zA-Z0-9_-]+$/.test(id)) {
-      return this.appService.renderNotFound(id, `Could not find "${id}" crate.`, HttpStatus.BAD_REQUEST);
+      return this.appService.generateStaticSite("404", PUG_404_PATH, {
+        title: id,
+        msg: `Could not find "${id}" crate.`,
+        status: HttpStatus.BAD_REQUEST
+      });
     }
 
+    // fetch crate data
     const data = await this.appService.fetchCache(id);
 
     if ("errors" in data) {
-      return this.appService.renderNotFound(id, `Could not find "${id}" crate.`, HttpStatus.NOT_FOUND);
+      return this.appService.generateStaticSite("404", PUG_404_PATH, {
+        title: id,
+        msg: `Could not find "${id}" crate.`,
+        status: HttpStatus.NOT_FOUND
+      });
     }
 
-    return this.appService.renderCrate(data);
+    return this.appService.generateStaticSite("crate", PUG_CRATES_ID_PATH, { data });
   }
 
   @Get("*")
   @Header("content-type", "text/html")
   getSummary() {
-    return this.appService.renderNotFound("Unknown Route", "Unknown route.", HttpStatus.NOT_FOUND);
+    return this.appService.generateStaticSite("404", PUG_404_PATH, {
+      title: "Unknown Route",
+      msg: "Unknown route.",
+      status: HttpStatus.NOT_FOUND
+    });
   }
 
   // @Get("/explore")

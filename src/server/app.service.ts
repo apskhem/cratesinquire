@@ -5,19 +5,21 @@ import * as esbuild from "esbuild";
 import * as sass from "sass";
 import { join } from "path";
 import fetch from "node-fetch";
+import postcss from "postcss";
+import autoprefixer from "autoprefixer";
 
-const PUG_INDEX_PATH = join(__dirname, "..", "src", "client", "templates", "index.pug");
-const PUG_CRATES_ID_PATH = join(__dirname, "..", "src", "client", "templates", "crate.pug");
-const PUG_404_PATH = join(__dirname, "..", "src", "client", "templates", "404.pug");
-const TYPESCRIPT_INDEX_PATH = join(__dirname, "..", "src", "client", "scripts", "index.ts");
-const TYPESCRIPT_OUT_PATH = join(__dirname, "..", "public", "bundle.js");
-const SASS_INDEX_PATH = join(__dirname, "..", "src", "client", "scss", "index.scss");
-const SASS_OUT_PATH = join(__dirname, "..", "public", "bundle.css");
+export const PUG_INDEX_PATH = join(__dirname, "..", "src", "client", "templates", "index.pug");
+export const PUG_CRATES_ID_PATH = join(__dirname, "..", "src", "client", "templates", "crate.pug");
+export const PUG_404_PATH = join(__dirname, "..", "src", "client", "templates", "404.pug");
+export const TYPESCRIPT_INDEX_PATH = join(__dirname, "..", "src", "client", "scripts", "index.ts");
+export const TYPESCRIPT_OUT_PATH = join(__dirname, "..", "public", "bundle.js");
+export const SASS_INDEX_PATH = join(__dirname, "..", "src", "client", "scss", "index.scss");
+export const SASS_OUT_PATH = join(__dirname, "..", "public", "bundle.css");
 
 @Injectable()
 export class AppService {
   private readonly staticSiteCache = new Map<string, string>();
-  private readonly compiledServerSideGeneration = new Map<string, pug.compileTemplate>();
+  private readonly compiledStaticSite = new Map<string, pug.compileTemplate>();
   private readonly reqCrateCache = new Map<string, CrateResponse>();
 
   public isProductionMode = Boolean(process.env["PRODUCTION"]);
@@ -47,7 +49,7 @@ export class AppService {
     return data;
   }
 
-  renderIndex(): string {
+  generateIndex(): string {
     const cache = this.staticSiteCache.get("index");
     if (cache && this.isProductionMode) {
       return cache;
@@ -63,33 +65,15 @@ export class AppService {
     return fn();
   }
 
-  renderCrate(data: CrateResponse): string {
-    const ssg = this.compiledServerSideGeneration.has("crate");
-    if (!ssg || !this.isProductionMode) {
-      const pugString = fs.readFileSync(PUG_CRATES_ID_PATH, "utf8");
-      const temp = pug.compile(pugString, { filename: PUG_CRATES_ID_PATH });
+  generateStaticSite<T>(key: string, path: string, data: T) {
+    if (!this.compiledStaticSite.has(key) || !this.isProductionMode) {
+      const pugString = fs.readFileSync(path, "utf8");
+      const temp = pug.compile(pugString, { filename: path });
 
-      this.compiledServerSideGeneration.set("crate", temp);
+      this.compiledStaticSite.set(key, temp);
     }
 
-    const res = this.compiledServerSideGeneration.get("crate")?.({ data });
-
-    if (!res) {
-      throw new Error();
-    }
-
-    return res;
-  }
-
-  renderNotFound(title: string, msg: string, status: number): string {
-    if (!this.compiledServerSideGeneration.has("404") || !this.isProductionMode) {
-      const pugString = fs.readFileSync(PUG_404_PATH, "utf8");
-      const temp = pug.compile(pugString, { filename: PUG_404_PATH });
-
-      this.compiledServerSideGeneration.set("404", temp);
-    }
-
-    const res = this.compiledServerSideGeneration.get("404")?.({ title, msg, status });
+    const res = this.compiledStaticSite.get(key)?.(data);
 
     if (!res) {
       throw new Error();
@@ -117,20 +101,25 @@ export class AppService {
   }
 
   static async bundleSass() {
-    const res = await new Promise<sass.Result>((resolve, reject) => {
-      sass.render({
-        file: SASS_INDEX_PATH,
-        outFile: SASS_OUT_PATH,
-        outputStyle: "compressed",
-        sourceMap: true
-      },
-      (err, res) => err ? reject(err) : resolve(res));
+    const sassResult = sass.renderSync({
+      file: SASS_INDEX_PATH,
+      outFile: SASS_OUT_PATH,
+      outputStyle: "compressed",
+      sourceMap: true
     });
 
-    fs.writeFileSync(SASS_OUT_PATH, res.css);
+    const postcssResult = await postcss([ autoprefixer ]).process(sassResult.css, {
+      from: SASS_INDEX_PATH,
+      to: SASS_OUT_PATH,
+      map: {
+        prev: sassResult.map?.toString()
+      }
+    });
+
+    fs.writeFileSync(SASS_OUT_PATH, postcssResult.css);
   
-    if (res.map) {
-      fs.writeFileSync(`${SASS_OUT_PATH}.map`, res.map);
+    if (postcssResult.map) {
+      fs.writeFileSync(`${SASS_OUT_PATH}.map`, postcssResult.map.toString());
     }
   }
 }

@@ -28,37 +28,6 @@ function leastSquares(xSeries: number[], ySeries: number[]) {
   return [ slope, intercept, rSquare ];
 }
 
-// get trend keyword
-const getTrendKeyword = (trendCoeff: number) => {
-  if (trendCoeff > 0.5) {
-    return "rise";
-  }
-  else if (trendCoeff > 0.3) {
-    return "significant uptrend";
-  }
-  else if (trendCoeff > 0.2) {
-    return "uptrend";
-  }
-  else if (trendCoeff > 0.1) {
-    return "slight uptrend";
-  }
-  else if (trendCoeff > -0.1) {
-    return "stable";
-  }
-  else if (trendCoeff > -0.2) {
-    return "slight downtrend";
-  }
-  else if (trendCoeff > -0.3) {
-    return "downtrend";
-  }
-  else if (trendCoeff > -0.5) {
-    return "significant downtrend";
-  }
-  else {
-    return "decline";
-  }
-};
-
 export const getTrend = (data: TrendData, keys: string[]) => {
   const yValues = new Map<Date, number>();
   const maxYScale = data.reduce((acc, x) => {

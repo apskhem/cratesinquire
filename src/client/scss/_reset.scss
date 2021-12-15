@@ -49,8 +49,6 @@ select {
   width: 100%;
   background-color: transparent;
   border: 0;
-  font-size: inherit;
-  font: inherit;
 
   $carret-size: 12px;
   -webkit-appearance: none;
@@ -79,8 +77,6 @@ input {
   width: 100%;
   background-color: transparent;
   border: 0;
-  font-size: inherit;
-  font: inherit;
   
   &:focus {
     outline: none;
