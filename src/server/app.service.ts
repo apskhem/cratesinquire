@@ -13,7 +13,7 @@ export const PUG_CRATES_ID_PATH = join(__dirname, "..", "src", "client", "templa
 export const PUG_404_PATH = join(__dirname, "..", "src", "client", "templates", "404.pug");
 export const TYPESCRIPT_INDEX_PATH = join(__dirname, "..", "src", "client", "scripts", "index.ts");
 export const TYPESCRIPT_OUT_PATH = join(__dirname, "..", "public", "bundle.js");
-export const SASS_INDEX_PATH = join(__dirname, "..", "src", "client", "scss", "index.scss");
+export const SASS_INDEX_PATH = join(__dirname, "..", "src", "client", "scss", "main.scss");
 export const SASS_OUT_PATH = join(__dirname, "..", "public", "bundle.css");
 
 @Injectable()

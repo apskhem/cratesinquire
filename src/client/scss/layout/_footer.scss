@@ -1,0 +1,39 @@
+footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 1em;
+  color: #8695AC;
+
+  img {
+    height: 32px;
+  }
+
+  > .lhs {
+    display: flex;
+    flex-flow: column;
+    gap: 0.25em;
+  }
+
+  > .rhs {
+    display: flex;
+    align-items: flex-end;
+    
+    > div {
+      display: flex;
+      gap: 0.25em;
+      align-items: center;
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    flex-flow: column;
+    align-items: flex-start;
+
+    > .rhs {
+      width: 100%;
+      padding-top: 1em;
+      margin-top: 1em;
+      border-top: 1px solid #8695AC;
+    }
+  }
+}

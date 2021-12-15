@@ -1,0 +1,17 @@
+header {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1em;
+
+  > div {
+    display: flex;
+    gap: 0.5em;
+
+    .banner {
+      color: #8695AC;
+      border-color: #8695AC;
+    }
+  }
+}

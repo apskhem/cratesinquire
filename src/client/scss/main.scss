@@ -1,0 +1,20 @@
+@import "./base/font";
+@import "./base/reset";
+@import "./components/loader";
+@import "./components/search-bar";
+@import "./layout/footer";
+@import "./layout/header";
+@import "./pages/home";
+@import "./pages/crate";
+
+html,
+body {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  font-family: "Cabin", sans-serif;
+  line-height: 1.5;
+}

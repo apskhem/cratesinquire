@@ -23,7 +23,7 @@ rules:
   no-eol-whitespace:
     - true
     - ignore: [empty-lines]
-  no-missing-end-of-source-newline: null
+  no-missing-end-of-source-newline: true
   number-leading-zero: always
   string-quotes: double
 

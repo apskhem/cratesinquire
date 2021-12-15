@@ -1,0 +1,47 @@
+.loader-container {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+
+  > .result-msg,
+  .action-msg {
+    color: #8695AC;
+  }
+
+  > .action-msg {
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+
+  > .dot-table-layout {
+    display: grid;
+    grid-template-columns: repeat(3, 24px);
+    grid-auto-rows: 24px;
+    gap: 0.5em;
+
+    > div {
+      width: 100%;
+      height: 100%;
+      background-color: #F3F5F7;
+      border-radius: 50%;
+      animation: dot-animation infinite ease 1000ms;
+    }
+  }
+
+  @keyframes dot-animation {
+    0% {
+      transform: scale(1);
+    }
+
+    50% {
+      transform: scale(0);
+    }
+
+    100% {
+      transform: scale(1);
+    }
+  }
+}

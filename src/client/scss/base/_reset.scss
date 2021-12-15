@@ -71,10 +71,10 @@ input {
   -ms-user-select: all; /* Internet Explorer/Edge */
   user-select: all; /* supported by Chrome and Opera */
   
-  margin: 0;
-  padding: 0;
-  font: inherit;
   width: 100%;
+  padding: 0;
+  margin: 0;
+  font: inherit;
   background-color: transparent;
   border: 0;
   
@@ -90,17 +90,17 @@ input {
   &[type="search"]::-webkit-search-cancel-button,
   &[type="search"]::-webkit-search-results-button,
   &[type="search"]::-webkit-search-results-decoration {
-    -webkit-appearance:none;
+    -webkit-appearance: none;
   }
 }
 
 button {
   display: block;
   margin: 0;
+  font: inherit;
   color: inherit;
   background-color: transparent;
   border: 0;
-  font: inherit;
 
   &:focus {
     outline: none;
@@ -109,8 +109,8 @@ button {
 
 a {
   color: inherit;
-  background-color: transparent;
   text-decoration: none;
+  background-color: transparent;
   outline-width: 0;
 
   &:active,
@@ -118,6 +118,7 @@ a {
     color: inherit;
     text-decoration: underline;
   }
+  
   &:visited {
     color: inherit;
   }
