@@ -251,6 +251,7 @@ const initDependencySection = async (id: string, num: string) => {
 };
 
 const initFeaturesSection = (id: string, stableVersion: string, versions: CrateResponse["versions"]) => {
+  const featuresSelect = d3.select<HTMLSelectElement, null>(".features-selection");
   const layer = d3.select<HTMLElement, [ string, string[] ]>(".features-toggles");
   const display = d3.select<HTMLElement, null>(".features-display-pane");
   const copyIcon = d3.select<HTMLElement, null>(".copy-icon");
@@ -262,7 +263,7 @@ const initFeaturesSection = (id: string, stableVersion: string, versions: CrateR
   };
 
   // mount event handler
-  const featuresSelect = d3.select(".features-selection").on("change", () => {
+  featuresSelect.on("change", () => {
     const value = featuresSelect.property("value") as string;
 
     setVersion(value, versions);

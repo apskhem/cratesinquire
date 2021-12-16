@@ -326,6 +326,7 @@
               white-space: nowrap;
               overflow: hidden;
               text-overflow: ellipsis;
+              user-select: text;
 
               &.blinked {
                 animation: blink 300ms;
@@ -342,6 +343,8 @@
               }
 
               span {
+                user-select: text;
+                
                 &.string {
                   color: #008200;
                 }

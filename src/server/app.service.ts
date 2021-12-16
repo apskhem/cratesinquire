@@ -22,7 +22,7 @@ export class AppService {
   private readonly compiledStaticSite = new Map<string, pug.compileTemplate>();
   private readonly reqCrateCache = new Map<string, CrateResponse>();
 
-  public isProductionMode = Boolean(process.env["PRODUCTION"]);
+  public isProductionMode = process.env["NODE_ENV"] === "production";
 
   async fetchCrate(id: string) {
     const raw = await fetch(`https://crates.io/api/v1/crates/${id}`);
