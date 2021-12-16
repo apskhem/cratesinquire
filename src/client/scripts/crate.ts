@@ -11,6 +11,8 @@ import convert from "color-convert";
 type BarMode = "size" | "downloads" | "lifetime" | "features";
 type A = [ number, number ];
 
+const MAX_COLLAPSABLE_CONTENT = 20;
+
 /* utils */
 const getData = <T>(id: string): T => {
   const dataInputEl = d3.select(`#${id}`);
@@ -88,7 +90,29 @@ const useLoader = async (selector: string, callback: () => Promise<SVGSVGElement
 const initBarChartSection = (id: string, stableVersio: string, versions: CrateResponse["versions"]) => {
   const bundleSizeGraphContainer = d3.select<HTMLElement, null>(".bar-chart-container");
   const viewSwitchContainer = d3.select<HTMLElement, null>(".view-swtiches");
+  const collapsableContent = d3.select<HTMLElement, null>(".collapsable-content");
+  const collapsableLabel = d3.select<HTMLElement, number>(".collapsable-label");
 
+  // set collapsable content
+  collapsableLabel
+    .data([ versions.length ])
+    .text((d) => d > MAX_COLLAPSABLE_CONTENT ? `Expand another ${d - MAX_COLLAPSABLE_CONTENT} ${pluralize("version", d - MAX_COLLAPSABLE_CONTENT)}` : "")
+    .on("click", (e, d) => {
+      if (d <= MAX_COLLAPSABLE_CONTENT) {
+        return;
+      }
+
+      if (collapsableContent.node()?.offsetHeight === collapsableContent.node()?.scrollHeight) {
+        collapsableContent.style("max-height", "472px");
+        collapsableLabel.text((d) => d > MAX_COLLAPSABLE_CONTENT ? `Expand another ${d - MAX_COLLAPSABLE_CONTENT} ${pluralize("version", d - MAX_COLLAPSABLE_CONTENT)}` : "");
+      }
+      else {
+        collapsableContent.style("max-height", `${collapsableContent.node()?.scrollHeight}px`);
+        collapsableLabel.text(`Collapse to only ${MAX_COLLAPSABLE_CONTENT} ${pluralize("version", MAX_COLLAPSABLE_CONTENT)}`);
+      }
+    });
+
+  // add mode event handler
   const addButtonEventHandler = (queryString: string, mode: BarMode, maxValue: number) => {
     const el = d3.select<HTMLElement, null>(queryString);
 

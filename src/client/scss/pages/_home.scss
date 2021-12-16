@@ -213,6 +213,34 @@ a.pass-href {
   }
 }
 
+.collapsable-container {
+  display: grid;
+  gap: 0.5em;
+
+  .collapsable-content {
+    overflow: hidden;
+    max-height: calc((20px + 4px) * 20 - (4px * 2));
+    transition: 500ms;
+  }
+
+  .collapsable-label {
+    text-align: center;
+    background-color: #F3F5F7;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 300ms;
+
+    &:not(:empty) {
+      padding: 8px;
+    }
+
+    &:hover {
+      background-color: #FFEFD1;
+      color: #C48B21;
+    }
+  }
+}
+
 .error-msg {
   color: #960D0D;
   text-align: center;

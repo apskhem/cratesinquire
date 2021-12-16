@@ -1,0 +1,35 @@
+@media (prefers-color-scheme: dark) {
+  html,
+  body {
+    background-color: #1a202c;
+    color: white;
+  }
+
+  img[src="/favicon.svg"],
+  img[src="/img/docs-icon.svg"],
+  img[src="/img/github-icon.svg"] {
+    filter: invert(1);
+  }
+
+  .search-bar-container {
+    .search-bar-grid {
+      background-color: #3a4556 !important;
+    }
+  }
+
+  .search-ribbon,
+  .features-input-container,
+  .view-swtiches,
+  .collapsable-label,
+  .bar-row > .version-track > div {
+    background-color: #2d3848 !important;
+  }
+
+  .banner {
+    border-color: white !important;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  
+}

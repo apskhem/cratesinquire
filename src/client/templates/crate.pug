@@ -86,14 +86,17 @@ html(lang="en")
               #switch-features Features
             .view-options
               div
-          .bar-chart-container
-            //- each version in data.versions
-            //-  div
-            //-    .version-track
-            //-  a(rel="noreferrer", href=`https://crates.io/crates/${data.crate.id}/${version.num}`, target="_blank") #{version.num}
-            //-  div
-            //-    .bar-content
-            //-      span
+          .collapsable-container
+            .collapsable-content
+              .bar-chart-container
+              //- each version in data.versions
+              //-  div
+              //-    .version-track
+              //-  a(rel="noreferrer", href=`https://crates.io/crates/${data.crate.id}/${version.num}`, target="_blank") #{version.num}
+              //-  div
+              //-    .bar-content
+              //-      span
+            .collapsable-label
         section.crate-dep-tree
           h3 Dependency Tree
           .flex-items-container(hidden)
