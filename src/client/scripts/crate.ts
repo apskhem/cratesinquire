@@ -1,12 +1,13 @@
 import bytes from "bytes";
 import pluralize from "pluralize";
 import semver from "semver";
-import { getBaseDepTree, getDevDepTree, getOptionalDepTree } from "./deps";
-import { getDepChart } from "./tree";
+import { constructDepLink, fetchBaseDepTree, fetchTreemapData } from "./deps";
+import { getDepGraph } from "./graph";
 import * as d3 from "d3";
 import { initSearchBar as possessSearchBar } from "./search-bar";
 import { getTrend } from "./trend";
 import convert from "color-convert";
+import { getTreemap } from "./treemap";
 
 type BarMode = "size" | "downloads" | "lifetime" | "features";
 type A = [ number, number ];
@@ -52,7 +53,7 @@ export const runCrate = async () => {
   ]);
 };
 
-const useLoader = async (selector: string, callback: () => Promise<SVGSVGElement | null>) => {
+const useLoader = async (selector: string, callback: () => Promise<(Element | null)[]>) => {
   const displayContainer = d3.select<HTMLElement, null>(selector);
   const toggleContainer = displayContainer.node()?.parentElement?.getElementsByClassName("flex-items-container") ?? [];
   const loaderContainer = displayContainer.selectChild();
@@ -61,7 +62,7 @@ const useLoader = async (selector: string, callback: () => Promise<SVGSVGElement
   try {
     const el = await callback();
 
-    displayContainer.append(() => el);
+    el.forEach((x) => displayContainer.append(() => x));
     loaderContainer.remove();
     Array.from(toggleContainer).forEach((x) => x.removeAttribute("hidden"));
   }
@@ -243,10 +244,20 @@ const initDependencySection = async (id: string, num: string) => {
   });
 
   await useLoader(".dep-tree-display-container", async () => {
-    const depData = await getBaseDepTree(id, num);
-    const chartEl = getDepChart(depData);
+    await fetchBaseDepTree(id, num);
+    const treemapData = await fetchTreemapData(id, num);
 
-    return chartEl;
+    const depData = constructDepLink(id, num);
+    const treemapEl = getTreemap(id, treemapData);
+    const graphEl = getDepGraph(depData);
+
+    const totalSize = treemapData.children.reduce((acc, x) => acc + x.value, 0);
+    const totalSizeText = bytes(totalSize, { thousandsSeparator: "," });
+    const sizeLabel = d3.create("div")
+      .text(`Approximate Size: ${totalSizeText}`)
+      .node();
+
+    return [ graphEl, treemapEl, sizeLabel ];
   });
 };
 
@@ -525,6 +536,6 @@ const initTrendSection = async (id: string, nummap: Map<number, string>) => {
     // create toggles
     createTrendToggles(requiredKeys, nummap, highlight, unhighlight);
 
-    return svg;
+    return [ svg ];
   });
 };

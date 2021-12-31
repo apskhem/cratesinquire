@@ -2,6 +2,23 @@ interface DepNode extends Partial<Dependency> {
   children: DepNode[];
 }
 
+type DepGraph = {
+  nodes: {
+    id: string;
+    index?: number;
+    vx?: number;
+    vy?: number;
+    x?: number;
+    y?: number;
+    attr?: Dependency | null;
+  }[];
+  links: {
+    source: string;
+    target: string;
+    distance: number;
+  }[];
+};
+
 /* components */
 interface Dependency {
   crate_id: string;
@@ -14,6 +31,46 @@ interface Dependency {
   req: string;
   target: null;
   version_id: number;
+}
+
+interface CrateVersionData {
+  audit_actions: {
+    action: string;
+    time: string;
+    user: {
+      avatar: string;
+      id: number;
+      login: string;
+      name: string;
+      url: string;
+    };
+  }[];
+  crate: string;
+  crate_size: number;
+  created_at: string;
+  dl_path: string;
+  downloads: number;
+  features: {
+    [key: string]: string[];
+  };
+  id: number;
+  license: string;
+  links: {
+    authors: string;
+    dependencies: string;
+    version_downloads: string;
+  };
+  num: string;
+  published_by: {
+    avatar: string;
+    id: number;
+    login: string;
+    name: string;
+    url: string;
+  };
+  readme_path: string;
+  updated_at: string;
+  yanked: boolean;
 }
 
 /* api response */
@@ -64,45 +121,7 @@ interface CrateResponse {
     id: string;
     keyword: string;
   }[];
-  versions: {
-    audit_actions: {
-      action: string;
-      time: string;
-      user: {
-        avatar: string;
-        id: number;
-        login: string;
-        name: string;
-        url: string;
-      };
-    }[];
-    crate: string;
-    crate_size: number;
-    created_at: string;
-    dl_path: string;
-    downloads: number;
-    features: {
-      [key: string]: string[];
-    };
-    id: number;
-    license: string;
-    links: {
-      authors: string;
-      dependencies: string;
-      version_downloads: string;
-    };
-    num: string;
-    published_by: {
-      avatar: string;
-      id: number;
-      login: string;
-      name: string;
-      url: string;
-    };
-    readme_path: string;
-    updated_at: string;
-    yanked: boolean;
-  }[];
+  versions: CrateVersionData[];
 }
 
 interface SearchResponse {

@@ -275,6 +275,7 @@
       &.crate-dep-tree {
         .dep-tree-display-container {
           display: flex;
+          flex-flow: column;
           align-items: center;
           justify-content: center;
           min-height: 212px;
