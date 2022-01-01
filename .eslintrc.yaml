@@ -171,6 +171,7 @@ rules:
     - selector: ExportDefaultDeclaration[declaration.type!="Identifier"]
       message: Export default must not use with declaration statement.
     - MemberExpression[object.name="Array"][property.name!="from"]
+    - ArrayExpression[elements.length=1] > SpreadElement
     - MemberExpression[object.name="Object"][property.name!=/values|keys|entries/]
   no-sequences: error
   no-template-curly-in-string: error

@@ -1,45 +1,24 @@
 import bytes from "bytes";
 import pluralize from "pluralize";
 import semver from "semver";
-import { constructDepLink, fetchBaseDepTree, fetchTreemapData } from "./deps";
+import { constructDepLink, fetchBaseDepTree, fetchTreemapData, getMainData } from "./data";
 import { getDepGraph } from "./graph";
 import * as d3 from "d3";
 import { initSearchBar as possessSearchBar } from "./search-bar";
 import { getTrend } from "./trend";
 import convert from "color-convert";
 import { getTreemap } from "./treemap";
+import { getDay, getTimeDiff } from "./utils";
 
 type BarMode = "size" | "downloads" | "lifetime" | "features";
-type A = [ number, number ];
 
 const MAX_COLLAPSABLE_CONTENT = 20;
-
-/* utils */
-const getData = <T>(id: string): T => {
-  const dataInputEl = d3.select(`#${id}`);
-  const data = JSON.parse(dataInputEl.attr("value")) as T;
-
-  dataInputEl.remove();
-
-  return data;
-};
-
-const getDay = (milsec: number) => {
-  return Math.floor(milsec / (1000 * 60 * 60 * 24));
-};
-
-const getTimeDiff = (d1: string, d2: string) => {
-  const t1 = new Date(d1).getTime();
-  const t2 = new Date(d2).getTime();
-
-  return t1 - t2;
-};
 
 /* main */
 export const runCrate = async () => {
   possessSearchBar();
 
-  const { categories, crate, keywords, versions } = getData<CrateResponse>("data");
+  const { categories, crate, keywords, versions } = getMainData("data");
 
   const num = crate.max_stable_version || crate.max_version;
 
@@ -60,14 +39,14 @@ const useLoader = async (selector: string, callback: () => Promise<(Element | nu
   const loaderLayout = loaderContainer.selectChild();
 
   try {
-    const el = await callback();
+    const elements = await callback();
 
-    el.forEach((x) => displayContainer.append(() => x));
+    elements.forEach((x) => displayContainer.append(() => x));
     loaderContainer.remove();
     Array.from(toggleContainer).forEach((x) => x.removeAttribute("hidden"));
   }
   catch (err) {
-    console.log(err);
+    console.error(err);
 
     loaderLayout.remove();
   
@@ -97,7 +76,7 @@ const initBarChartSection = (id: string, stableVersio: string, versions: CrateRe
   // set collapsable content
   collapsableLabel
     .data([ versions.length ])
-    .text((d) => d > MAX_COLLAPSABLE_CONTENT ? `Expand another ${d - MAX_COLLAPSABLE_CONTENT} ${pluralize("version", d - MAX_COLLAPSABLE_CONTENT)}` : "")
+    .text((d) => d > MAX_COLLAPSABLE_CONTENT ? `Expand another ${pluralize("version", d - MAX_COLLAPSABLE_CONTENT, true)}` : "")
     .on("click", (e, d) => {
       if (d <= MAX_COLLAPSABLE_CONTENT) {
         return;
@@ -105,11 +84,11 @@ const initBarChartSection = (id: string, stableVersio: string, versions: CrateRe
 
       if (collapsableContent.node()?.offsetHeight === collapsableContent.node()?.scrollHeight) {
         collapsableContent.style("max-height", "472px");
-        collapsableLabel.text((d) => d > MAX_COLLAPSABLE_CONTENT ? `Expand another ${d - MAX_COLLAPSABLE_CONTENT} ${pluralize("version", d - MAX_COLLAPSABLE_CONTENT)}` : "");
+        collapsableLabel.text((d) => d > MAX_COLLAPSABLE_CONTENT ? `Expand another ${pluralize("version", d - MAX_COLLAPSABLE_CONTENT, true)}` : "");
       }
       else {
         collapsableContent.style("max-height", `${collapsableContent.node()?.scrollHeight}px`);
-        collapsableLabel.text(`Collapse to only ${MAX_COLLAPSABLE_CONTENT} ${pluralize("version", MAX_COLLAPSABLE_CONTENT)}`);
+        collapsableLabel.text(`Collapse to only ${pluralize("version", MAX_COLLAPSABLE_CONTENT, true)}`);
       }
     });
 
@@ -224,37 +203,20 @@ const initBarChartSection = (id: string, stableVersio: string, versions: CrateRe
 };
 
 const initDependencySection = async (id: string, num: string) => {
-  const container = d3.select(".dep-tree-toggles");
-  const devBtn = container.select("#dev");
-  const optionalBtn = container.select("#optional");
-
-  // mount toggle event listener
-  devBtn.select(".toggle-button").on("click", () => {
-    const value = !devBtn.classed("checked");
-    devBtn.classed("checked", value);
-
-    // getDevDepTree();
-  });
-
-  optionalBtn.select(".toggle-button").on("click", () => {
-    const value = !optionalBtn.classed("checked");
-    optionalBtn.classed("checked", value);
-
-    // getOptionalDepTree();
-  });
-
   await useLoader(".dep-tree-display-container", async () => {
-    await fetchBaseDepTree(id, num);
-    const treemapData = await fetchTreemapData(id, num);
+    await fetchBaseDepTree(id, num, (x) => !/dev|build/.test(x.kind) && !x.optional);
+    const { treemapRoot, unknownSizeCrate } = await fetchTreemapData(id, num);
 
     const depData = constructDepLink(id, num);
-    const treemapEl = getTreemap(id, treemapData);
+    const treemapEl = getTreemap(id, treemapRoot);
     const graphEl = getDepGraph(depData);
 
-    const totalSize = treemapData.children.reduce((acc, x) => acc + x.value, 0);
+    const totalSize = treemapRoot.children.reduce((acc, x) => acc + x.value, 0);
     const totalSizeText = bytes(totalSize, { thousandsSeparator: "," });
     const sizeLabel = d3.create("div")
-      .text(`Approximate Size: ${totalSizeText}`)
+      .text(unknownSizeCrate
+        ? `Approximate Size: ${totalSizeText}, Unknown Size: ${pluralize("Crate", unknownSizeCrate, true)}`
+        : `Approximate Size: ${totalSizeText}`)
       .node();
 
     return [ graphEl, treemapEl, sizeLabel ];

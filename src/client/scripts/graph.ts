@@ -108,7 +108,7 @@ export const getDepGraph = (data: DepGraph) => {
     .attr("stroke-width", 2);
 
   // This function is run at each iteration of the force algorithm, updating the nodes position.
-  const ticked = () => {
+  const handleTick = () => {
     link
       .attr("d", (d) => {
         const dx = d.target.x - d.source.x;
@@ -154,7 +154,7 @@ export const getDepGraph = (data: DepGraph) => {
     )
     .force("charge", d3.forceManyBody().strength(-350))
     .force("center", d3.forceCenter(WIDTH / 2, HEIGHT / 2))
-    .on("tick", ticked);
+    .on("tick", handleTick);
 
   return svg.node();
 };
