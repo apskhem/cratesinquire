@@ -31,6 +31,7 @@
     "fastify-compress": "^4.0.0",
     "fastify-helmet": "^5.3.2",
     "fastify-static": "^4.5.0",
+    "node-cache": "^5.1.2",
     "node-fetch": "~2.6.6",
     "pluralize": "^8.0.0",
     "point-of-view": "^5.0.0",

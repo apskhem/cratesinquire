@@ -6,6 +6,7 @@ import { join } from "path";
 import fetch from "node-fetch";
 import postcss from "postcss";
 import autoprefixer from "autoprefixer";
+import NodeCache from "node-cache";
 
 const TYPESCRIPT_INDEX_PATH = join(__dirname, "..", "src", "client", "scripts", "index.ts");
 const TYPESCRIPT_OUT_PATH = join(__dirname, "..", "public", "bundle.js");
@@ -14,9 +15,8 @@ const SASS_OUT_PATH = join(__dirname, "..", "public", "bundle.css");
 
 @Injectable()
 export class AppService {
-  private readonly reqCrateCache = new Map<string, CrateResponse>();
-
-  public isProductionMode = process.env["NODE_ENV"] === "production";
+  private readonly crateCache = new NodeCache({ stdTTL: 600, checkperiod: 600 });
+  public readonly isProductionMode = process.env["NODE_ENV"] === "production";
 
   async fetchCrate(id: string) {
     const raw = await fetch(`https://crates.io/api/v1/crates/${id}`);
@@ -26,19 +26,14 @@ export class AppService {
   }
 
   async fetchCache(id: string) {
-    if (this.isProductionMode) {
-      return await this.fetchCrate(id);
+    const cachedCrate = this.crateCache.get<CrateResponse>(id);
+
+    if (cachedCrate) {
+      return cachedCrate;
     }
-
-    const reqUrl = `https://crates.io/api/v1/crates/${id}`;
-    const cache = this.reqCrateCache.get(reqUrl);
-
-    if (cache) {
-      return cache;
-    }
-
+    
     const data = await this.fetchCrate(id);
-    this.reqCrateCache.set(reqUrl, data);
+    this.crateCache.set(id, data);
 
     return data;
   }
