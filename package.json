@@ -33,6 +33,7 @@
     "fastify-static": "^4.5.0",
     "node-fetch": "~2.6.6",
     "pluralize": "^8.0.0",
+    "point-of-view": "^5.0.0",
     "pug": "^3.0.2",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",

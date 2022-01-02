@@ -1,7 +1,4 @@
-import {
-  FastifyAdapter,
-  NestFastifyApplication
-} from "@nestjs/platform-fastify";
+import { FastifyAdapter, NestFastifyApplication } from "@nestjs/platform-fastify";
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import { Logger } from "@nestjs/common";
@@ -9,6 +6,8 @@ import compression from "fastify-compress";
 import { fastifyHelmet } from "fastify-helmet";
 import * as helmet from "helmet";
 import { AppService } from "./app.service";
+import * as pug from "pug";
+import { join } from "path";
 
 declare const module: any;
 
@@ -28,6 +27,10 @@ void (async () => {
           "connect-src": [ "https://crates.io/" ]
         }
       }
+    }),
+    app.setViewEngine({
+      engine: { pug },
+      templates: join(__dirname, "..", "src", "client", "templates")
     })
   ]);
 

@@ -1,18 +1,20 @@
-import { Controller, Get, Header, Param, HttpStatus } from "@nestjs/common";
-import { AppService, PUG_404_PATH, PUG_CRATES_ID_PATH } from "./app.service";
+import { Controller, Get, Param, HttpStatus, HttpException, Render, UseFilters } from "@nestjs/common";
+import { AppService } from "./app.service";
+import { HttpExceptionFilter } from "./http-exception.filter";
 
 @Controller("/")
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get("/")
-  @Header("content-type", "text/html")
+  @Render("index.pug")
   getHello() {
-    return this.appService.generateIndex();
+    return {};
   }
 
   @Get("/crates/:id")
-  @Header("content-type", "text/html")
+  @UseFilters(HttpExceptionFilter)
+  @Render("crate.pug")
   async getCrateById(@Param("id") id: string) {
     // only in development mode
     if (!this.appService.isProductionMode) {
@@ -21,35 +23,32 @@ export class AppController {
 
     // validate id
     if (!/^[a-zA-Z0-9_-]+$/.test(id)) {
-      return this.appService.generateStaticSite("404", PUG_404_PATH, {
+      throw new HttpException({
         title: id,
-        msg: `Could not find "${id}" crate.`,
-        status: HttpStatus.BAD_REQUEST
-      });
+        msg: `Could not find "${id}" crate.`
+      }, HttpStatus.BAD_REQUEST);
     }
 
     // fetch crate data
     const data = await this.appService.fetchCache(id);
 
     if ("errors" in data) {
-      return this.appService.generateStaticSite("404", PUG_404_PATH, {
+      throw new HttpException({
         title: id,
-        msg: `Could not find "${id}" crate.`,
-        status: HttpStatus.NOT_FOUND
-      });
+        msg: `Could not find "${id}" crate.`
+      }, HttpStatus.NOT_FOUND);
     }
 
-    return this.appService.generateStaticSite("crate", PUG_CRATES_ID_PATH, { data });
+    return { data };
   }
 
   @Get("*")
-  @Header("content-type", "text/html")
+  @UseFilters(HttpExceptionFilter)
   getSummary() {
-    return this.appService.generateStaticSite("404", PUG_404_PATH, {
+    throw new HttpException({
       title: "Unknown Route",
-      msg: "Unknown route.",
-      status: HttpStatus.NOT_FOUND
-    });
+      msg: "Unknown route."
+    }, HttpStatus.NOT_FOUND);
   }
 
   // @Get("/explore")
