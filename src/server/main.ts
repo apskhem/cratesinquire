@@ -29,10 +29,10 @@ void (async () => {
         }
       }
     }),
-    app.register(fastifyStatic, {
-      root: join(__dirname, "..", "public"),
-      wildcard: false
-    }),
+    // app.register(fastifyStatic, {
+    //   root: join(__dirname, "..", "public"),
+    //   wildcard: false
+    // }),
     app.setViewEngine({
       engine: { pug },
       templates: join(__dirname, "..", "src", "client", "templates")
