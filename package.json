@@ -23,7 +23,6 @@
     "@nestjs/config": "^1.1.5",
     "@nestjs/core": "^8.2.3",
     "@nestjs/platform-fastify": "^8.2.3",
-    "@nestjs/serve-static": "^2.2.2",
     "bytes": "^3.1.1",
     "color-convert": "^2.0.1",
     "d3": "~6.7.0",

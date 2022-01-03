@@ -2,12 +2,12 @@ import bytes from "bytes";
 import pluralize from "pluralize";
 import semver from "semver";
 import { constructDepLink, fetchBaseDepTree, fetchTreemapData, getMainData } from "./data";
-import { getDepGraph } from "./graph";
+import { renderGraph } from "./chart-graph";
 import * as d3 from "d3";
 import { initSearchBar as possessSearchBar } from "./search-bar";
-import { getTrend } from "./trend";
+import { renderTrends } from "./chart-trends";
 import convert from "color-convert";
-import { getTreemap } from "./treemap";
+import { renderTreemap } from "./chart-treemap";
 import { getDay, getTimeDiff } from "./utils";
 
 type BarMode = "size" | "downloads" | "lifetime" | "features";
@@ -205,11 +205,11 @@ const initBarChartSection = (id: string, stableVersio: string, versions: CrateRe
 const initDependencySection = async (id: string, num: string) => {
   await useLoader(".dep-tree-display-container", async () => {
     await fetchBaseDepTree(id, num, (x) => !/dev|build/.test(x.kind) && !x.optional);
-    const { treemapRoot, unknownSizeCrate } = await fetchTreemapData(id, num);
+    const { treemapRoot, unknownSizeCrate } = await fetchTreemapData();
 
     const depData = constructDepLink(id, num);
-    const treemapEl = getTreemap(id, treemapRoot);
-    const graphEl = getDepGraph(depData);
+    const treemapEl = renderTreemap(id, treemapRoot);
+    const graphEl = renderGraph(depData);
 
     const totalSize = treemapRoot.children.reduce((acc, x) => acc + x.value, 0);
     const totalSizeText = bytes(totalSize, { thousandsSeparator: "," });
@@ -493,7 +493,7 @@ const initTrendSection = async (id: string, nummap: Map<number, string>) => {
     });
 
     // render trend graph
-    const { svg, highlight, unhighlight } = getTrend(readyData, requiredKeys);
+    const { svg, highlight, unhighlight } = renderTrends(readyData, requiredKeys);
 
     // create toggles
     createTrendToggles(requiredKeys, nummap, highlight, unhighlight);

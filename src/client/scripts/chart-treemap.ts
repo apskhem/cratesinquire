@@ -11,7 +11,7 @@ type Data = {
   }[];
 };
 
-export const getTreemap = (rootId: string, data: Data) => {
+export const renderTreemap = (rootId: string, data: Data) => {
   const totalSize = data.children.reduce((acc, x) => acc + x.value, 0);
   const root = d3.hierarchy(data).sum((d) => d.value); // Here the size of each leave is given in the 'value' field in input data
 

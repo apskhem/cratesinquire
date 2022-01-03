@@ -9,7 +9,7 @@ const MARGIN = {
 const WIDTH = Math.min(900, window.innerWidth);
 const HEIGHT = Math.min(212);
 
-export const getDepGraph = (data: DepGraph) => {
+export const renderGraph = (data: DepGraph) => {
   const maxDistance = data.links.reduce((acc, x) => Math.max(acc, x.distance), 0);
 
   const svg = d3.create("svg");
@@ -137,7 +137,7 @@ export const getDepGraph = (data: DepGraph) => {
         Math.max(acc[2], x.x),
         Math.max(acc[3], x.y)
       ];
-    }, [ data.nodes[0].x, data.nodes[0].y, data.nodes[0].x, data.nodes[0].y ]);
+    }, [ data.nodes[0]?.x, data.nodes[0]?.y, data.nodes[0]?.x, data.nodes[0]?.y ]);
 
     const w = Math.max(box[2] - box[0], WIDTH);
     const h = Math.max(box[3] - box[1], HEIGHT);
