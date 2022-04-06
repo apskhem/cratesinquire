@@ -58,10 +58,11 @@
           background-color: #F3F5F7;
           border-radius: 8px;
 
-          > .lhs, .rhs {
+          > .lhs,
+          .rhs {
             display: flex;
-            align-items: center;
             gap: 0.5em;
+            align-items: center;
             padding: 0.5em 1em;
             
             img {
@@ -103,8 +104,8 @@
 
           .header-links {
             display: flex;
-            margin: 4px 0;
             gap: 0.5em;
+            margin: 4px 0;
 
             img {
               width: 24px;
@@ -113,20 +114,20 @@
           }
   
           .header-date {
-            color: #62727A;
             font-size: small;
+            color: #62727A;
           }
   
           .header-desc {
             display: flex;
-            align-items: center;
             gap: 0.5em;
+            align-items: center;
           }
   
           .header-keywords {
             display: flex;
-            align-items: center;
             gap: 0.5em;
+            align-items: center;
   
             .header-keywords-row {
               display: flex;
@@ -134,9 +135,9 @@
   
               > a {
                 padding: 0 8px;
-                border-radius: 4px;
                 color: #20A243;
                 background-color: #CEF7C5;
+                border-radius: 4px;
               }
             }
           }
@@ -148,7 +149,7 @@
           align-items: flex-end;
 
           > div {
-            display: flex;;
+            display: flex;
           }
         }
       }
@@ -161,17 +162,17 @@
       
           .view-swtiches {
             display: flex;
+            overflow: hidden;
             background-color: #F3F5F7;
             border-radius: 8px;
-            overflow: hidden;
         
             > div {
               padding: 8px 12px;
               cursor: pointer;
       
               &.sel {
-                background-color: #FFEFD1;
                 color: #C48B21;
+                background-color: #FFEFD1;
               }
             }
           }
@@ -192,7 +193,7 @@
               }
 
               .bar-content {
-                background-color: #c3890f;
+                background-color: #C3890F;
               }
             }
 
@@ -203,8 +204,8 @@
 
               .version-track {
                 > div {
-                  border-color: #960D0D !important;
                   background-color: #FDCECE !important;
+                  border-color: #960D0D !important;
                 }
               }
             }
@@ -216,23 +217,24 @@
 
               .version-track {
                 > div {
-                  border-color: #C48B21 !important;
                   background-color: #FFEFD1 !important;
+                  border-color: #C48B21 !important;
                 }
               }
             }
 
-            > div, a {
+            > div,
+            a {
               position: relative;
-              white-space: nowrap;
               overflow: hidden;
               text-overflow: ellipsis;
+              white-space: nowrap;
         
               &.version-track {
                 > div {
                   position: absolute;
-                  left: 50%;
                   top: 50%;
+                  left: 50%;
                   width: 8px;
                   height: 100%;
                   background-color: #F3F5F7;
@@ -247,20 +249,20 @@
                   &.major {
                     width: 16px;
                     height: 16px;
-                    border-radius: 50%;
                     border: 2px solid #62727A;
+                    border-radius: 50%;
                   }
                 }
               }
           
               > .bar-content {
+                position: absolute;
                 display: flex;
                 align-items: center;
-                position: absolute;
                 height: 100%;
-                border-radius: 8px;
-                background-color: #fdc659;
                 font-size: x-small;
+                background-color: #FDC659;
+                border-radius: 8px;
                 transition: width 300ms;
           
                 > span {
@@ -299,8 +301,8 @@
         .features-input-container {
           position: relative;
           height: 42px;
-          border-radius: 8px;
           background-color: #F3F5F7;
+          border-radius: 8px;
 
           .features-input-grid {
             display: grid;
@@ -310,9 +312,9 @@
 
             select {
               height: 36px;
-              white-space: nowrap;
               overflow: hidden;
               text-overflow: ellipsis;
+              white-space: nowrap;
             }
 
             .features-selection-container {
@@ -320,14 +322,14 @@
             }
 
             .features-display-pane {
-              margin: auto 0;
               padding-left: 1em;
-              border-left: 1px solid #62727A;
-              font-family: "Fira Code", monospace;
-              white-space: nowrap;
+              margin: auto 0;
               overflow: hidden;
+              font-family: "Fira Code", monospace;
               text-overflow: ellipsis;
+              white-space: nowrap;
               user-select: text;
+              border-left: 1px solid #62727A;
 
               &.blinked {
                 animation: blink 300ms;
@@ -351,7 +353,7 @@
                 }
 
                 &.keyword {
-                  color: #b21e00;
+                  color: #B21E00;
                 }
               }
             }
@@ -398,6 +400,7 @@
   from {
     color: transparent;
   }
+
   to {
     color: currentColor;
   }
@@ -407,6 +410,7 @@
   from {
     color: transparent;
   }
+
   to {
     color: #008200;
   }
@@ -416,7 +420,8 @@
   from {
     color: transparent;
   }
+
   to {
-    color: #b21e00;
+    color: #B21E00;
   }
 }

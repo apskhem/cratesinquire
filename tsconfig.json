@@ -1,17 +1,20 @@
 {
   "compilerOptions": {
     "target": "ES6",
+    "lib": [ "DOM", "ES2020" ],
     "module": "ES2020",
     "sourceMap": true,
+
+    "esModuleInterop": true,
     "strict": true,
     "noImplicitReturns": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noUncheckedIndexedAccess": true,
+    "forceConsistentCasingInFileNames": true,
+
     "removeComments": true,
-    "esModuleInterop": true,
-    "lib": [ "DOM", "ES2020" ],
-    "forceConsistentCasingInFileNames": true
+    "isolatedModules": true,
   },
   "include": [
     "./src/client/scripts/**/*.ts",
@@ -19,5 +22,5 @@
   ],
   "exclude": [
     "./src/server"
-  ]
+  ],
 }

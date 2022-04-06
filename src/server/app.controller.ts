@@ -1,4 +1,4 @@
-import { Controller, Get, Param, HttpStatus, HttpException, Render, UseFilters } from "@nestjs/common";
+import { Controller, Get, Param, Render, UseFilters, BadRequestException, NotFoundException } from "@nestjs/common";
 import { AppService } from "./app.service";
 import { HttpExceptionFilter } from "./http-exception.filter";
 
@@ -8,7 +8,7 @@ export class AppController {
 
   @Get("/")
   @Render("index.pug")
-  getHello() {
+  getIndex() {
     return {};
   }
 
@@ -16,27 +16,22 @@ export class AppController {
   @UseFilters(HttpExceptionFilter)
   @Render("crate.pug")
   async getCrateById(@Param("id") id: string) {
-    // only in development mode
-    if (!this.appService.isProductionMode) {
-      await this.appService.compilePreprocess();
-    }
-
     // validate id
     if (!/^[a-zA-Z0-9_-]+$/.test(id)) {
-      throw new HttpException({
+      throw new BadRequestException({
         title: id,
         msg: `Could not find "${id}" crate.`
-      }, HttpStatus.BAD_REQUEST);
+      });
     }
 
     // fetch crate data
     const data = await this.appService.fetchCache(id);
 
     if ("errors" in data) {
-      throw new HttpException({
+      throw new NotFoundException({
         title: id,
         msg: `Could not find "${id}" crate.`
-      }, HttpStatus.NOT_FOUND);
+      });
     }
 
     return { data };
@@ -45,10 +40,10 @@ export class AppController {
   @Get("*")
   @UseFilters(HttpExceptionFilter)
   getSummary() {
-    throw new HttpException({
+    throw new NotFoundException({
       title: "Unknown Route",
       msg: "Unknown route."
-    }, HttpStatus.NOT_FOUND);
+    });
   }
 
   // @Get("/explore")

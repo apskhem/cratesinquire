@@ -1,3 +1,13 @@
+mixin bar(id, version)
+  .bar-row.current
+    .version-track
+      .minor
+    a(rel="noopener noreferrer", href=`https://crates.io/crates/${id}/${version.num}`, target="_blank") #{version.num}
+    div 
+      .bar-content(style="width: 0%;")
+        span 81,993B
+
+
 doctype html
 html(lang="en")
   head
@@ -25,7 +35,7 @@ html(lang="en")
             .mid
               include includes/search-bar.pug
             .rhs
-              a.banner.pass-href(rel="noreferrer", href="https://github.com/apskhem/cratesinquire", target="_blank")
+              a.banner.pass-href(rel="noopener noreferrer", href="https://github.com/apskhem/cratesinquire", target="_blank")
                 i.fab.fa-github
                 span GITHUB REPO
         section.crate-header
@@ -36,18 +46,18 @@ html(lang="en")
               span #{data.crate.max_stable_version}
               if data.versions[0] && data.versions[0].published_by && !/^\s+$/.test(data.versions[0].published_by)
                 span #{" • Published by "}
-                a(rel="noreferrer", href=data.versions[0].published_by.url, target="_blank") #{data.versions[0].published_by.name}
+                a(rel="noopener noreferrer", href=data.versions[0].published_by.url, target="_blank") #{data.versions[0].published_by.name}
             .header-links
-              a(rel="noreferrer", href=`https://crates.io/crates/${data.crate.id}`, target="_blank")
+              a(rel="noopener noreferrer", href=`https://crates.io/crates/${data.crate.id}`, target="_blank")
                 img(src="/img/crates-icon.png", alt="link-icon")
               if data.crate.documentation
-                a(rel="noreferrer", href=data.crate.documentation, target="_blank")
+                a(rel="noopener noreferrer", href=data.crate.documentation, target="_blank")
                   img(src="/img/docs-icon.svg", alt="link-icon")
               if data.crate.repository
-                a(rel="noreferrer", href=data.crate.repository, target="_blank")
+                a(rel="noopener noreferrer", href=data.crate.repository, target="_blank")
                   img(src="/img/github-icon.svg", alt="link-icon")
               if data.crate.homepage
-                a(rel="noreferrer", href=data.crate.homepage, target="_blank")
+                a(rel="noopener noreferrer", href=data.crate.homepage, target="_blank")
                   img(src="/img/homepage-icon.svg", alt="link-icon")
             .header-date Updated on #{new Date(data.crate.updated_at).toLocaleString("en", { year: "numeric", month: "long", day: "numeric" })}
             .header-date Created on #{new Date(data.crate.created_at).toLocaleString("en", { year: "numeric", month: "long", day: "numeric" })}
@@ -60,7 +70,7 @@ html(lang="en")
                 i.fas.fa-tags
               .header-keywords-row
                 each keyword in data.crate.keywords
-                  a(rel="noreferrer", href=`https://crates.io/keywords/${keyword}`, target="_blank") #{keyword}
+                  a(rel="noopener noreferrer", href=`https://crates.io/keywords/${keyword}`, target="_blank") #{keyword}
                 if !data.crate.keywords.length
                   span.empty-tags none
           .rhs
@@ -90,12 +100,7 @@ html(lang="en")
             .collapsable-content
               .bar-chart-container
               //- each version in data.versions
-              //-  div
-              //-    .version-track
-              //-  a(rel="noreferrer", href=`https://crates.io/crates/${data.crate.id}/${version.num}`, target="_blank") #{version.num}
-              //-  div
-              //-    .bar-content
-              //-      span
+              //-  +bar(data.crate.id, version)
             .collapsable-label
         section.crate-dep-tree
           h3 Dependency Graph & Composition

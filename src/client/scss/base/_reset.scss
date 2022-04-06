@@ -1,8 +1,7 @@
 html,
 body {
   box-sizing: border-box;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -11,11 +10,7 @@ body {
 
 * {
   box-sizing: inherit;
-  -webkit-user-select: none; /* Safari */
-  -khtml-user-select: none; /* Konqueror HTML */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none; /* supported by Chrome and Opera */
+  user-select: none;
 
   &::before,
   &::after {
@@ -23,13 +18,18 @@ body {
   }
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0;
 }
 
 ul {
-  margin: 0;
   padding-inline-start: 2em;
+  margin: 0;
 }
 
 img {
@@ -43,22 +43,18 @@ img {
 }
 
 select {
-  margin: 0;
-  padding: 0;
-  color: inherit;
-  font: inherit;
   width: 100%;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
   background-color: transparent;
-  border: 0;
-
-  $carret-size: 12px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='black' stroke-width='12' stroke-linejoin='round' stroke-linecap='round'><path d='M8,25 L50,75 L92,25'/></svg>");
-  background-size: $carret-size;
-  background-position: 100% 50%;
   background-repeat: no-repeat;
+  background-position: 100% 50%;
+  background-size: 12px; /* carrent size */
+  border: 0;
+  appearance: none;
 
   &:focus {
     outline: none;
@@ -66,17 +62,16 @@ select {
 }
 
 input {
-  -webkit-user-select: text; /* Safari */
-  -khtml-user-select: all; /* Konqueror HTML */
-  -moz-user-select: all; /* Firefox */
-  -ms-user-select: all; /* Internet Explorer/Edge */
-  user-select: all; /* supported by Chrome and Opera */
-  
   width: 100%;
   padding: 0;
   margin: 0;
-  color: inherit;
   font: inherit;
+  color: inherit;
+  user-select: text; /* Safari */
+  user-select: all; /* Konqueror HTML */
+  user-select: all; /* Firefox */
+  user-select: all; /* Internet Explorer/Edge */
+  user-select: all; /* supported by Chrome and Opera */
   background-color: transparent;
   border: 0;
   
@@ -85,14 +80,14 @@ input {
   }
 
   &::-webkit-inner-spin-button {
-    -webkit-appearance: none;
+    appearance: none;
   }
 
   &[type="search"]::-webkit-search-decoration,
   &[type="search"]::-webkit-search-cancel-button,
   &[type="search"]::-webkit-search-results-button,
   &[type="search"]::-webkit-search-results-decoration {
-    -webkit-appearance: none;
+    appearance: none;
   }
 }
 

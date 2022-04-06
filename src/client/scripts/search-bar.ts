@@ -9,10 +9,10 @@ const getFormattedQuery = (value: string, query: string) => {
 
 /* main */
 export const initSearchBar = () => {
-  const searchContainer = d3.select<HTMLElement, null>(".search-bar-grid");
-  const searchInput = d3.select<HTMLInputElement, null>(".search-input");
-  const searchIcon = d3.select<HTMLElement, null>(".search-icon");
-  const searchResultDropdown = d3.select<HTMLElement, SearchResponse["crates"]>(".search-dropdown");
+  const searchContainer = d3.select<HTMLElement, null>(".search-bar__grid");
+  const searchInput = d3.select<HTMLInputElement, null>(".search-bar__input");
+  const searchIcon = d3.select<HTMLElement, null>(".search-bar__icon");
+  const searchResultDropdown = d3.select<HTMLElement, SearchResponse["crates"]>(".search-bar__dropdown");
   const errorMsg = d3.select<HTMLElement, null>(".error-msg");
 
   let cachedSearchData: SearchResponse | null = null;
@@ -44,7 +44,7 @@ export const initSearchBar = () => {
       onGoingRequest = null;
       cachedSearchData = await res.json() as SearchResponse;
 
-      /* if not delayed */
+      // if not delayed
       if (searchInput.property("value")) {
         renderSearchResponse(cachedSearchData, query);
       }
@@ -53,8 +53,10 @@ export const initSearchBar = () => {
       }
     }
     catch (err) {
-      if (err.name !== "AbortError") {
-        errorMsg.text("Something went wrong! Please try again.");
+      if (err instanceof Error) {
+        if (err.name !== "AbortError") {
+          errorMsg.text("Something went wrong! Please try again.");
+        }
       }
     }
   };
@@ -185,5 +187,6 @@ export const initSearchBar = () => {
     handleSearch();
   });
 
+  /* initialize dropdown element */
   searchResultDropdown.attr("hidden", null).remove();
 };

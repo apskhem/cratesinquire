@@ -9,7 +9,7 @@ const fetchedDepCache = new Map<CrateID, Dependency>();
 const fetchedDataCache = new Map<CrateID, CrateVersionData>();
 let mainData: CrateResponse | null = null;
 
-export const getMainData = (id: string): CrateResponse => {
+export const consumeProps = (id: string): CrateResponse => {
   if (mainData) {
     mainData;
   }

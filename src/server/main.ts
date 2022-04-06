@@ -7,10 +7,8 @@ import * as helmet from "helmet";
 import * as pug from "pug";
 import { join } from "path";
 import fastifyStatic from "fastify-static";
+import httpsRedirect from "fastify-https-redirect";
 import { AppModule } from "./app.module";
-import { AppService } from "./app.service";
-
-declare const module: any;
 
 void (async () => {
   // create app
@@ -18,8 +16,7 @@ void (async () => {
 
   // set middlewares
   await Promise.all([
-    AppService.bundleSass(),
-    AppService.bundleTypeScript(),
+    app.register(httpsRedirect),
     app.register(compression),
     app.register(fastifyHelmet, {
       contentSecurityPolicy: {
@@ -43,15 +40,4 @@ void (async () => {
   const port = process.env["PORT"] || 3000;
   await app.listen(port, host);
   Logger.log(`server listening: ${await app.getUrl()}`);
-
-  if ("hot" in module) {
-    module.hot.accept();
-    // module.hot.accept([ "/src/client/scripts/index.ts" ], () => {
-    //   AppService.compileTypeScript();
-    // });
-    // module.hot.accept("/src/client/scss/main.scss", () => {
-    //   console.log("change");
-    // });
-    module.hot.dispose(() => app.close());
-  }
 })();

@@ -1,7 +1,7 @@
 import bytes from "bytes";
 import pluralize from "pluralize";
 import semver from "semver";
-import { constructDepLink, fetchBaseDepTree, fetchTreemapData, getMainData } from "./data";
+import { constructDepLink, fetchBaseDepTree, fetchTreemapData, consumeProps } from "./data";
 import { renderGraph } from "./chart-graph";
 import * as d3 from "d3";
 import { initSearchBar as possessSearchBar } from "./search-bar";
@@ -18,7 +18,7 @@ const MAX_COLLAPSABLE_CONTENT = 20;
 export const runCrate = async () => {
   possessSearchBar();
 
-  const { categories, crate, keywords, versions } = getMainData("data");
+  const { categories, crate, keywords, versions } = consumeProps("data");
 
   const num = crate.max_stable_version || crate.max_version;
 

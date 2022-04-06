@@ -65,7 +65,7 @@
     letter-spacing: 5px;
 
     > .b {
-      color: #fdc659;
+      color: #FDC659;
     }
   }
 
@@ -87,25 +87,25 @@ a.pass-href {
   transition: 300ms;
 
   &:hover {
-    color: #c3890f;
+    color: #C3890F;
   }
 }
 
 .banner {
   display: flex;
-  align-items: center;
   gap: 0.5em;
+  align-items: center;
   padding: 4px 8px;
+  cursor: pointer;
   border: 1px solid black;
   border-radius: 8px;
-  cursor: pointer;
-  transition: 300ms;
+  transition: color border-color 300ms;
 
   &:active,
   &:hover {
-    border-color: #fdc659;
-    color: #fdc659;
+    color: #FDC659;
     text-decoration: none;
+    border-color: #FDC659;
   }
 }
 
@@ -124,9 +124,9 @@ a.pass-href {
     $btn-size: 16px;
 
     position: relative;
-    border-radius: 50%;
-    border: 2px solid;
     cursor: pointer;
+    border: 2px solid;
+    border-radius: 50%;
     opacity: 0.4;
 
     &.checked {
@@ -155,13 +155,13 @@ a.pass-href {
     &.checked {
       .toggle-button {
         left: 0;
-        border-color: #fdc659;
         background-color: #FFEFD1;
+        border-color: #FDC659;
         transform: translate(100%, -50%);
       }
 
       .toggle-line {
-        background-color: #fdc659;
+        background-color: #FDC659;
       }
     }
 
@@ -171,12 +171,12 @@ a.pass-href {
       left: 0;
       width: $btn-size;
       height: $btn-size;
-      border-radius: 50%;
-      border: 2px solid #62727A;
-      background-color: white;
       cursor: pointer;
-      transform: translate(0, -50%);
+      background-color: white;
+      border: 2px solid #62727A;
+      border-radius: 50%;
       transition: 300ms;
+      transform: translate(0, -50%);
     }
 
     .toggle-line {
@@ -184,8 +184,8 @@ a.pass-href {
       top: 50%;
       width: 100%;
       height: 2px;
-      border-radius: 1px;
       background-color: #62727A;
+      border-radius: 1px;
       transform: translate(0, -50%);
     }
   }
@@ -199,7 +199,7 @@ a.pass-href {
       }
 
       &.highlighted {
-        color: #fdc659;
+        color: #FDC659;
       }
     }
 
@@ -218,16 +218,16 @@ a.pass-href {
   gap: 0.5em;
 
   .collapsable-content {
-    overflow: hidden;
     max-height: calc((20px + 4px) * 20 - (4px * 2));
+    overflow: hidden;
     transition: 500ms;
   }
 
   .collapsable-label {
     text-align: center;
+    cursor: pointer;
     background-color: #F3F5F7;
     border-radius: 8px;
-    cursor: pointer;
     transition: 300ms;
 
     &:not(:empty) {
@@ -235,8 +235,8 @@ a.pass-href {
     }
 
     &:hover {
-      background-color: #FFEFD1;
       color: #C48B21;
+      background-color: #FFEFD1;
     }
   }
 }
