@@ -1,12 +1,16 @@
-@import "./base/font";
-@import "./base/reset";
-@import "./base/theme";
-@import "./components/loader";
-@import "./components/search-bar";
-@import "./layout/footer";
-@import "./layout/header";
-@import "./pages/home";
-@import "./pages/crate";
+@use "@fortawesome/fontawesome-free/scss/fontawesome";
+@use "@fortawesome/fontawesome-free/scss/solid";
+@use "@fortawesome/fontawesome-free/scss/regular";
+@use "@fortawesome/fontawesome-free/scss/brands";
+@use "./base/font";
+@use "./base/reset";
+@use "./base/theme";
+@use "./components/loader";
+@use "./components/search-bar";
+@use "./layout/footer";
+@use "./layout/header";
+@use "./pages/home";
+@use "./pages/crate";
 
 html,
 body {

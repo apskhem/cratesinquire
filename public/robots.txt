@@ -1,6 +1,3 @@
-# https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
-
-# Host
-Host: https://www.cratesinquire.com
+Allow: /
+Sitemap: https://cratesinquire.info/sitemap-index.xml

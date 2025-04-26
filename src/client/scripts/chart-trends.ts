@@ -6,29 +6,33 @@ const WIDTH = Math.min(900, window.innerWidth) - MARGIN.left - MARGIN.right;
 const HEIGHT = 320 - MARGIN.top - MARGIN.bottom;
 
 // returns slope, intercept and r-square of the line
-const leastSquares = (xSeries: number[], ySeries: number[]): [number, number, number] => {
+const leastSquares = (
+  xSeries: number[],
+  ySeries: number[]
+): [number, number, number] => {
   const reduceSumFunc = (prev: number, cur: number) => prev + cur;
-  
+
   const xBar = xSeries.reduce(reduceSumFunc, 0) / xSeries.length;
   const yBar = ySeries.reduce(reduceSumFunc, 0) / ySeries.length;
 
   const ssXX = xSeries
     .map((d) => Math.pow(d - xBar, 2))
     .reduce(reduceSumFunc, 0);
-  
+
   const ssYY = ySeries
     .map((d) => Math.pow(d - yBar, 2))
     .reduce(reduceSumFunc, 0);
 
-  const ssXY = d3.zip(xSeries, ySeries)
-    .map(([ x = 0, y = 0 ]) => (x - xBar) * (y - yBar))
+  const ssXY = d3
+    .zip(xSeries, ySeries)
+    .map(([x = 0, y = 0]) => (x - xBar) * (y - yBar))
     .reduce(reduceSumFunc, 0);
-    
+
   const slope = ssXY / ssXX;
-  const intercept = yBar - (xBar * slope);
+  const intercept = yBar - xBar * slope;
   const rSquare = Math.pow(ssXY, 2) / (ssXX * ssYY);
-  
-  return [ slope, intercept, rSquare ];
+
+  return [slope, intercept, rSquare];
 };
 
 export const renderTrends = (data: TrendData, keys: string[]) => {
@@ -37,53 +41,53 @@ export const renderTrends = (data: TrendData, keys: string[]) => {
     const sum = Object.entries(x)
       .filter((x) => x[0] !== "date")
       .reduce((acc, x) => acc + x[1], 0);
-      
+
     yValues.set(new Date(x.date), sum);
 
     return Math.max(acc, sum);
   }, 0);
 
   // A color scale: one color for each group
-  const color = d3.scaleOrdinal<string>()
+  const color = d3
+    .scaleOrdinal<string>()
     .domain(keys)
-    .range([
-      "#4393c3",
-      "#92c5df",
-      "#f4a582",
-      "#d6604d",
-      "#b2172b",
-      "#670020"
-    ]);
+    .range(["#4393c3", "#92c5df", "#f4a582", "#d6604d", "#b2172b", "#670020"]);
 
-  const stackedData = d3.stack()
-    .keys(keys)
-    .order(d3.stackOrderReverse)(data);
+  const stackedData = d3.stack().keys(keys).order(d3.stackOrderReverse)(data);
 
   // append the svg object to the body of the page
   const svg = d3
     .create("svg")
-    .attr("viewBox", [ 0, 0, WIDTH + MARGIN.left + MARGIN.right, HEIGHT + MARGIN.top + MARGIN.bottom ].join(" "));
+    .attr(
+      "viewBox",
+      [
+        0,
+        0,
+        WIDTH + MARGIN.left + MARGIN.right,
+        HEIGHT + MARGIN.top + MARGIN.bottom
+      ].join(" ")
+    );
 
   const g = svg
     .append("g")
     .attr("transform", `translate(${MARGIN.left},${MARGIN.top})`);
 
   // Add X axis --> it is a date format
-  const x = d3.scaleTime()
+  const x = d3
+    .scaleTime()
     .domain(d3.extent(data, (d) => new Date(d.date)) as [Date, Date])
-    .range([ 0, WIDTH ]);
+    .range([0, WIDTH]);
   const xAxis = g
     .append("g")
     .attr("transform", `translate(0, ${HEIGHT})`)
     .call(d3.axisBottom(x));
 
   // Add Y axis
-  const y = d3.scaleLinear()
-    .domain([ 0, maxYScale * 1.05 ])
-    .range([ HEIGHT, 0 ]);
-  g
-    .append("g")
-    .call(d3.axisLeft(y).ticks(6).tickFormat(d3.format(".1s")));
+  const y = d3
+    .scaleLinear()
+    .domain([0, maxYScale * 1.05])
+    .range([HEIGHT, 0]);
+  g.append("g").call(d3.axisLeft(y).ticks(6).tickFormat(d3.format(".1s")));
 
   // BRUSHING AND CHART //
 
@@ -104,12 +108,11 @@ export const renderTrends = (data: TrendData, keys: string[]) => {
     .on("end", updateChart); // Each time the brush selection changes, trigger the 'updateChart' function */
 
   // Create the scatter variable: where both the circles and the brush take place
-  const areaChart = g
-    .append("g")
-    .attr("clip-path", "url(#clip)");
+  const areaChart = g.append("g").attr("clip-path", "url(#clip)");
 
   // Area generator
-  const area = d3.area()
+  const area = d3
+    .area()
     .curve(d3.curveCatmullRom)
     .x((d) => x(d.data.date))
     .y0((d) => y(d[0]))
@@ -126,24 +129,25 @@ export const renderTrends = (data: TrendData, keys: string[]) => {
     .attr("d", area);
 
   // add trendline
-  const xScale = d3.scaleLinear<number>()
-    .domain([ 1, yValues.size + 1 ])
-    .range([ 0, WIDTH ]);
+  const xScale = d3
+    .scaleLinear<number>()
+    .domain([1, yValues.size + 1])
+    .range([0, WIDTH]);
 
   // set ranges
   const xSeries = d3.range(1, yValues.size + 1);
   const ySeries = Array.from(yValues.values());
-  
+
   const leastSquaresCoeff = leastSquares(xSeries, ySeries);
-  
+
   // apply the reults of the least squares regression
   const x1 = xSeries[0];
   const y1 = leastSquaresCoeff[0] + leastSquaresCoeff[1];
   const x2 = xSeries[xSeries.length - 1];
   const y2 = leastSquaresCoeff[0] * xSeries.length + leastSquaresCoeff[1];
-  const trendData = [[ x1, y1, x2, y2 ]];
+  const trendData = [[x1, y1, x2, y2]];
   // const trendSlope = (y2 - y1) / (x2 - x1) * (y2 - y1);
-  
+
   const trendline = g
     .selectAll(".trendline")
     .data(trendData)
@@ -205,7 +209,7 @@ export const renderTrends = (data: TrendData, keys: string[]) => {
 
   // What to do when one group is hovered
   const highlight = (num: string) => {
-    stackLayer.attr("opacity", (d) => d.key === num ? null : 0.1);
+    stackLayer.attr("opacity", (d) => (d.key === num ? null : 0.1));
   };
 
   // And when it is not hovered anymore

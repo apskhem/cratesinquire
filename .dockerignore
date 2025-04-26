@@ -1,9 +1,6 @@
 # compiled output
 /dist
 /node_modules
-makefile
-
-src/rustsec/data
 
 # Logs
 logs

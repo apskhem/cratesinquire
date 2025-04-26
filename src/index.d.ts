@@ -1,7 +1,3 @@
-interface DepNode extends Partial<Dependency> {
-  children: DepNode[];
-}
-
 type DepGraph = {
   nodes: {
     id: string;
@@ -29,7 +25,7 @@ interface Dependency {
   kind: string;
   optional: boolean;
   req: string;
-  target: null;
+  target: string | null;
   version_id: number;
 }
 
@@ -76,6 +72,10 @@ interface CrateVersionData {
 /* api response */
 interface DependenciesResponse {
   dependencies: Dependency[];
+}
+
+interface CrateVersionResponse {
+  version: CrateVersionData;
 }
 
 interface CrateResponse {
@@ -173,6 +173,44 @@ interface DownloadsResponse {
     version: number;
   }[];
 }
+
+type ApiCrateDepsResponse = {
+  treemapRoot: {
+    name: string;
+    children: {
+      name: string;
+      value: number;
+    }[];
+  };
+  unknownSizeCrate: number;
+  depData: {
+    nodes: {
+      id: string;
+      index?: number;
+      vx?: number;
+      vy?: number;
+      x?: number;
+      y?: number;
+      attr?: {
+        crate_id: string;
+        default_features: boolean;
+        downloads: number;
+        features: string[];
+        id: number;
+        kind: string;
+        optional: boolean;
+        req: string;
+        target: string | null;
+        version_id: number;
+      } | null;
+    }[];
+    links: {
+      source: string;
+      target: string;
+      distance: number;
+    }[];
+  };
+};
 
 /* script structs */
 type Point = {

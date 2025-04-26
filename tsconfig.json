@@ -1,9 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES6",
-    "lib": [ "DOM", "ES2020" ],
-    "module": "ES2020",
+    "lib": [ "DOM", "ES2024" ],
+    "moduleResolution": "nodenext",
+    "module": "NodeNext",
     "sourceMap": true,
+    "skipLibCheck": true,
 
     "esModuleInterop": true,
     "strict": true,

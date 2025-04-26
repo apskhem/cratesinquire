@@ -12,7 +12,9 @@ export const initSearchBar = () => {
   const searchContainer = d3.select<HTMLElement, null>(".search-bar__grid");
   const searchInput = d3.select<HTMLInputElement, null>(".search-bar__input");
   const searchIcon = d3.select<HTMLElement, null>(".search-bar__icon");
-  const searchResultDropdown = d3.select<HTMLElement, SearchResponse["crates"]>(".search-bar__dropdown");
+  const searchResultDropdown = d3.select<HTMLElement, SearchResponse["crates"]>(
+    ".search-bar__dropdown"
+  );
   const errorMsg = d3.select<HTMLElement, null>(".error-msg");
 
   let cachedSearchData: SearchResponse | null = null;
@@ -42,17 +44,15 @@ export const initSearchBar = () => {
 
       // proess data
       onGoingRequest = null;
-      cachedSearchData = await res.json() as SearchResponse;
+      cachedSearchData = (await res.json()) as SearchResponse;
 
       // if not delayed
       if (searchInput.property("value")) {
         renderSearchResponse(cachedSearchData, query);
-      }
-      else {
+      } else {
         cachedSearchData = null;
       }
-    }
-    catch (err) {
+    } catch (err) {
       if (err instanceof Error) {
         if (err.name !== "AbortError") {
           errorMsg.text("Something went wrong! Please try again.");
@@ -72,17 +72,16 @@ export const initSearchBar = () => {
   const search = (searchString: string) => {
     window.location.href = `/crates/${searchString}`;
   };
-  
+
   const renderSearchResponse = (data: SearchResponse, query: string) => {
     if (data.crates.length) {
       searchContainer.append(() => searchResultDropdown.node());
-    }
-    else {
+    } else {
       hideDropdownResult();
     }
 
     const row = searchResultDropdown
-      .selectAll("div")
+      .selectAll<d3.BaseType, (typeof data.crates)[number]>("div")
       .data(data.crates, (d) => d.id)
       .join("div")
       .classed("result-row", true)
@@ -92,8 +91,14 @@ export const initSearchBar = () => {
       })
       .on("click", () => handleSearch());
 
-    row.join("div").append("div").html((d) => getFormattedQuery(d.name, query));
-    row.join("div").append("div").text((d) => d.max_stable_version || d.max_version);
+    row
+      .join("div")
+      .append("div")
+      .html((d) => getFormattedQuery(d.name, query));
+    row
+      .join("div")
+      .append("div")
+      .text((d) => d.max_stable_version || d.max_version);
   };
 
   /* handle seach */
@@ -127,7 +132,7 @@ export const initSearchBar = () => {
   const selectDown = () => {
     const selEl = d3.select<HTMLElement, null>(".sel");
     const nextSibling = selEl.node()?.nextElementSibling;
-    
+
     if (nextSibling) {
       selEl.classed("sel", false);
       nextSibling.classList.add("sel");
@@ -140,7 +145,7 @@ export const initSearchBar = () => {
   });
 
   /* search container event listeners */
-  searchContainer.on("click", (e) => {
+  searchContainer.on("click", (e: MouseEvent) => {
     e.stopPropagation();
   });
 
@@ -150,8 +155,7 @@ export const initSearchBar = () => {
 
     if (value) {
       await searchRequest(value);
-    }
-    else {
+    } else {
       hideDropdownResult();
     }
   });
@@ -161,22 +165,19 @@ export const initSearchBar = () => {
 
     if (cachedSearchData && value) {
       renderSearchResponse(cachedSearchData, value);
-    }
-    else {
+    } else {
       hideDropdownResult();
     }
   });
 
-  searchInput.on("keydown", (e) => {
+  searchInput.on("keydown", (e: KeyboardEvent) => {
     if (e.code === "Enter") {
       e.preventDefault();
       handleSearch();
-    }
-    else if (e.code === "ArrowDown") {
+    } else if (e.code === "ArrowDown") {
       e.preventDefault();
       selectDown();
-    }
-    else if (e.code === "ArrowUp") {
+    } else if (e.code === "ArrowUp") {
       e.preventDefault();
       selectUp();
     }

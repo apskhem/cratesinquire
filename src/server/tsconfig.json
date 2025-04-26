@@ -1,31 +1,26 @@
 {
   "compilerOptions": {
-    "baseUrl": "/",
-    "module": "CommonJS",
+    "module": "commonjs",
     "declaration": true,
     "removeComments": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "target": "ES6",
+    "resolveJsonModule": true,
+    "target": "ES2021",
     "sourceMap": true,
-    "outDir": "../../dist",
-    "strict": true,
-    "noImplicitReturns": true,
-    "noImplicitOverride": true,
-    "noPropertyAccessFromIndexSignature": true,
-    "noUncheckedIndexedAccess": true,
-    "esModuleInterop": true,
+    "outDir": "./dist",
+    "baseUrl": "./src/server",
     "incremental": true,
     "skipLibCheck": true,
-    "strictNullChecks": true,
-    "noImplicitAny": true,
-    "strictBindCallApply": false,
-    "forceConsistentCasingInFileNames": false,
+    
+    "strict": true,
+    // "noUncheckedIndexedAccess": true,
     "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noImplicitOverride": true,
+    // "noPropertyAccessFromIndexSignature": true,
+    "forceConsistentCasingInFileNames": true,
+    // "exactOptionalPropertyTypes": true,
+    "types": [ "../index.d.ts" ]
   },
-  "include": [
-    ".",
-    "../index.d.ts"
-  ]
+  "exclude": ["node_modules"]
 }

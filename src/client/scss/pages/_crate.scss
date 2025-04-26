@@ -154,6 +154,111 @@
         }
       }
 
+      &.advisories {
+        display: grid;
+        gap: 0.5em;
+
+        .advisory-card {
+          border: 1px solid #960D0D;
+          border-radius: 8px;
+          overflow: hidden;
+          background: #F3F5F7;
+        }
+        
+        .advisory-header {
+          padding: 1rem;
+          cursor: pointer;
+          background: #FDCECE;
+          display: flex;
+          gap: 1em;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+        }
+
+        .advisory-title {
+          display: flex;
+          align-items: center;
+          flex-wrap: nowrap;
+          color: #960D0D;
+          flex-grow: 1;
+          overflow: hidden;
+
+          span {
+            margin-left: 0.5em;
+            font-weight: bold;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+        }
+        
+        .advisory-meta {
+          font-size: smaller;
+          color: #555;
+          display: flex;
+          gap: 0.5em;
+        }
+
+        .advisory-id {
+          text-wrap: nowrap;
+        }
+        
+        .advisory-info {
+          display: grid;
+          gap: 0.5em;
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.3s ease, padding 0.3s ease;
+          padding: 0 1rem;
+        }
+        
+        .advisory-info.expanded {
+          padding: 1rem;
+          max-height: 500px; /* Enough for content */
+        }
+
+        .advisory-description {
+          margin: 0;
+          font-size: small;
+        }
+        
+        .advisory-fields {
+          display: grid;
+          gap: 0.5em;
+          list-style: none;
+          padding: 0;
+        }
+        
+        .advisory-fields li {
+          font-size: smaller;
+
+          > .items-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.25em;
+
+            > .item {
+              padding: 0 8px;
+              color: #20A243;
+              background-color: #CEF7C5;
+              border-radius: 4px;
+            }
+          }
+        }
+        
+        .advisory-links a {
+          text-decoration: none;
+          color: #0077cc;
+          font-weight: bold;
+          font-size: smaller;
+        }
+        
+        .advisory-links a:hover {
+          text-decoration: underline;
+        }
+      }
+
       &.bar-chart {
         .bar-chart-header {
           display: flex;
