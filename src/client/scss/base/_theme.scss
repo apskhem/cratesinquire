@@ -12,8 +12,8 @@
     filter: invert(1);
   }
 
-  .search-bar-container {
-    .search-bar-grid {
+  .search-bar {
+    &__grid {
       background-color: #3A4556 !important;
     }
   }

@@ -1,12 +1,5 @@
 import * as d3 from "d3";
 
-/* utils */
-const getFormattedQuery = (value: string, query: string) => {
-  return value.replace(new RegExp(query, "gi"), (value) => {
-    return `<span>${value}</span>`;
-  });
-};
-
 /* main */
 export const initSearchBar = () => {
   const searchContainer = d3.select<HTMLElement, null>(".search-bar__grid");
@@ -94,7 +87,21 @@ export const initSearchBar = () => {
     row
       .join("div")
       .append("div")
-      .html((d) => getFormattedQuery(d.name, query));
+      .each(function(d) {
+        const container = d3.select(this);
+        const regex = new RegExp(query, "gi");
+        const parts = d.name.split(regex);
+        const matches = d.name.match(regex);
+
+        container.text(null);
+    
+        parts.forEach((part, i) => {
+          container.append("span").text(part);
+          if (matches && matches[i]) {
+            container.append("span").text(matches[i]).classed("matched", true)
+          }
+        });
+      });
     row
       .join("div")
       .append("div")

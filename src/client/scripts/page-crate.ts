@@ -289,9 +289,7 @@ const initFeaturesSection = (
   stableVersion: string,
   versions: CrateResponse["versions"]
 ) => {
-  const featuresSelect = d3.select<HTMLSelectElement, null>(
-    ".features-selection"
-  );
+  const featuresSelect = d3.select<HTMLSelectElement, null>(".features-selection");
   const layer = d3.select<HTMLElement, [string, string[]]>(".features-toggles");
   const display = d3.select<HTMLElement, null>(".features-display-pane");
   const copyIcon = d3.select<HTMLElement, null>(".copy-icon");
@@ -450,29 +448,35 @@ const initFeaturesSection = (
   };
 
   const renderResult = () => {
-    const tokenize = (str: string) => {
-      const res = str
-        .replace(/"(.*?)"/g, (token) => `<span class="string">${token}</span>`)
-        .replace(
-          /true|false/g,
-          (token) => `<span class="keyword">${token}</span>`
-        );
-
-      return res;
-    };
-
     const res = getResultText();
+    const regex = /"(.*?)"|true|false/g;
 
-    display.html(tokenize(res));
+    // Clear existing content
+    display.text(null);
+
+    let lastIndex = 0;
+    let match;
+
+    while ((match = regex.exec(res)) !== null) {
+      if (match.index > lastIndex) {
+        display.append("span").text(res.slice(lastIndex, match.index));
+      }
+
+      const cls = match[0].startsWith("\"") ? "string" : "keyword";
+      display.append("span").attr("class", cls).text(match[0]);
+
+      lastIndex = regex.lastIndex;
+    }
+
+    if (lastIndex < res.length) {
+      display.append("span").text(res.slice(lastIndex));
+    }
   };
 
   // init
-  (() => {
-    // get data
-    const data = selectVersion(stableVersion, versions);
+  const data = selectVersion(stableVersion, versions);
 
-    render(data);
-  })();
+  render(data);
 };
 
 const initTrendSection = async (id: string, nummap: Map<number, string>) => {
